@@ -1,0 +1,26 @@
+{
+  "thread": "donor-report",
+  "items": [
+    {"type":"deadline","label":"Submit Q1 narrative and financial report to Hartwell","match_ids":["d003"],"chain":["2026-04-06","2026-04-10","2026-04-16"],"status":"current"},
+    {"type":"owner","label":"Draft the Q1 narrative","match_ids":["d004","d005"],"owner":"Juliana Pardo","status":"current"},
+    {"type":"owner","label":"Prepare the financial workbook","match_ids":["d006"],"owner":"Andrés Beltrán","status":"current"},
+    {"type":"deadline","label":"Hold the Q1 report kickoff","match_ids":["d007"],"chain":["2026-03-26"],"status":"cancelled"},
+    {"type":"decision","label":"Put the results table in the narrative body","match_ids":["d010","d011"],"status":"reversed","superseded_by":"d045"},
+    {"type":"deadline","label":"Put the first narrative draft in the shared folder","match_ids":["d012"],"chain":["2026-03-27"],"status":"current"},
+    {"type":"owner","label":"Reconcile field counts against the registers","match_ids":["d014"],"owner":"Mateo Rincón","status":"current"},
+    {"type":"deadline","label":"Finish reconciling field counts","match_ids":["d015","d016"],"chain":["2026-03-30"],"status":"current"},
+    {"type":"question","label":"Which grant code belongs on the donor cover sheet?","match_ids":["d017"]},
+    {"type":"cancellation","label":"Call off the Q1 report kickoff","match_ids":["d019"],"target":"d007"},
+    {"type":"decision","label":"Show category totals in COP only","match_ids":["d020","d021"],"status":"in_force"},
+    {"type":"owner","label":"Submit the Q1 report to Hartwell","match_ids":["d025"],"owner":"Lucía Cárdenas","status":"current"},
+    {"type":"proposal","label":"Add a one-page infographic at the front of the narrative","match_ids":["d030"]},
+    {"type":"proposal","label":"Pull the donor submission forward to April 6","match_ids":["d033"]},
+    {"type":"decision","label":"Use 'participants' consistently in the narrative","match_ids":["d038","d039"],"status":"in_force"},
+    {"type":"deadline","label":"Lock the financial workbook","match_ids":["d041"],"chain":["2026-04-10"],"status":"current"},
+    {"type":"decision","label":"Move the results table to Annex A and leave the headline count in the narrative","match_ids":["d045","d046"],"status":"in_force"},
+    {"type":"question","label":"Who has the stamped receipt from last quarter's upload?","match_ids":["d047"]},
+    {"type":"deadline","label":"Close narrative comments","match_ids":["d048"],"chain":["2026-04-08"],"status":"current"},
+    {"type":"deadline","label":"Hold the internal sign-off","match_ids":["d049"],"chain":["2026-04-14","2026-04-15"],"status":"current"},
+    {"type":"question","label":"Who has edit access to the old Q1 archive?","match_ids":["d063"]}
+  ]
+}
