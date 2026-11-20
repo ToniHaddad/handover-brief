@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "handover-brief"
+version = "0.1.0"
+description = "Turn weeks of team chat into a handover timeline where every item links to the message that set it."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Toni Haddad" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+handover = "handover.cli:main"
+
+[tool.setuptools]
+packages = ["handover"]
+
+[tool.setuptools.package-data]
+handover = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
