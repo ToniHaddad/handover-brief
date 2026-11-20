@@ -1,0 +1,22 @@
+First run of the held-out thread (donor-report), extractor at commit 311dbef. Output of: python -m handover bench --split heldout -v
+
+== heldout (donor-report) ==
+type          gold found right  precision  recall
+deadline         7     8     7       0.88    1.00
+decision         4     3     3       1.00    0.75
+proposal         2     3     2       0.67    1.00
+owner            4     2     2       1.00    0.50
+question         3     4     3       0.75    1.00
+cancellation     1     1     1       1.00    1.00
+change           3     2     2       1.00    0.67
+all items       21    21    18       0.86    0.86
+Superseded, cancelled or unagreed items shown as current: 1 (out of 6 such items in gold)
+  ! d007 deadline 'Q1 report kickoff is Thursday at 10.' shown as current
+  extra  deadline: d087 Hartwell acknowledged both files this morning.
+  missed decision: d010 Put the results table in the narrative body
+  extra  proposal: d053 Are the annex headings locked by the donor or can we change them?
+  missed owner: d004 Draft the Q1 narrative
+  missed owner: d006 Prepare the financial workbook
+  extra  question: d086 only 14?
+  missed change: d010 Put the results table in the narrative body reversed
+
