@@ -316,7 +316,9 @@ section .hint { color: var(--ink-3); font-size: 13px; margin: 0 0 10px; }
     items.forEach(function (i) { var c = card(i); if (s[0] === "changed" || s[0] === "owners") c.dataset.dup = "1"; list.appendChild(c); });
     sec.appendChild(list);
     brief.appendChild(sec);
-    var a = el("a"); a.href = "#" + s[0]; a.appendChild(el("b", null, String(items.length))); a.appendChild(document.createTextNode(" " + s[1].toLowerCase()));
+    var CHIP = { deadlines: "current deadlines", decisions: "decisions in force", questions: "open questions", changed: "changed",
+      cancelled: "cancelled", proposals: "never agreed", owners: "owners" };
+    var a = el("a"); a.href = "#" + s[0]; a.appendChild(el("b", null, String(items.length))); a.appendChild(document.createTextNode(" " + CHIP[s[0]]));
     summary.appendChild(a);
   });
   var note = el("p", "foot-note", "Every item is extracted by fixed rules, not a language model, and quotes the message it came from. Dates are resolved against each message's own timestamp. Click any item to see its source.");

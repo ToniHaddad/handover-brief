@@ -82,7 +82,7 @@ def make_handler(data_dir: Path):
 
 def serve(data_dir: Path, port: int = 8102) -> None:
     server = ThreadingHTTPServer(("127.0.0.1", port), make_handler(data_dir))
-    print(f"Serving {len(list((data_dir / 'threads').glob('*.json')))} threads on http://127.0.0.1:{port}/  (Ctrl+C to stop)")
+    print(f"Serving {len(list((data_dir / 'threads').glob('*.json')))} threads on http://127.0.0.1:{port}/  (Ctrl+C to stop)", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

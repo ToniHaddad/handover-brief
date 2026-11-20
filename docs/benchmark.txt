@@ -1,0 +1,25 @@
+== tune (warehouse-move, cash-distribution) ==
+type          gold found right  precision  recall
+deadline        20    20    19       0.95    0.95
+decision         9     9     9       1.00    1.00
+proposal         6     6     6       1.00    1.00
+owner           21    22    21       0.95    1.00
+question         4     4     4       1.00    1.00
+cancellation     5     5     5       1.00    1.00
+change           9     9     9       1.00    1.00
+all items       65    66    64       0.97    0.98
+Superseded, cancelled or unagreed items shown as current: 0 (out of 19 such items in gold)
+
+== heldout (donor-report) ==
+type          gold found right  precision  recall
+deadline         7     8     7       0.88    1.00
+decision         4     3     3       1.00    0.75
+proposal         2     3     2       0.67    1.00
+owner            4     2     2       1.00    0.50
+question         3     4     3       0.75    1.00
+cancellation     1     1     1       1.00    1.00
+change           3     2     2       1.00    0.67
+all items       21    21    18       0.86    0.86
+Superseded, cancelled or unagreed items shown as current: 1 (out of 6 such items in gold)
+  ! d007 deadline 'Q1 report kickoff is Thursday at 10.' shown as current
+
