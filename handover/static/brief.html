@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<style>
+:root {
+  --paper: #f5f2ec;
+  --card: #fffdf9;
+  --ink: #1c2230;
+  --ink-2: #4a5263;
+  --ink-3: #7a8191;
+  --rule: #e2dccf;
+  --rule-2: #d3cbbb;
+  --accent: #0e6b6b;
+  --accent-soft: #d9ecea;
+  --moved: #a8641a;
+  --moved-soft: #f7e7cf;
+  --cancel: #a63d2c;
+  --cancel-soft: #f5ddd7;
+  --agreed: #2d6f45;
+  --agreed-soft: #dcefe1;
+  --prop: #5a6274;
+  --prop-soft: #e6e8ee;
+  --q: #6a4c9c;
+  --q-soft: #ebe4f5;
+  --hl: #fff1c2;
+  --shadow: 0 1px 2px rgba(28,34,48,.06), 0 2px 8px rgba(28,34,48,.05);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14171d; --card: #1b1f27; --ink: #e8e4dc; --ink-2: #b7b3ab; --ink-3: #8a8780;
+    --rule: #2b303a; --rule-2: #3a404c; --accent: #5cc2bb; --accent-soft: #173a3a;
+    --moved: #e2a75a; --moved-soft: #3a2c18; --cancel: #ec8a77; --cancel-soft: #3b211c;
+    --agreed: #7fcc97; --agreed-soft: #1c3324; --prop: #a9b0bf; --prop-soft: #272c36;
+    --q: #c3a8ef; --q-soft: #2c2440; --hl: #3d3517; --shadow: 0 1px 2px rgba(0,0,0,.3);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14171d; --card: #1b1f27; --ink: #e8e4dc; --ink-2: #b7b3ab; --ink-3: #8a8780;
+  --rule: #2b303a; --rule-2: #3a404c; --accent: #5cc2bb; --accent-soft: #173a3a;
+  --moved: #e2a75a; --moved-soft: #3a2c18; --cancel: #ec8a77; --cancel-soft: #3b211c;
+  --agreed: #7fcc97; --agreed-soft: #1c3324; --prop: #a9b0bf; --prop-soft: #272c36;
+  --q: #c3a8ef; --q-soft: #2c2440; --hl: #3d3517; --shadow: 0 1px 2px rgba(0,0,0,.3);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+.top { padding: 22px 28px 14px; border-bottom: 1px solid var(--rule); display: flex; gap: 16px; align-items: flex-start; }
+.top .titles { flex: 1; min-width: 0; }
+.kicker { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 600 28px/1.15 var(--serif); margin: 6px 0 4px; letter-spacing: -.01em; }
+.meta { color: var(--ink-2); font-size: 13px; margin: 0; }
+.meta .syn { display: inline-block; border: 1px solid var(--rule-2); border-radius: 4px; padding: 0 6px; margin-left: 4px; font-size: 11px; color: var(--ink-3); }
+.theme { border: 1px solid var(--rule-2); background: var(--card); border-radius: 999px; padding: 6px 12px; font-size: 12px; cursor: pointer; color: var(--ink-2); white-space: nowrap; }
+.summary { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 28px; border-bottom: 1px solid var(--rule); }
+.summary a { text-decoration: none; color: var(--ink-2); font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--rule); }
+.summary a b { color: var(--ink); font-weight: 650; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 460px); gap: 0; align-items: start; }
+.brief { padding: 8px 28px 60px; min-width: 0; }
+section { margin-top: 26px; }
+section h2 { font: 600 19px/1.2 var(--serif); margin: 0 0 4px; display: flex; align-items: baseline; gap: 8px; }
+section h2 .n { font: 600 12px var(--sans); color: var(--ink-3); }
+section .hint { color: var(--ink-3); font-size: 13px; margin: 0 0 10px; }
+.empty { color: var(--ink-3); font-size: 13px; font-style: italic; padding: 6px 0; }
+.list { display: grid; gap: 8px; }
+.item { display: flex; gap: 14px; width: 100%; text-align: left; background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; cursor: pointer; box-shadow: var(--shadow); transition: border-color .15s, transform .15s; border-left: 4px solid var(--rule-2); }
+.item:hover { border-color: var(--rule-2); }
+.item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.item.active { border-color: var(--accent); border-left-color: var(--accent); background: linear-gradient(0deg, var(--accent-soft), var(--accent-soft)) padding-box, var(--card); }
+.item.t-deadline { border-left-color: var(--accent); }
+.item.t-decision { border-left-color: var(--agreed); }
+.item.t-question { border-left-color: var(--q); }
+.item.t-proposal { border-left-color: var(--prop); }
+.item.is-changed { border-left-color: var(--moved); }
+.item.is-cancelled { border-left-color: var(--cancel); }
+.cal { flex: none; width: 54px; text-align: center; border: 1px solid var(--rule-2); border-radius: 8px; overflow: hidden; background: var(--paper); align-self: flex-start; }
+.cal .dow { display: block; font: 700 10px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; padding: 4px 0 3px; background: var(--accent); color: var(--card); }
+.is-changed .cal .dow { background: var(--moved); }
+.is-cancelled .cal .dow { background: var(--cancel); }
+.cal .dom { display: block; font: 600 22px/1.1 var(--serif); padding-top: 3px; }
+.cal .mon { display: block; font-size: 11px; color: var(--ink-2); padding-bottom: 4px; }
+.body { flex: 1; min-width: 0; display: grid; gap: 4px; }
+.label { font-size: 14.5px; line-height: 1.4; overflow-wrap: anywhere; }
+.label::before { content: "\201C"; color: var(--ink-3); }
+.label::after { content: "\201D"; color: var(--ink-3); }
+.plain .label::before, .plain .label::after { content: none; }
+.trail { font-size: 13px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+.trail s { color: var(--ink-3); text-decoration-thickness: 1.5px; }
+.trail .now { color: var(--moved); font-weight: 650; }
+.trail .arrow { color: var(--ink-3); }
+.foot { font-size: 12px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.ref { font: 12px var(--mono); color: var(--accent); }
+.tag { display: inline-block; font: 600 11px/1.6 var(--sans); padding: 0 7px; border-radius: 4px; letter-spacing: .02em; }
+.tag.moved { background: var(--moved-soft); color: var(--moved); }
+.tag.cancel { background: var(--cancel-soft); color: var(--cancel); }
+.tag.agreed { background: var(--agreed-soft); color: var(--agreed); }
+.tag.prop { background: var(--prop-soft); color: var(--prop); }
+.tag.q { background: var(--q-soft); color: var(--q); }
+.tag.passed { background: transparent; color: var(--ink-3); border: 1px solid var(--rule-2); }
+.owner { display: inline-flex; align-items: center; gap: 5px; color: var(--ink-2); }
+.av { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font: 700 9px/1 var(--sans); color: #fff; flex: none; }
+.side { position: sticky; top: 0; height: 100vh; border-left: 1px solid var(--rule); background: var(--card); display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.history { border-bottom: 1px solid var(--rule); padding: 16px 18px 14px; max-height: 48vh; overflow: auto; }
+.history .intro { color: var(--ink-3); font-size: 13px; margin: 0; }
+.history h3 { font: 600 16px/1.3 var(--serif); margin: 6px 0 10px; overflow-wrap: anywhere; }
+.steps { list-style: none; margin: 0; padding: 0; position: relative; }
+.steps::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--rule); }
+.step { position: relative; padding: 0 0 10px 22px; }
+.step::before { content: ""; position: absolute; left: 1px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); }
+.step.k-moved::before, .step.k-corrected::before { border-color: var(--moved); background: var(--moved); }
+.step.k-cancelled::before, .step.k-reversed::before, .step.k-rejected::before, .step.k-reassigned::before { border-color: var(--cancel); background: var(--cancel); }
+.step.k-agreed::before { border-color: var(--agreed); background: var(--agreed); }
+.step.k-mentioned::before { border-color: var(--rule-2); width: 8px; height: 8px; left: 3px; top: 7px; }
+.step button { all: unset; cursor: pointer; display: block; width: 100%; }
+.step button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.step .what { font-size: 13.5px; }
+.step .what b { font-weight: 650; }
+.step .k-moved-v { color: var(--moved); font-weight: 650; }
+.step .who { font-size: 12px; color: var(--ink-3); }
+.step.k-mentioned .what { color: var(--ink-3); font-size: 12.5px; }
+.thread { overflow: auto; padding: 10px 0 40px; position: relative; scroll-behavior: smooth; }
+.day { position: sticky; top: 0; z-index: 1; font: 600 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); background: var(--card); padding: 8px 18px; border-bottom: 1px solid var(--rule); }
+.msg { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 0 10px; padding: 8px 18px; border-left: 3px solid transparent; transition: background .2s; }
+.msg .av { width: 26px; height: 26px; font-size: 10px; margin-top: 2px; }
+.msg .hd { font-size: 12px; color: var(--ink-3); display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.msg .hd .name { color: var(--ink); font-weight: 600; font-size: 13px; }
+.msg .tx { font-size: 14px; overflow-wrap: anywhere; }
+.msg .re { font-size: 12px; color: var(--ink-3); }
+.msg .badge { font: 600 11px/1.6 var(--sans); padding: 0 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.msg .badge.moved, .msg .badge.corrected { background: var(--moved-soft); color: var(--moved); }
+.msg .badge.cancelled, .msg .badge.reversed, .msg .badge.rejected, .msg .badge.reassigned { background: var(--cancel-soft); color: var(--cancel); }
+.msg .badge.agreed { background: var(--agreed-soft); color: var(--agreed); }
+.msg.src { background: color-mix(in srgb, var(--accent-soft) 55%, transparent); border-left-color: var(--accent); }
+.msg.key { background: var(--hl); border-left-color: var(--moved); }
+.msg.focus { animation: pulse 1.4s ease-out 1; }
+@keyframes pulse { 0% { box-shadow: inset 0 0 0 2px var(--moved); } 100% { box-shadow: inset 0 0 0 2px transparent; } }
+.dt { background: var(--accent-soft); color: var(--accent); border-radius: 4px; padding: 0 3px; white-space: nowrap; }
+.dt small { font: 600 10.5px var(--sans); opacity: .85; margin-left: 3px; }
+.dt.past { background: transparent; color: var(--ink-2); border-bottom: 1px dotted var(--ink-3); border-radius: 0; }
+.closebar { display: none; }
+.foot-note { color: var(--ink-3); font-size: 12px; margin-top: 40px; border-top: 1px solid var(--rule); padding-top: 12px; }
+@media (max-width: 900px) {
+  .top { padding: 16px 16px 12px; }
+  h1 { font-size: 23px; }
+  .summary { padding: 10px 16px; }
+  .layout { display: block; }
+  .brief { padding: 4px 16px 40px; }
+  .side { position: fixed; inset: 0; height: auto; z-index: 10; border-left: none; transform: translateY(100%); transition: transform .25s ease; grid-template-rows: auto auto minmax(0, 1fr); box-shadow: 0 -8px 24px rgba(0,0,0,.15); }
+  .side.open { transform: none; }
+  .closebar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--rule); background: var(--paper); }
+  .closebar button { border: 1px solid var(--rule-2); background: var(--card); border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+  .closebar span { font-size: 12px; color: var(--ink-3); }
+  .history { max-height: 40vh; padding: 12px 16px; }
+  .msg { padding: 8px 16px; }
+  .cal { width: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="titles">
+    <div class="kicker">Handover brief</div>
+    <h1 id="title"></h1>
+    <p class="meta" id="meta"></p>
+  </div>
+  <button class="theme" id="theme" type="button" aria-label="Switch light or dark">Dark</button>
+</header>
+<nav class="summary" id="summary" aria-label="Sections"></nav>
+<main class="layout">
+  <div class="brief" id="brief"></div>
+  <aside class="side" id="side" aria-label="Source messages">
+    <div class="closebar"><button type="button" id="close">Back to brief</button><span>Source messages</span></div>
+    <div class="history" id="history" aria-live="polite"></div>
+    <div class="thread" id="thread"></div>
+  </aside>
+</main>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("data").textContent);
+  var byMsg = {}, byItem = {};
+  D.messages.forEach(function (m) { byMsg[m.id] = m; });
+  D.items.forEach(function (i) { byItem[i.id] = i; });
+  var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var HUES = ["#0e6b6b","#a8641a","#6a4c9c","#2d6f45","#a63d2c","#3d5a99","#7a5b2e","#8a3d6d"];
+  var authors = {};
+  D.messages.forEach(function (m) { if (!(m.author in authors)) authors[m.author] = HUES[Object.keys(authors).length % HUES.length]; });
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function pd(iso) { var p = iso.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmt(iso) { var d = pd(iso); return DOW[d.getDay()] + " " + d.getDate() + " " + MON[d.getMonth()]; }
+  function fmtTs(ts) { var d = ts.slice(0, 10), t = ts.slice(11, 16); return fmt(d) + ", " + t; }
+  function initials(n) { return n.split(/\s+/).map(function (w) { return w[0]; }).slice(0, 2).join("").toUpperCase(); }
+  function avatar(name) { var a = el("span", "av", initials(name)); a.style.background = authors[name] || "#777"; a.setAttribute("aria-hidden", "true"); return a; }
+  function first(name) { return name.split(" ")[0]; }
+
+  // -------- header
+  document.getElementById("title").textContent = D.channel || "Handover";
+  var meta = document.getElementById("meta");
+  var firstM = D.messages[0], lastM = D.messages[D.messages.length - 1];
+  meta.textContent = (D.team ? D.team + " · " : "") + D.messages.length + " messages · " +
+    (firstM ? fmt(firstM.ts.slice(0, 10)) + " to " + fmt(lastM.ts.slice(0, 10)) : "") + " · as of the last message";
+  if (D.synthetic) meta.appendChild(el("span", "syn", "synthetic data"));
+
+  // -------- sections
+  var asOf = D.as_of;
+  function chain(i) {
+    var out = [];
+    i.history.forEach(function (v) {
+      if ((v.kind === "set" || v.kind === "moved" || v.kind === "corrected") && v.value && (!out.length || out[out.length - 1].value !== v.value)) out.push(v);
+    });
+    return out;
+  }
+  function trail(i, box) {
+    var c = chain(i);
+    if (c.length < 2) return;
+    c.forEach(function (v, k) {
+      if (k) box.appendChild(el("span", "arrow", "→"));
+      if (k < c.length - 1) box.appendChild(el("s", null, fmt(v.value)));
+      else box.appendChild(el("span", "now", fmt(v.value)));
+    });
+    var last = c[c.length - 1];
+    box.appendChild(el("span", null, "· " + (last.kind === "corrected" ? "corrected" : "changed") + " by " + first(last.author) + " in #" + byMsg[last.message_id].idx));
+  }
+  function ownersFor(i) {
+    // an owner belongs to an item when they share a message that set or changed it (a passing mention does not count)
+    var own = i.history.filter(function (v) { return v.kind !== "mentioned"; }).map(function (v) { return v.message_id; });
+    return D.items.filter(function (o) { return o.type === "owner" && o.status === "current" && o.source_ids.some(function (s) { return own.indexOf(s) >= 0; }); });
+  }
+  function card(i) {
+    var b = el("button", "item t-" + i.type);
+    b.type = "button";
+    b.dataset.item = i.id;
+    if (i.changed) b.classList.add("is-changed");
+    if (i.status === "cancelled" || i.status === "reversed" || i.status === "superseded") b.classList.add("is-cancelled");
+    if (i.type === "deadline" && i.date) {
+      var d = pd(i.date), cal = el("span", "cal");
+      cal.appendChild(el("span", "dow", DOW[d.getDay()]));
+      cal.appendChild(el("span", "dom", String(d.getDate())));
+      cal.appendChild(el("span", "mon", MON[d.getMonth()]));
+      b.appendChild(cal);
+    }
+    var body = el("span", "body");
+    var label = i.type === "cancellation" && i.target && byItem[i.target] ? byItem[i.target].label : i.label;
+    body.appendChild(el("span", "label", label));
+    var t = el("span", "trail");
+    if (i.type === "deadline") trail(i, t);
+    if (i.type === "decision" && i.status === "reversed" && i.target && byItem[i.target]) t.appendChild(el("span", null, "Replaced by: " + byItem[i.target].label));
+    if (i.type === "owner" && i.status === "superseded") {
+      var r = i.history.filter(function (v) { return v.kind === "reassigned"; })[0];
+      if (r) t.appendChild(el("span", null, first(i.owner) + " → " + r.value + " in #" + byMsg[r.message_id].idx));
+    }
+    if (t.childNodes.length) body.appendChild(t);
+    var f = el("span", "foot");
+    var o = byMsg[i.origin_id];
+    f.appendChild(el("span", "ref", "#" + o.idx));
+    f.appendChild(el("span", null, o.author + ", " + fmtTs(o.ts)));
+    if (i.type === "deadline" && i.date && asOf && i.date < asOf && i.status === "current") f.appendChild(el("span", "tag passed", "date passed"));
+    if (i.type === "decision" && i.status === "in_force") {
+      var ag = i.history.filter(function (v) { return v.kind === "agreed"; })[0];
+      f.appendChild(el("span", "tag agreed", ag ? "agreed by " + first(ag.author) : "announced"));
+    }
+    if (i.type === "proposal") {
+      var rj = i.history.filter(function (v) { return v.kind === "rejected"; })[0];
+      f.appendChild(el("span", "tag prop", rj ? "turned down by " + first(rj.author) : "no one agreed"));
+    }
+    if (i.type === "question") f.appendChild(el("span", "tag q", "no answer in the thread"));
+    if (i.status === "cancelled") {
+      var cv = i.history.filter(function (v) { return v.kind === "cancelled"; })[0];
+      if (cv) f.appendChild(el("span", "tag cancel", "called off by " + first(cv.author) + " in #" + byMsg[cv.message_id].idx));
+    }
+    if (i.type === "owner") { var ow = el("span", "owner"); ow.appendChild(avatar(i.owner)); ow.appendChild(el("span", null, i.owner)); f.insertBefore(ow, f.firstChild); }
+    ownersFor(i).forEach(function (ox) { if (i.type !== "owner") { var s = el("span", "owner"); s.appendChild(avatar(ox.owner)); s.appendChild(el("span", null, first(ox.owner))); f.appendChild(s); } });
+    body.appendChild(f);
+    b.appendChild(body);
+    b.addEventListener("click", function () { select(i.id, true); });
+    return b;
+  }
+  var SECTIONS = [
+    ["deadlines", "Current deadlines", "The latest agreed date for each task or event, with every earlier date struck through.",
+      function (i) { return i.type === "deadline" && i.status === "current"; }, function (a, b) { return a.date < b.date ? -1 : 1; }],
+    ["decisions", "Decisions in force", "Proposals another person agreed to, or decisions announced as made.",
+      function (i) { return i.type === "decision" && i.status === "in_force"; }],
+    ["questions", "Open questions", "Asked in the thread and never answered.",
+      function (i) { return i.type === "question"; }],
+    ["changed", "Things that changed", "Deadlines that moved or were corrected, decisions that were reversed, tasks that changed hands.",
+      function (i) { return i.changed && i.status !== "cancelled"; }],
+    ["cancelled", "Things that were cancelled", "Called off in the thread. Not shown as current anywhere above.",
+      function (i) { return i.type === "cancellation"; }],
+    ["proposals", "Proposals never agreed", "Suggested, but nobody else agreed. These are not decisions.",
+      function (i) { return i.type === "proposal"; }],
+    ["owners", "Who took what", "Tasks someone claimed, or accepted when asked.",
+      function (i) { return i.type === "owner" && i.status === "current"; }]
+  ];
+  var brief = document.getElementById("brief"), summary = document.getElementById("summary");
+  SECTIONS.forEach(function (s) {
+    var items = D.items.filter(s[3]);
+    if (s[4]) items.sort(s[4]);
+    var sec = el("section"); sec.id = s[0];
+    var h = el("h2", null, s[1]); h.appendChild(el("span", "n", String(items.length))); sec.appendChild(h);
+    sec.appendChild(el("p", "hint", s[2]));
+    var list = el("div", "list");
+    if (!items.length) list.appendChild(el("div", "empty", "Nothing found."));
+    items.forEach(function (i) { var c = card(i); if (s[0] === "changed" || s[0] === "owners") c.dataset.dup = "1"; list.appendChild(c); });
+    sec.appendChild(list);
+    brief.appendChild(sec);
+    var a = el("a"); a.href = "#" + s[0]; a.appendChild(el("b", null, String(items.length))); a.appendChild(document.createTextNode(" " + s[1].toLowerCase()));
+    summary.appendChild(a);
+  });
+  var note = el("p", "foot-note", "Every item is extracted by fixed rules, not a language model, and quotes the message it came from. Dates are resolved against each message's own timestamp. Click any item to see its source.");
+  brief.appendChild(note);
+
+  // -------- thread
+  var thread = document.getElementById("thread"), lastDay = null, msgEls = {};
+  D.messages.forEach(function (m) {
+    var day = m.ts.slice(0, 10);
+    if (day !== lastDay) { thread.appendChild(el("div", "day", fmt(day))); lastDay = day; }
+    var row = el("div", "msg"); row.id = "m-" + m.id; msgEls[m.id] = row;
+    row.appendChild(avatar(m.author));
+    var c = el("div");
+    var hd = el("div", "hd");
+    hd.appendChild(el("span", "name", m.author));
+    hd.appendChild(el("span", null, m.ts.slice(11, 16)));
+    hd.appendChild(el("span", "ref", "#" + m.idx));
+    if (m.edited) hd.appendChild(el("span", null, "edited"));
+    c.appendChild(hd);
+    if (m.reply_to && byMsg[m.reply_to]) {
+      var rm = byMsg[m.reply_to], snip = rm.seg.map(function (s) { return s.t; }).join("");
+      c.appendChild(el("div", "re", "↳ replying to " + first(rm.author) + " #" + rm.idx + ": " + (snip.length > 60 ? snip.slice(0, 59) + "…" : snip)));
+    }
+    var tx = el("div", "tx");
+    m.seg.forEach(function (s) {
+      if (!s.d) { tx.appendChild(document.createTextNode(s.t)); return; }
+      var sp = el("span", "dt" + (s.past ? " past" : ""), s.t);
+      if (!/\d/.test(s.t) || /^(today|tomorrow)/i.test(s.t)) sp.appendChild(el("small", null, fmt(s.d)));
+      sp.title = "Resolved to " + fmt(s.d) + " from the message date";
+      tx.appendChild(sp);
+    });
+    c.appendChild(tx);
+    var badges = el("div", "hd"); badges.dataset.badges = "1"; c.appendChild(badges);
+    row.appendChild(c);
+    thread.appendChild(row);
+  });
+
+  // -------- selection
+  var VERB = { set: "Set", proposed: "Proposed", agreed: "Agreed", moved: "Moved", corrected: "Corrected", rejected: "Turned down",
+    cancelled: "Called off", reversed: "Reversed", reassigned: "Handed to", mentioned: "Mentioned again", announced: "Announced" };
+  var side = document.getElementById("side"), hist = document.getElementById("history");
+  function emptyHistory() {
+    hist.innerHTML = "";
+    hist.appendChild(el("p", "intro", "Pick any item on the left to see the message that set it, highlighted in the thread, and every change since."));
+  }
+  function clearMarks() {
+    D.messages.forEach(function (m) { var r = msgEls[m.id]; r.classList.remove("src", "key", "focus"); r.querySelector("[data-badges]").innerHTML = ""; });
+    document.querySelectorAll(".item.active").forEach(function (x) { x.classList.remove("active"); });
+  }
+  function scrollToMsg(id) {
+    var r = msgEls[id]; if (!r) return;
+    var top = r.offsetTop - thread.clientHeight / 3;
+    thread.scrollTo({ top: Math.max(0, top) });
+    r.classList.remove("focus"); void r.offsetWidth; r.classList.add("focus");
+  }
+  function select(id, fromClick) {
+    var i = byItem[id]; if (!i) return;
+    clearMarks();
+    document.querySelectorAll('[data-item="' + id + '"]').forEach(function (x) { x.classList.add("active"); });
+    var keyKinds = { moved: 1, corrected: 1, cancelled: 1, reversed: 1, rejected: 1, reassigned: 1 };
+    i.source_ids.forEach(function (s) { if (msgEls[s]) msgEls[s].classList.add("src"); });
+    var keyMsg = i.origin_id;
+    i.history.forEach(function (v) {
+      var r = msgEls[v.message_id]; if (!r) return;
+      // land on the first change: that is the message a newcomer would never find on their own
+      if (keyKinds[v.kind]) { r.classList.add("key"); if (keyMsg === i.origin_id) keyMsg = v.message_id; }
+      if (v.kind !== "mentioned") {
+        var bd = el("span", "badge " + v.kind, (VERB[v.kind] || v.kind) + (v.value && /^\d{4}-/.test(v.value) ? ": " + fmt(v.value) : ""));
+        r.querySelector("[data-badges]").appendChild(bd);
+      }
+    });
+    msgEls[i.origin_id] && msgEls[i.origin_id].classList.add("key");
+    // history panel
+    hist.innerHTML = "";
+    var kind = { deadline: "Deadline", decision: "Decision", proposal: "Proposal, not agreed", owner: "Owner", question: "Open question", cancellation: "Cancelled" }[i.type];
+    var k = el("div", "kicker", kind + (i.status === "cancelled" && i.type !== "cancellation" ? " · cancelled" : "") + (i.status === "reversed" ? " · reversed" : "") + (i.status === "superseded" ? " · handed over" : ""));
+    hist.appendChild(k);
+    hist.appendChild(el("h3", null, i.type === "deadline" && i.date ? fmt(i.date) + " · " + i.label : i.label));
+    var ol = el("ol", "steps"), mentions = 0;
+    i.history.forEach(function (v) {
+      var m = byMsg[v.message_id]; if (!m) return;
+      if (v.kind === "mentioned") { mentions++; }
+      var li = el("li", "step k-" + v.kind);
+      var bt = el("button"); bt.type = "button";
+      var w = el("div", "what");
+      w.appendChild(el("b", null, VERB[v.kind] || v.kind));
+      if (v.value && /^\d{4}-/.test(v.value)) { w.appendChild(document.createTextNode(" ")); w.appendChild(el("span", v.kind === "moved" || v.kind === "corrected" ? "k-moved-v" : null, fmt(v.value))); }
+      else if (v.value && v.kind !== "set") w.appendChild(document.createTextNode(" " + v.value));
+      bt.appendChild(w);
+      bt.appendChild(el("div", "who", "by " + v.author + " · " + fmtTs(m.ts) + " · #" + m.idx));
+      bt.addEventListener("click", function () { scrollToMsg(v.message_id); });
+      li.appendChild(bt); ol.appendChild(li);
+    });
+    hist.appendChild(ol);
+    if (fromClick) side.classList.add("open");
+    scrollToMsg(keyMsg);
+    if (fromClick && history.replaceState) history.replaceState(null, "", "#" + id);
+  }
+  document.getElementById("close").addEventListener("click", function () { side.classList.remove("open"); });
+  emptyHistory();
+  var h = (location.hash || "").slice(1);
+  if (byItem[h]) select(h, false);
+
+  // -------- theme
+  var root = document.documentElement, tb = document.getElementById("theme");
+  function isDark() { var t = root.getAttribute("data-theme"); return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
+  function label() { tb.textContent = isDark() ? "Light" : "Dark"; }
+  try { var saved = localStorage.getItem("handover-theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  label();
+  tb.addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark"; root.setAttribute("data-theme", next);
+    try { localStorage.setItem("handover-theme", next); } catch (e) {}
+    label();
+  });
+})();
+</script>
+</body>
+</html>
