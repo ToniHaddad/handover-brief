@@ -102,5 +102,13 @@ def test_several_mentions_in_order():
     assert [m.value for m in found] == [date(2026, 3, 16), date(2026, 3, 13)]
 
 
+def test_weekday_before_numeric_date_is_one_mention():
+    assert [m.value for m in find_dates("due Fri 10/04", WED_4_MAR)] == [date(2026, 4, 10)]
+
+
+def test_weekday_with_a_time_is_still_the_weekday():
+    assert [m.value for m in find_dates("call Monday 10am", WED_4_MAR)] == [date(2026, 3, 9)]
+
+
 def test_may_without_a_day_is_not_a_date():
     assert find_dates("we may need more trucks", WED_4_MAR) == []

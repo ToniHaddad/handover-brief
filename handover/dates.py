@@ -212,6 +212,8 @@ def find_dates(text: str, base: date) -> list[DateMention]:
                 value = _next_day_of_month(base, d)
                 out_kind = "ordinal"
             elif kind == "weekday":
+                if re.match(r"[,\s]+\d{1,2}/\d", text[e:]):
+                    continue  # "Fri 10/04": the explicit date that follows is the mention
                 wd = WEEKDAYS[g["wd"].lower()]
                 clause_start = max(lower.rfind(c, 0, s) for c in ".!?;,")
                 before = lower[clause_start + 1:s]
