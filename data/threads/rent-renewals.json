@@ -1,0 +1,672 @@
+{
+  "schema": "handover-thread/1",
+  "synthetic": true,
+  "team": "The Organization, facilities and finance",
+  "channel": "Rent renewals 2026",
+  "messages": [
+    {
+      "id": "r001",
+      "createdDateTime": "2026-01-12T08:46:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Morning. The script sent both three-month emails again: one for contract expiry, one for yearly expiry. The weekly recap is in the same inbox. Let's use this thread for the April renewals and the next annual budget lines.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r002",
+      "createdDateTime": "2026-01-12T08:51:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Zahle community centre, RENT-ZAH-03: contract ends April 16. Our follow-up is set for March 26 in the Sheet. USD 14,400/year, FA-2026.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r003",
+      "createdDateTime": "2026-01-12T08:54:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Is the April date from the contract or from the sheet?",
+      "replyToId": "r002",
+      "edited": false
+    },
+    {
+      "id": "r004",
+      "createdDateTime": "2026-01-12T08:58:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Signed contract. I have the scan open.",
+      "replyToId": "r003",
+      "edited": false
+    },
+    {
+      "id": "r005",
+      "createdDateTime": "2026-01-12T09:02:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Jbeil health centre, RENT-JBE-04, still has last April in the yearly end column. It was renewed and nobody rolled that cell forward. USD 18,600/year.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r006",
+      "createdDateTime": "2026-01-12T09:13:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Halba store RENT-HAL-02 is worse, all 3 date cells blank. It's in the recap but there's nothing for the script to count from.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r007",
+      "createdDateTime": "2026-01-12T18:51:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Just got home. Tripoli traffic was something else today.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r008",
+      "createdDateTime": "2026-01-13T09:09:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Le 26 mars ne colle pas. Pour Zahlé, on remonte de trois mois à partir de la fin du contrat, pas de la fin de la période annuelle.",
+      "replyToId": "r002",
+      "edited": false
+    },
+    {
+      "id": "r009",
+      "createdDateTime": "2026-01-13T09:14:00+02:00",
+      "from": "Maya Tannous",
+      "body": "You're right. The March 26 follow-up was copied from another row. Corrected it in the Sheet to January 16, three months before April 16. That's the date we'll follow up.",
+      "replyToId": "r008",
+      "edited": false
+    },
+    {
+      "id": "r010",
+      "createdDateTime": "2026-01-13T09:17:00+02:00",
+      "from": "Maya Tannous",
+      "body": "I'll handle the Zahle follow-up myself. I have the lease and the last rent note here.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r011",
+      "createdDateTime": "2026-01-13T09:38:00+02:00",
+      "from": "Karim Nahle",
+      "body": "For the next annual period on the Tripoli warehouse, let's charge the whole USD 21,600 to EA-2026. The draft has room there.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r012",
+      "createdDateTime": "2026-01-13T09:42:00+02:00",
+      "from": "Dalia Akl",
+      "body": "تمام، موافقة نحط إيجار المستودع كله على هالبند.",
+      "replyToId": "r011",
+      "edited": false
+    },
+    {
+      "id": "r013",
+      "createdDateTime": "2026-01-13T11:20:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "We could give the weekly recap its own tab with a chart of rents by town.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r014",
+      "createdDateTime": "2026-01-14T08:39:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Got the signed page from Tripoli. RENT-TRI-07 expires April 24. The yearly and contract end dates are the same on that one.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r015",
+      "createdDateTime": "2026-01-14T09:06:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Finance needs the consolidated renewal budget pack next Monday.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r016",
+      "createdDateTime": "2026-01-14T09:10:00+02:00",
+      "from": "Dalia Akl",
+      "body": "@Karim Nahle can you put the property lines and reserve amounts together?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r017",
+      "createdDateTime": "2026-01-14T09:12:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Yep, I'll own the budget pack. The rent column is yearly, that saves me one pass.",
+      "replyToId": "r016",
+      "edited": false
+    },
+    {
+      "id": "r018",
+      "createdDateTime": "2026-01-14T09:17:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Could we move the pack to Wednesday instead? Gives everyone a little breathing room.",
+      "replyToId": "r015",
+      "edited": false
+    },
+    {
+      "id": "r019",
+      "createdDateTime": "2026-01-14T09:20:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Wednesday won't work for finance. Keep Monday for now.",
+      "replyToId": "r018",
+      "edited": false
+    },
+    {
+      "id": "r020",
+      "createdDateTime": "2026-01-14T11:34:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "I'll upload the signed Tripoli notice scan tomorrow end of day. It was in the paper folder all along.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r021",
+      "createdDateTime": "2026-01-14T17:16:00+02:00",
+      "from": "Maya Tannous",
+      "body": "@Dalia Akl can you draft a bilingual reminder template for the site admins?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r022",
+      "createdDateTime": "2026-01-15T08:48:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Power cut again. The generator is running but my wifi apparently didnt get the memo.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r023",
+      "createdDateTime": "2026-01-15T09:32:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Do we have to include service charges in the Tripoli rent line?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r024",
+      "createdDateTime": "2026-01-15T16:08:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "No, separate line on the lease. Also the signed notice scan is in the Tripoli folder now.",
+      "replyToId": "r023",
+      "edited": false
+    },
+    {
+      "id": "r025",
+      "createdDateTime": "2026-01-16T10:04:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "The reserve figures are still locked. Finance moved the budget pack to Thursday.",
+      "replyToId": "r015",
+      "edited": false
+    },
+    {
+      "id": "r026",
+      "createdDateTime": "2026-01-16T10:11:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Fine by me. I'll keep filling the lines I have.",
+      "replyToId": "r025",
+      "edited": false
+    },
+    {
+      "id": "r027",
+      "createdDateTime": "2026-01-16T15:29:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Spoke to the Zahle owner today about renewal. He says the rent is staying the same.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r028",
+      "createdDateTime": "2026-01-16T15:38:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Saida owner still hasn't replied to the frist note btw. Nothing in the inbox.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r029",
+      "createdDateTime": "2026-01-16T15:46:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "On my second coffee and it is doing absolutely nothing.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r030",
+      "createdDateTime": "2026-01-19T09:02:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Found the signed Jbeil renewal. The yearly period ends April 30 this year. I rolled the stale cell forward. The contract itself runs beyond that.",
+      "replyToId": "r005",
+      "edited": true
+    },
+    {
+      "id": "r031",
+      "createdDateTime": "2026-01-19T09:18:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "For rows with no dates, let's keep the automatic emails off and show the rows under Missing dates in the weekly recap.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r032",
+      "createdDateTime": "2026-01-19T09:23:00+02:00",
+      "from": "Dalia Akl",
+      "body": "D’accord, on garde les lignes sans date dans le récapitulatif.",
+      "replyToId": "r031",
+      "edited": false
+    },
+    {
+      "id": "r033",
+      "createdDateTime": "2026-01-19T10:40:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "مين معه نسخة عن محضر تسليم المخزن بحلبا؟",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r034",
+      "createdDateTime": "2026-01-19T11:35:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Baalbek health centre is RENT-BAA-05, in case anyone is searching by town. The rent is USD 9,600/year.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r035",
+      "createdDateTime": "2026-01-19T14:20:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Halba site visit is Thursday. I'll take the visit and check the folder at the store while I'm there.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r036",
+      "createdDateTime": "2026-01-20T08:52:00+02:00",
+      "from": "Dalia Akl",
+      "body": "@Tarek Choueiri can you chase the Saida owner and get a written answer on renewal?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r037",
+      "createdDateTime": "2026-01-20T09:01:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "إيه، أنا بتابع مع المالك وبطلب جواب خطّي عن التجديد.",
+      "replyToId": "r036",
+      "edited": false
+    },
+    {
+      "id": "r038",
+      "createdDateTime": "2026-01-20T09:44:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Saida community centre RENT-SAI-06 expires April 10. USD 16,800/year in the draft.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r039",
+      "createdDateTime": "2026-01-20T10:10:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Is that rent for both floors in Saida?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r040",
+      "createdDateTime": "2026-01-20T10:14:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Yes both, including the upstairs room we only use for training.",
+      "replyToId": "r039",
+      "edited": false
+    },
+    {
+      "id": "r041",
+      "createdDateTime": "2026-01-20T13:25:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Can we put March 10 as the deadline for clearing the Saida renewal for signature? That leaves a month on the lease.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r042",
+      "createdDateTime": "2026-01-20T13:33:00+02:00",
+      "from": "Karim Nahle",
+      "body": "D’accord pour le 10 mars, ça nous laisse assez de marge.",
+      "replyToId": "r041",
+      "edited": false
+    },
+    {
+      "id": "r043",
+      "createdDateTime": "2026-01-20T18:14:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Sorry I disappeared, my son has a fever. Catching up now.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r044",
+      "createdDateTime": "2026-01-21T09:08:00+02:00",
+      "from": "Dalia Akl",
+      "body": "On annule la visite à Halba. Le magasin est fermé et personne ne peut nous ouvrir.",
+      "replyToId": "r035",
+      "edited": false
+    },
+    {
+      "id": "r045",
+      "createdDateTime": "2026-01-21T09:15:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Seen, thanks. Saves me a drive.",
+      "replyToId": "r044",
+      "edited": false
+    },
+    {
+      "id": "r046",
+      "createdDateTime": "2026-01-21T11:50:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Finance reopened the reserve file but still has to reconcile it. Budget pack moves again to next Monday.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r047",
+      "createdDateTime": "2026-01-21T11:53:00+02:00",
+      "from": "Karim Nahle",
+      "body": "ok, next Monday works.",
+      "replyToId": "r046",
+      "edited": false
+    },
+    {
+      "id": "r048",
+      "createdDateTime": "2026-01-21T17:25:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Generator finally stopped making that noise. Turns out the door was just rattling.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r049",
+      "createdDateTime": "2026-01-22T09:12:00+02:00",
+      "from": "Dalia Akl",
+      "body": "For the February register, the final rent figures have to be in by the 14th. The portal locks at midnight even on weekends.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r050",
+      "createdDateTime": "2026-01-22T09:15:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Sorry, I meant the 15th not the 14th. Just checked the portal.",
+      "replyToId": "r049",
+      "edited": false
+    },
+    {
+      "id": "r051",
+      "createdDateTime": "2026-01-22T10:38:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Which cost centre should we use for Halba's municipal fee? The rent line has a code but the fee cell is blank.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r052",
+      "createdDateTime": "2026-01-22T16:40:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Saida again: called the owner at lunch, no answer. The written request is still sitting there.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r053",
+      "createdDateTime": "2026-01-26T11:10:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Budget pack sent to finance. Tripoli is still on the draft code in that copy.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r054",
+      "createdDateTime": "2026-01-26T11:22:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Did the Saida reserve go in even though we're waiting for the owner?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r055",
+      "createdDateTime": "2026-01-26T11:27:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Yes, the full USD 16,800 is reserved under EA-2026.",
+      "replyToId": "r054",
+      "edited": false
+    },
+    {
+      "id": "r056",
+      "createdDateTime": "2026-01-26T14:32:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Pour Tripoli, je propose de basculer tout le loyer de la prochaine période sur FA-2026. La ligne est confirmée, et le solde d’EA-2026 doit couvrir Saïda.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r057",
+      "createdDateTime": "2026-01-26T14:37:00+02:00",
+      "from": "Karim Nahle",
+      "body": "tamam, agreed. Full Tripoli rent to FA-2026.",
+      "replyToId": "r056",
+      "edited": false
+    },
+    {
+      "id": "r058",
+      "createdDateTime": "2026-01-26T14:55:00+02:00",
+      "from": "Karim Nahle",
+      "body": "The revised pack is in the folder. Tripoli now shows FA-2026 for the full USD 21,600.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r059",
+      "createdDateTime": "2026-01-27T09:40:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Dans deux semaines, il faut avoir vérifié les codes budgétaires du récapitulatif avec le fichier de la finance.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r060",
+      "createdDateTime": "2026-01-27T09:48:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Leave the code check with me. I can compare both exports.",
+      "replyToId": "r059",
+      "edited": false
+    },
+    {
+      "id": "r061",
+      "createdDateTime": "2026-01-27T12:37:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "In case the sheet hangs, it did load for me after refreshing twice.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r062",
+      "createdDateTime": "2026-01-27T13:44:00+02:00",
+      "from": "Dalia Akl",
+      "body": "I put the existing Saida signature-clearance deadline in the Sheet as 10/03 so it sorts with the other dates.",
+      "replyToId": "r041",
+      "edited": false
+    },
+    {
+      "id": "r063",
+      "createdDateTime": "2026-01-29T09:07:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Missing-date rows need to be grouped by end of the week, before we log off Friday. The recap has Halba between two complete rows right now.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r064",
+      "createdDateTime": "2026-01-29T09:14:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "I'll group those rows. Halba and that annex in Baalbek are the ones I know about.",
+      "replyToId": "r063",
+      "edited": false
+    },
+    {
+      "id": "r065",
+      "createdDateTime": "2026-01-29T11:02:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "بعد ما ردّ مالك مركز صيدا، ولا حتى عالرسالة التانية.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r066",
+      "createdDateTime": "2026-01-29T14:21:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Anyone want coffee?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r067",
+      "createdDateTime": "2026-01-30T14:50:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Grouped the blank-date rows for the recap. The annex is on a separate line from the Baalbek centre.",
+      "replyToId": "r063",
+      "edited": false
+    },
+    {
+      "id": "r068",
+      "createdDateTime": "2026-01-30T15:23:00+02:00",
+      "from": "Karim Nahle",
+      "body": "I can see both lines now. The annex rent is already broken out in the budget.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r069",
+      "createdDateTime": "2026-02-02T09:08:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Morning. The generator is down again so I'm in the front office if anyone's looking.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r070",
+      "createdDateTime": "2026-02-02T10:20:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Is the Jbeil rent still USD 18,600 on the signed annual page?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r071",
+      "createdDateTime": "2026-02-02T10:26:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Yes, same rent. Only the yearly end date changed.",
+      "replyToId": "r070",
+      "edited": false
+    },
+    {
+      "id": "r072",
+      "createdDateTime": "2026-02-02T10:32:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Let's cover Jbeil's next yearly period entirely from WASH-2026. That's the budget line finance confirmed for the health centre.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r073",
+      "createdDateTime": "2026-02-02T10:41:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Fine by me, put the whole Jbeil rent there.",
+      "replyToId": "r072",
+      "edited": false
+    },
+    {
+      "id": "r074",
+      "createdDateTime": "2026-02-04T09:16:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "Qui a l’original papier de l’avenant de Jbeil ?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r075",
+      "createdDateTime": "2026-02-04T10:25:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Still no written answer from the Saida owner. Checked the site inbox too.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r076",
+      "createdDateTime": "2026-02-06T16:14:00+02:00",
+      "from": "Karim Nahle",
+      "body": "Tripoli and Jbeil codes both showing in the live sheet now. Finally.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r077",
+      "createdDateTime": "2026-02-09T08:51:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Weekly recap came in. The blank-date section is easy to find now.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r078",
+      "createdDateTime": "2026-02-09T09:06:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Still nothing from Saida. The owner didn't answer when I called this morning either.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r079",
+      "createdDateTime": "2026-02-10T15:52:00+02:00",
+      "from": "Maya Tannous",
+      "body": "Code check done. The recap and the finance file agree for Zahle, Saida, Tripoli and Jbeil. Halba still has that fee cell open.",
+      "replyToId": "r059",
+      "edited": false
+    },
+    {
+      "id": "r080",
+      "createdDateTime": "2026-02-10T16:01:00+02:00",
+      "from": "Rima Zoghbi",
+      "body": "merci, saw it.",
+      "replyToId": "r079",
+      "edited": false
+    },
+    {
+      "id": "r081",
+      "createdDateTime": "2026-02-12T09:19:00+02:00",
+      "from": "Karim Nahle",
+      "body": "The portal accepted the final figures this morning. Saida's reserve is still in EA-2026.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r082",
+      "createdDateTime": "2026-02-12T09:28:00+02:00",
+      "from": "Tarek Choueiri",
+      "body": "Saida owner still hasn't replied. The site team knows we're waiting on the written answer.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "r083",
+      "createdDateTime": "2026-02-12T17:41:00+02:00",
+      "from": "Dalia Akl",
+      "body": "Thanks all. Logging off before the power does.",
+      "replyToId": null,
+      "edited": false
+    }
+  ]
+}

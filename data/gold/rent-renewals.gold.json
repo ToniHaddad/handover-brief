@@ -1,0 +1,285 @@
+{
+  "thread": "rent-renewals",
+  "items": [
+    {
+      "type": "deadline",
+      "label": "Zahle community centre contract ends",
+      "match_ids": [
+        "r002"
+      ],
+      "chain": [
+        "2026-04-16"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Follow up on the Zahle community centre renewal",
+      "match_ids": [
+        "r002"
+      ],
+      "chain": [
+        "2026-03-26",
+        "2026-01-16"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Follow up on the Zahle community centre renewal",
+      "match_ids": [
+        "r010"
+      ],
+      "owner": "Maya Tannous",
+      "status": "current"
+    },
+    {
+      "type": "decision",
+      "label": "Charge the full Tripoli warehouse rent for the next annual period to EA-2026",
+      "match_ids": [
+        "r011",
+        "r012"
+      ],
+      "status": "reversed",
+      "superseded_by": "r056"
+    },
+    {
+      "type": "proposal",
+      "label": "Add a weekly recap tab with a chart of rents by town",
+      "match_ids": [
+        "r013"
+      ]
+    },
+    {
+      "type": "deadline",
+      "label": "Tripoli warehouse contract and yearly period end",
+      "match_ids": [
+        "r014"
+      ],
+      "chain": [
+        "2026-04-24"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Submit the consolidated renewal budget pack to finance",
+      "match_ids": [
+        "r015"
+      ],
+      "chain": [
+        "2026-01-19",
+        "2026-01-22",
+        "2026-01-26"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Prepare the consolidated renewal budget pack",
+      "match_ids": [
+        "r017"
+      ],
+      "owner": "Karim Nahle",
+      "status": "current"
+    },
+    {
+      "type": "proposal",
+      "label": "Move the budget pack deadline to Wednesday, January 21",
+      "match_ids": [
+        "r018"
+      ]
+    },
+    {
+      "type": "deadline",
+      "label": "Upload the signed Tripoli notice scan",
+      "match_ids": [
+        "r020"
+      ],
+      "chain": [
+        "2026-01-15"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Upload the signed Tripoli notice scan",
+      "match_ids": [
+        "r020"
+      ],
+      "owner": "Rima Zoghbi",
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Jbeil health centre yearly period ends",
+      "match_ids": [
+        "r030"
+      ],
+      "chain": [
+        "2026-04-30"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "decision",
+      "label": "Suppress automatic emails for rows with no dates and list them under Missing dates in the weekly recap",
+      "match_ids": [
+        "r031",
+        "r032"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "question",
+      "label": "Who has a copy of the Halba store handover record?",
+      "match_ids": [
+        "r033"
+      ]
+    },
+    {
+      "type": "deadline",
+      "label": "Visit the Halba store and check the site folder",
+      "match_ids": [
+        "r035"
+      ],
+      "chain": [
+        "2026-01-22"
+      ],
+      "status": "cancelled"
+    },
+    {
+      "type": "owner",
+      "label": "Visit the Halba store and check the site folder",
+      "match_ids": [
+        "r035"
+      ],
+      "owner": "Rima Zoghbi",
+      "status": "cancelled"
+    },
+    {
+      "type": "owner",
+      "label": "Get a written renewal answer from the Saida landlord",
+      "match_ids": [
+        "r037"
+      ],
+      "owner": "Tarek Choueiri",
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Saida community centre contract ends",
+      "match_ids": [
+        "r038"
+      ],
+      "chain": [
+        "2026-04-10"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Clear the Saida renewal for signature",
+      "match_ids": [
+        "r041",
+        "r042"
+      ],
+      "chain": [
+        "2026-03-10"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "cancellation",
+      "label": "Halba store site visit called off",
+      "match_ids": [
+        "r044"
+      ],
+      "target": "r035"
+    },
+    {
+      "type": "deadline",
+      "label": "Submit the final rent figures for the February register",
+      "match_ids": [
+        "r049"
+      ],
+      "chain": [
+        "2026-02-14",
+        "2026-02-15"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "question",
+      "label": "Which cost centre should cover the Halba municipal fee?",
+      "match_ids": [
+        "r051"
+      ]
+    },
+    {
+      "type": "decision",
+      "label": "Charge the full Tripoli warehouse rent for the next annual period to FA-2026",
+      "match_ids": [
+        "r056",
+        "r057"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "deadline",
+      "label": "Check budget codes in the recap against the finance file",
+      "match_ids": [
+        "r059"
+      ],
+      "chain": [
+        "2026-02-10"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Check budget codes in the recap against the finance file",
+      "match_ids": [
+        "r060"
+      ],
+      "owner": "Maya Tannous",
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Group the missing-date rows for the weekly recap",
+      "match_ids": [
+        "r063"
+      ],
+      "chain": [
+        "2026-01-30"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Group the missing-date rows for the weekly recap",
+      "match_ids": [
+        "r064"
+      ],
+      "owner": "Rima Zoghbi",
+      "status": "current"
+    },
+    {
+      "type": "decision",
+      "label": "Charge the full Jbeil health centre rent for the next yearly period to WASH-2026",
+      "match_ids": [
+        "r072",
+        "r073"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "question",
+      "label": "Who has the original paper copy of the Jbeil amendment?",
+      "match_ids": [
+        "r074"
+      ]
+    }
+  ]
+}

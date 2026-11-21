@@ -8,14 +8,14 @@ export uses, flattened so a thread can be written or converted by hand.
 {
   "schema": "handover-thread/1",
   "synthetic": true,
-  "team": "Northbridge Relief Lebanon",
-  "channel": "Zahle warehouse move",
+  "team": "The Organization, Bekaa logistics",
+  "channel": "WH-14 go-live",
   "messages": [
     {
       "id": "m001",
-      "createdDateTime": "2026-03-02T08:41:00+02:00",
-      "from": "Amal Rizk",
-      "body": "Morning all. Landlord confirmed we must be out of the old site by 31 March.",
+      "createdDateTime": "2026-04-13T08:41:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Morning all. Admin confirmed WH-14 gets unlocked in the stock system on 4 May.",
       "replyToId": null,
       "edited": false
     }

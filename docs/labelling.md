@@ -20,7 +20,7 @@ nobody agreed to (that is a proposal).
 
 **decision**: a proposal followed by agreement from at least one other
 person, or a decision announced as already made ("we have decided", "final
-answer from the country director: ..."). An agreed date is a deadline, not a
+answer from the operations manager: ..."). An agreed date is a deadline, not a
 decision. An agreed move of an existing deadline is a step in that deadline's
 chain, not a decision.
 
@@ -33,8 +33,8 @@ turned down). This includes proposed new dates for an existing deadline that
 were not agreed. These must never be shown as decisions.
 
 **owner**: a person took responsibility for a task, either by claiming it
-("I'll take it", "leave it with me") or by accepting a request ("@Daniel can
-you ...?" then "yes, on it" from Daniel). A request nobody accepted is not an
+("I'll take it", "leave it with me") or by accepting a request ("@Rami can
+you ...?" then "yes, on it" from Rami). A request nobody accepted is not an
 owner item.
 
 - `owner`: the person's name as it appears in `from`.
@@ -72,21 +72,24 @@ whole chain agrees.
 
 ```json
 {
-  "thread": "warehouse-move",
+  "thread": "warehouse-golive",
   "items": [
-    {"type": "deadline", "label": "Racking installed at new site",
-     "match_ids": ["m014"], "chain": ["2026-03-13", "2026-03-16"],
+    {"type": "deadline", "label": "Opening stock count at WH-14",
+     "match_ids": ["g014"], "chain": ["2026-04-16", "2026-04-20"],
      "status": "current"},
-    {"type": "decision", "label": "Use Bekaa Freight for the move",
-     "match_ids": ["m020", "m021"], "status": "in_force"},
-    {"type": "proposal", "label": "Weekend shift to move pallets",
-     "match_ids": ["m033"]},
-    {"type": "owner", "label": "Book forklift hire", "match_ids": ["m040"],
-     "owner": "Daniel Mensah", "status": "current"},
-    {"type": "question", "label": "Who holds the keys to the old site?",
-     "match_ids": ["m055"]},
-    {"type": "cancellation", "label": "Thursday site visit called off",
-     "match_ids": ["m077"], "target": "m061"}
+    {"type": "decision", "label": "Print QR labels per shelf, not per box",
+     "match_ids": ["g020", "g021"], "status": "in_force"},
+    {"type": "proposal", "label": "Count on Saturday to avoid closing",
+     "match_ids": ["g033"]},
+    {"type": "owner", "label": "Train the keepers on the phone app",
+     "match_ids": ["g040"], "owner": "Rami Khoury", "status": "current"},
+    {"type": "question", "label": "Who holds the admin login for WH-14?",
+     "match_ids": ["g055"]},
+    {"type": "cancellation", "label": "Transfer to WH-09 called off",
+     "match_ids": ["g077"], "target": "g061"}
   ]
 }
 ```
+
+Messages in Arabic or French follow the same rules: a deadline set in French
+is a deadline, an agreement written in Arabic is an agreement.
