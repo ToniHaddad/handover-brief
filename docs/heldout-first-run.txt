@@ -1,57 +1,49 @@
-First run of the held-out thread (rent-renewals), extractor at commit 5be6068. Output of: python -m handover bench --split heldout -v
+First and only run of the held-out thread (count-investigation), extractor at commit 2366b12. Output of: python -m handover bench --split heldout -v
 
-== heldout (rent-renewals) ==
+== heldout (count-investigation) ==
 type          gold found right  precision  recall
-deadline        12    14    10       0.71    0.83
-decision         4     3     2       0.67    0.50
-proposal         2     6     2       0.33    1.00
-owner            7     7     6       0.86    0.86
-question         3     2     2       1.00    0.67
-cancellation     1     1     1       1.00    1.00
-change           4     2     2       1.00    0.50
-all items       29    33    23       0.70    0.79
-Superseded, cancelled or unagreed items shown as current: 3 (out of 8 such items in gold)
-  ! r002 deadline 'Our follow-up is set for March 26 in the Sheet.' shown as current
-  ! r011 decision 'For the next annual period on the Tripoli warehouse, let's charge the whole USD 21,600 to EA-2026.' shown as current
-  ! r035 deadline 'Halba site visit is Thursday.' shown as current
-  missed deadline: r002 Zahle community centre contract ends
-  missed deadline: r002 Follow up on the Zahle community centre renewal
-  extra  deadline: r002 Our follow-up is set for March 26 in the Sheet.
-  extra  deadline: r009 Corrected it in the Sheet to January 16, three months before April 16.
-  extra  deadline: r019 Wednesday won't work for finance.
-  extra  deadline: r062 I put the existing Saida signature-clearance deadline in the Sheet as 10/03 so it sorts with the other dates.
-  missed decision: r011 Charge the full Tripoli warehouse rent for the next annual period to EA-2026
-  missed decision: r031 Suppress automatic emails for rows with no dates and list them under Missing dates in the weekly recap
-  extra  decision: r011 For the next annual period on the Tripoli warehouse, let's charge the whole USD 21,600 to EA-2026.
-  extra  proposal: r001 Let's use this thread for the April renewals and the next annual budget lines.
-  extra  proposal: r031 For rows with no dates, let's keep the automatic emails off and show the rows under Missing dates in the weekly recap.
-  extra  proposal: r041 Can we put March 10 as the deadline for clearing the Saida renewal for signature?
-  extra  proposal: r051 Which cost centre should we use for Halba's municipal fee?
-  missed owner: r037 Get a written renewal answer from the Saida landlord
-  extra  owner: r036 Tarek Choueiri can you chase the Saida owner and get a written answer on renewal?
-  missed question: r051 Which cost centre should cover the Halba municipal fee?
-  missed change: r002 Follow up on the Zahle community centre renewal ['2026-03-26', '2026-01-16']
-  missed change: r011 Charge the full Tripoli warehouse rent for the next annual period to EA-2026 reversed
-
-
-----
-Rescored on 2026-11-22 after a scorer fix: a deadline or owner now also needs the right status
-(current or cancelled). Same thread, same gold labels, extractor unchanged since commit 5be6068
-(only a code comment differs). This is the number the README quotes.
-
-== heldout (rent-renewals) ==
-type          gold found right  precision  recall
-deadline        12    14     9       0.64    0.75
-decision         4     3     2       0.67    0.50
-proposal         2     6     2       0.33    1.00
-owner            7     7     6       0.86    0.86
-question         3     2     2       1.00    0.67
-cancellation     1     1     1       1.00    1.00
-change           4     2     2       1.00    0.50
-all items       29    33    22       0.67    0.76
-Superseded, cancelled or unagreed items shown as current: 3 (out of 8 such items in gold)
-  ! r002 deadline 'Our follow-up is set for March 26 in the Sheet.' shown as current
-  ! r011 decision 'For the next annual period on the Tripoli warehouse, let's charge the whole USD 21,600 to EA-2026.' shown as current
-  ! r035 deadline 'Halba site visit is Thursday.' shown as current
-Current items shown as cancelled, reversed or handed over: 0 (out of 20 current items in gold)
+deadline         8    15     5       0.33    0.62
+decision         5     4     2       0.50    0.40
+proposal         2     0     0        n/a    0.00
+owner            4     4     3       0.75    0.75
+question         2     3     2       0.67    1.00
+cancellation     2     2     1       0.50    0.50
+change           4     5     2       0.40    0.50
+all items       23    28    13       0.46    0.57
+Superseded, cancelled or unagreed items shown as current: 1 (out of 7 such items in gold)
+  ! c014 decision 'Let's use one signed recount sheet with separate blocks for FA and EA.' shown as current
+Current items shown as cancelled, reversed or handed over: 3 (out of 15 current items in gold)
+  ! c004 decision 'Let's reconcile each project and expiry on its own line.' shown as reversed
+  ! c028 deadline 'Scans of the signed count sheets by tomorrow end of day please.' shown as cancelled
+  ! c028 deadline 'Final investigation pack is due July 10.' shown as cancelled
+  missed deadline: c008 WH-22 canned cheese recount
+  missed deadline: c028 Upload scans of the signed count sheets
+  missed deadline: c028 File the final investigation pack
+  extra  deadline: c002 FA-2026, expiry 30 Nov: 12 boxes + 6 pieces on the floor.
+  extra  deadline: c008 Recount is Thursday at 9 in aisle 4.
+  extra  deadline: c024 Oui, on décale le recomptage à mardi, neuf heures.
+  extra  deadline: c028 Scans of the signed count sheets by tomorrow end of day please.
+  extra  deadline: c028 Final investigation pack is due July 10.
+  extra  deadline: c030 EA tag is still on it and the lot matches the 30 Nov row.
+  extra  deadline: c044 One signed waybill, 48 pieces of EA 30 Nov, WH-19 EA to WH-22 EA.
+  extra  deadline: c059 All six cans have the 30 Nov stamp.
+  extra  deadline: c063 294 on the 30 Nov row.
+  extra  deadline: c075 Final pack filed for 10/07.
+  missed decision: c004 Reconcile each project and expiry separately without offsetting FA and EA variances
+  missed decision: c014 Use one signed recount sheet with separate FA and EA sections
+  missed decision: c037 The operations manager signs the stock adjustment and the warehouse keeper signs the count sheets
+  extra  decision: c004 Let's reconcile each project and expiry on its own line.
+  extra  decision: c014 Let's use one signed recount sheet with separate blocks for FA and EA.
+  missed proposal: c017 Move the recount up to Friday, June 19
+  missed proposal: c049 Add a photo of the empty overflow bays to the final pack
+  missed owner: c037 Handle operations sign-off for the WH-22 stock adjustment
+  extra  owner: c060 I can read the project tag now.
+  extra  question: c049 Maybe add a photo of the empty overflow bays to the final pack too?
+  missed cancellation: c031 Withdraw damage report DMG-2026-00037 after finding the carton intact
+  extra  cancellation: c033 Scans of the signed count sheets by tomorrow end of day please.
+  missed change: c008 WH-22 canned cheese recount ['2026-06-18', '2026-06-22', '2026-06-23']
+  missed change: c014 Use one signed recount sheet with separate FA and EA sections reversed
+  extra  change: c002 FA-2026, expiry 30 Nov: 12 boxes + 6 pieces on the floor. ['2026-11-30', '2027-02-28']
+  extra  change: c004 Let's reconcile each project and expiry on its own line. reversed
+  extra  change: c008 Recount is Thursday at 9 in aisle 4. ['2026-06-18', '2026-06-22', '2026-06-19']
 
