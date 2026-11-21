@@ -34,7 +34,7 @@ handover build data/threads/warehouse-golive.json --out brief.html
 wrote brief.html (58 KB, self-contained)
 ```
 
-The page makes no external requests (no CDN, no web fonts), so it opens on a weak connection or none. It works at phone width, in light and dark. `handover items <thread.json>` prints the items as a table ([sample](docs/sample-output.txt)). `python -m handover` is the same command if your system blocks the generated launcher.
+The page makes no external requests (no CDN, no web fonts), so it opens on a weak connection or none. It works at phone width, in light and [dark](docs/dark-changes.png). `handover items <thread.json>` prints the items as a table ([sample](docs/sample-output.txt)). `python -m handover` is the same command if your system blocks the generated launcher.
 
 <img src="docs/mobile-source.png" alt="On a phone, the selected stock count opens a panel with its history and the highlighted message 'Count pushed to Monday'" width="300">
 
