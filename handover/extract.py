@@ -22,39 +22,46 @@ from .model import Item, Message, Thread, Version
 AGREE_START = re.compile(
     r"^(?:yes|yep|yeah|yup|ok|okay|agreed|agree|sure|fine|sounds good|works for me|fine by me|"
     r"go ahead|go for it|approved|deal|good idea|great idea|makes sense|that works|perfect|"
-    r"no objection|vale|dale|listo|de acuerdo|perfecto|claro|correct|absolutely|definitely|\+1)\b", re.I)
+    r"no objection|vale|dale|listo|de acuerdo|perfecto|claro|correct|absolutely|definitely|\+1|"
+    r"d'accord|parfait|ça marche|ca marche|entendu|ok pour moi|tamam|"
+    r"تمام|موافق|موافقة|ماشي|اوكي|أوكي|اتفقنا|اكيد|أكيد|طيب)(?!\w)", re.I)
 AGREE_ANY = re.compile(
     r"\b(?:agreed|i agree|fine by me|works for me|sounds good|go ahead|makes sense|good idea|"
-    r"happy with that|let's do (?:it|that)|approved|go for it|no objection|that works)\b|\bworks[.!]*$", re.I)
-AGREE_NOT = re.compile(r"\b(?:as agreed|not agreed|never agreed|if agreed)\b", re.I)
+    r"happy with that|let's do (?:it|that)|approved|go for it|no objection|that works|d'accord|ça marche)\b"
+    r"|\bworks[.!]*$|(?<!\w)(?:موافق|اتفقنا)(?!\w)", re.I)
+AGREE_NOT = re.compile(r"\b(?:as agreed|not agreed|never agreed|if agreed|pas d'accord)\b", re.I)
 DISAGREE = re.compile(
     r"^(?:no|nope|not really|i'd rather not|i would rather not|i don't think|i disagree|can't|cannot|"
-    r"not possible|let's not)\b|\b(?:too late|won't approve|not approve|rather not|disagree)\b", re.I)
+    r"not possible|let's not|non|pas possible|لا)(?!\w)"
+    r"|\b(?:too late|won't approve|not approve|rather not|disagree|pas d'accord)\b|مش ممكن|ما بيمشي", re.I)
 PROPOSE = re.compile(
     r"\b(?:let's|let us|i propose|i suggest|i'd suggest|we could|why don't we|how about|"
     r"what about \w+ing|what if we|should we|shall we|could we|can we|i'd like|i would like|"
     r"my suggestion|proposal:|suggested|proposes|proposed|i think we should|maybe we (?:should|could)|"
-    r"perhaps we|suggest we|propose we)\b", re.I)
+    r"perhaps we|suggest we|propose we|change of plan|on pourrait|je propose|et si on)\b"
+    r"|(?<!\w)(?:شو رأيكم|شو رأيك|بقترح|منقترح)(?!\w)", re.I)
 PROPOSE_NOT = re.compile(r"\b(?:let's see|we'll see|let's not)\b", re.I)
 INFO_QUESTION_START = re.compile(
     r"^(?:who|what|when|where|why|which|how|has|have|is|are|was|were|did|do|does|will|would|any|"
-    r"anyone|anybody)\b", re.I)
+    r"anyone|anybody|est-ce|qui|quand|où|comment|pourquoi|quel|quelle|"
+    r"مين|شو|وين|ايمتى|إيمتى|كيف|ليش|هل|في حدا|حدا)(?!\w)", re.I)
 REQUEST = re.compile(r"\b(?:can you|could you|would you|can your team|could your team|please|pls|"
-                     r"can the \w+|could the \w+)\b", re.I)
-CLAIM_VERBS = (
-    "take|handle|do|send|sort|organise|organize|raise|pay|chase|get|lead|find|brief|ask|check|draft|"
-    "book|order|call|follow up|prepare|update|reschedule|put|write|share|look into|arrange|confirm|"
-    "make|cover|fix|translate|print|contact|collect|bring|run|set up|own|coordinate|adjust|review|"
-    "pick up|visit|email|submit|finish|complete|compile|reconcile|merge|clean|move|deliver|"
-    "speak|talk|liaise|plan|schedule|request|follow|pull|build|edit|proofread|format|add"
-)
+                     r"can the \w+|could the \w+|peux-tu|pouvez-vous|tu peux|merci de)\b"
+                     r"|(?<!\w)(?:فيك|فيكي|بليز)(?!\w)", re.I)
+# "I'll <verb>" is a claim unless the verb says nothing about taking a task.
+NOT_TASK = (r"be|have|try|see|wait|think|probably|need|let|keep|tell|come|go|leave|believe|look|join|"
+            r"stay|miss|only|just|still|never|also be|update you|get back|let you know|hope|guess|"
+            r"assume|say|mention|remember|forget|lose|die|sleep|survive")
 CLAIM = re.compile(
-    rf"\b(?:i'll|i will|i can|i'm going to|let me)\s+(?:also\s+|now\s+|then\s+)?(?:{CLAIM_VERBS})\b"
+    rf"\b(?:i'll|i will|i can|i'm going to|let me)\s+(?:also\s+|now\s+|then\s+)?(?!(?:{NOT_TASK})\b)[a-z]+"
     r"|\bleave it with me\b|\bi'm on it\b|^on it\b|\bi'll take (?:it|this|that)\b"
-    r"|\bi(?:'ve)? got (?:it|this)\b|\b(?:yo )?me encargo\b|\blo hago yo\b", re.I)
+    r"|\bi(?:'ve)? got (?:it|this)\b|\b(?:yo )?me encargo\b|\blo hago yo\b"
+    r"|\bje m'en (?:occupe|charge)\b|\bje vais (?!être|voir|attendre)\w+"
+    r"|(?<!\w)(?:عليّ|خليها عليّ|خليها علي|بتكفل|انا بعمل|أنا بعمل|انا ببعت|أنا ببعت|انا بجيب|أنا بجيب)(?!\w)", re.I)
 ACCEPT_START = re.compile(
     r"^(?:yes|yep|yeah|ok|okay|sure|on it|will do|no problem|done|consider it done|leave it with me|"
-    r"fine|of course|vale|dale|claro|listo|i'll|i will|i can)\b", re.I)
+    r"fine|of course|vale|dale|claro|listo|i'll|i will|i can|oui|d'accord|entendu|"
+    r"تمام|اكيد|أكيد|ماشي|حاضر|ايه|إيه)(?!\w)", re.I)
 TAKEOVER = re.compile(r"\b(?:take(?:s)? (?:it )?over|taking over|hand(?:ing)? (?:it )?over|instead of \w+ doing)\b", re.I)
 MOVE = re.compile(
     r"\b(?:push(?:ed|es|ing)?|mov(?:e|ed|es|ing)|postpon(?:e|ed|es|ing)|reschedul(?:e|ed|ing)|"
@@ -63,39 +70,51 @@ MOVE = re.compile(
     r"|\bnow\s+(?:on\s+|due\s+|is\s+)?(?:the\s+)?(?=monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
     r"jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\d)"
     r"|\bnew (?:\w+ )?(?:deadline|date|day)\b|\binstead of\b|\bextension (?:to|until|till)\b"
-    r"|\b(?:have|has|got) until\b", re.I)
+    r"|\b(?:have|has|got) until\b"
+    r"|\b(?:report|repouss|décal|decal|avanc)[ée]e?s?\s+(?:à|a|au)\b"
+    r"|(?<!\w)(?:تأجل|تأجّل|تأجلت|تأجّلت|أجّلنا|أجلنا|اجلنا|تأجيل)(?!\w)", re.I)
 CORRECTION = re.compile(
-    r"\b(?:sorry,? i meant|i meant|correction|typo|should have said|should read|my mistake|my bad|oops)\b"
-    r"|^\*"
+    r"\b(?:sorry,? i meant|i meant|correction|typo|should have said|should read|my mistake|my bad|oops|"
+    r"je voulais dire)\b"
+    r"|^\*|(?<!\w)(?:قصدي|عفوا قصدي)(?!\w)"
     r"|\b\d{1,2}(?:st|nd|rd|th)? not (?:the )?\d{1,2}(?:st|nd|rd|th)?\b", re.I)
 CANCEL = re.compile(
     r"\b(?:cancel(?:led|ed|ling|s)?|called off|call(?:ing)? off|is off|are off|'s off|"
     r"no longer (?:need(?:ed)?|happening|required|going ahead)|not needed|"
     r"don't need [^.]{0,40}after all|dropping (?:that|this|the|it)|drop (?:that|this|the|it)|"
     r"scrap(?:ped|ping)? (?:that|this|the|it)|not going ahead|won't go ahead|no point in|"
-    r"not happening|won't happen|forget (?:about )?(?:the|that|it))\b"
-    r"|\bno need (?:for|to) [^.]{0,40}(?:anymore|any more)\b", re.I)
+    r"not happening|won't happen|forget (?:about )?(?:the|that|it)|annul(?:é|ée|és|ées|e|er)|n'a plus lieu)\b"
+    r"|\bno need (?:for|to) [^.]{0,40}(?:anymore|any more)\b"
+    r"|(?<!\w)(?:ملغى|ملغية|ملغاة|انلغى|انلغت|ألغي|الغي|الغاء|إلغاء|ألغينا|الغينا|كنسلنا|تكنسل|تكنسلت)(?!\w)", re.I)
+# "the admin is off" is a person away, not a task called off
+OFF_PERSON = re.compile(r"\b(?:he|she|they|i|admin|driver|manager|keeper|everyone|nobody)\s+(?:is|are|'s|'m)\s+off\b", re.I)
 DECISION = re.compile(
-    r"\bdecision(?: from [^:.]{1,40})?:|\bfinal answer\b[^:.]{0,40}:|"
+    r"\bdecision(?: from [^:.]{1,40})?:|\bfinal answer\b[^:.]{0,40}:|\bdécision\b[^:.]{0,40}:|"
     r"\b(?:we(?:'ve| have)? decided|it's decided|it is decided|final decision|has decided|"
-    r"the decision is|decided to)\b", re.I)
+    r"the decision is|decided to)\b|(?<!\w)(?:القرار|تقرر)(?!\w)", re.I)
 REVERSAL = re.compile(
     r"\b(?:switch(?:ing)?|instead|change of plan|revised|revise|scrap|reverse|reversing|no longer|"
     r"rather than|from this round|replace|replacing|overrule|back to|actually|on second thought|"
-    r"changed our minds?|change of mind)\b", re.I)
+    r"changed our minds?|change of mind|finalement|plutôt)\b|(?<!\w)(?:بدل|بالآخر)(?!\w)", re.I)
 NOT_A_DEADLINE = re.compile(
     r"\b(?:let's see|we'll see|i'm (?:off|away|on leave|travelling|starting)|we start|"
-    r"i start|starting the|we're starting)\b", re.I)
+    r"i start|starting the|we're starting|i can only (?:come|make|do)|i'm only free|only free on)\b", re.I)
+# A same-day word ("today", "tonight") sets a deadline only next to a word that asks for something.
+TODAY_WORDS = re.compile(r"^(?:today|tonight|this\s+\w+|end\s+of|eod|cob|aujourd|ce\s+|اليوم|الليلة)", re.I)
+DUE_CUE = re.compile(
+    r"\b(?:by|before|until|due|deadline|must|need to|needs to|has to|have to|dispatch|send|deliver|"
+    r"submit|finish|load|close|closes|lock|locks|confirm|avant|pour)\b", re.I)
 CHATTER = re.compile(
-    r"\b(?:coffee|lunch|mug|match|football|weather|rain|snow|dust storm|batteries|birthday|weekend|"
+    r"\b(?:coffee|lunch|mug|match|football|weather|rain|snow|dust storm|batteries|birthday|"
     r"fever|sick|get well|pole sana|traffic|kitchen|cake|tea|dinner|breakfast|holiday plans|"
-    r"almuerzo|cafe|café|lluvia)\b", re.I)
+    r"almuerzo|cafe|café|lluvia|manouche|zaatar|bakery)\b|(?<!\w)(?:قهوة|ترويقة|منقوشة)(?!\w)", re.I)
 STILL = re.compile(r"\bstill\b", re.I)
 ANSWER_START = re.compile(
     r"^(?:yes|no|yeah|nope|not yet|it's|it is|they|we|the|i think|already|done|sent|i|he|she|"
-    r"none|all|only|sí|si)\b", re.I)
+    r"none|all|only|sí|si|oui|non|نعم|لا|ايه|إيه|ما في)(?!\w)", re.I)
 MENTION = re.compile(r"@(\w+)")
 ANAPHORA = re.compile(r"\b(?:it|them|that|this|one)\b", re.I)
+CODE = re.compile(r"\b[a-z]{1,5}-\d{2,4}(?:-\d{1,6})?\b", re.I)
 
 STOP = set("""
 a an the and or but if so of to in on at by for from with without about into over after before
@@ -109,19 +128,21 @@ month months january february march april may june july august september october
 end new next last this first deadline date time noon am pm i'll i'm we're it's that's don't can't
 won't isn't we'll they're there's what's here's she'll he'll you'll said says say told tell
 good great sure fine agreed agree moved pushed push cancelled cancel instead meant
+les des une est pour pas que qui dans sur avec par plus été
 """.split())
 
 
 def keywords(text: str) -> set[str]:
-    out = set()
-    for raw in re.findall(r"[a-záéíóúñ0-9']+", text.lower().replace("-", " ")):
+    out = {c.lower() for c in CODE.findall(text)}  # WH-07, S-03, FA-2026 name things precisely
+    rest = CODE.sub(" ", text.lower()).replace("-", " ")
+    for raw in re.findall(r"[a-záàâçéèêëîïôûùüñ0-9'؀-ۿ]+", rest):
         w = raw.strip("'")
         if w.endswith("'s"):
             w = w[:-2]
         if w in STOP or len(w) < 3 or w.isdigit():
             continue
         for suffix in ("ing", "ed", "es", "s"):
-            if len(w) > 4 and w.endswith(suffix) and not w.endswith("ss"):
+            if len(w) > 4 and w.isascii() and w.endswith(suffix) and not w.endswith("ss"):
                 w = w[: -len(suffix)]
                 break
         if w not in STOP:
@@ -132,7 +153,7 @@ def keywords(text: str) -> set[str]:
 def sentences(text: str) -> list[tuple[int, str]]:
     """Split into sentences, keeping each one's start offset."""
     out, start = [], 0
-    for m in re.finditer(r"[.!?]+(?:\s+|$)|\n+", text):
+    for m in re.finditer(r"[.!?\u061f]+(?:\s+|$)|\n+", text):
         chunk = text[start:m.end()].strip()
         if chunk:
             out.append((start, chunk))
@@ -140,6 +161,13 @@ def sentences(text: str) -> list[tuple[int, str]]:
     if text[start:].strip():
         out.append((start, text[start:].strip()))
     return out
+
+
+def is_due(mention: DateMention, sentence: str) -> bool:
+    """"Tonight" or "today" alone is usually a report ("a school opened tonight"), not a deadline."""
+    if TODAY_WORDS.match(mention.text.strip()):
+        return bool(DUE_CUE.search(sentence))
+    return True
 
 
 def short(text: str, limit: int = 140) -> str:
@@ -195,12 +223,14 @@ def describe(msg: Message, people: dict[str, str]) -> Features:
     if claim:
         end = re.search(r"[.!?](?:\s|$)", body[claim.end():])
         f.claim = body[claim.start(): claim.end() + (end.end() if end else len(body))].strip()
-        f.claim_dates = [d for d in f.dates if d.start >= claim.start()]
+        f.claim_dates = [d for d in f.dates if d.start >= claim.start() and is_due(d, f.claim)]
     f.takeover = bool(TAKEOVER.search(body))
     f.correction = bool(CORRECTION.search(body))
     f.decision = bool(DECISION.search(body))
     f.reversal = bool(REVERSAL.search(body))
     cancel = CANCEL.search(body)
+    if cancel and OFF_PERSON.search(body[max(0, cancel.start() - 30):cancel.end()]):
+        cancel = None
     if cancel:
         f.cancel = next((s for o, s in f.sents if o <= cancel.start() < o + len(s) + 2), body)
         # the clause that holds the cue names what was called off
@@ -211,7 +241,7 @@ def describe(msg: Message, people: dict[str, str]) -> Features:
     if move and any(d.start >= move.start() for d in f.dates):
         f.move = move
     for _, s in f.sents:
-        is_q = s.rstrip().endswith("?")
+        is_q = s.rstrip().endswith(("?", "\u061f"))
         addressee = re.match(r"^(\w+),\s", s) or re.match(r"^(\w+)\s+(?:can|could|would) you\b", s)
         to = None
         if f.mentions:
@@ -224,6 +254,8 @@ def describe(msg: Message, people: dict[str, str]) -> Features:
             f.request, f.request_to = s, to
         elif is_q and to and not INFO_QUESTION_START.match(re.sub(r"^\w+,\s*", "", s)) and not f.request:
             f.request, f.request_to = s, to
+        elif to and addressee and not f.request and not is_q:
+            f.request, f.request_to = s, to  # "Omar, same 150." is an instruction to Omar
         elif is_q and not f.question:
             sdates = [d for d in f.dates if d.start >= body.find(s)]
             if sdates and not INFO_QUESTION_START.match(s) and not f.proposal:
@@ -300,7 +332,8 @@ class Extractor:
                 score += 5
             if c.date and c.date in old_dates:
                 score += 4
-            overlap = len(words & c.keywords)
+            # a shared code (WH-09, S-03, DSP-2026-00413) names the same thing: it counts twice
+            overlap = sum(2 if CODE.fullmatch(w) else 1 for w in words & c.keywords)
             if overlap >= min_overlap:
                 score += 2 * overlap
             if score > 0:
@@ -330,7 +363,7 @@ class Extractor:
         for d in self.deadlines():
             # The same date again is the same deadline when the message is about the same
             # thing (shared words, or a reply to it) or too short to set up something new.
-            related = bool(words & d.keywords) or msg.reply_to in d.source_ids or len(msg.text.split()) <= 10
+            related = len(words & d.keywords) >= 2 or msg.reply_to in d.source_ids or len(msg.text.split()) <= 10
             if merge and d.date == mention.value and related:
                 d.add_source(msg.id)
                 d.keywords |= words
@@ -463,7 +496,7 @@ class Extractor:
                 continue
             if msg.idx - r.msg.idx > 12 or (msg.reply_to and msg.reply_to != r.msg.id):
                 continue
-            if f.accept or f.claim:
+            if f.claim or (f.accept and r.to):
                 accepted = r
                 break
         if accepted:
@@ -535,16 +568,19 @@ class Extractor:
 
         # 8. a new request ("@Rana can you get freight quotes?")
         if f.request and not f.chatter:
-            self.requests.append(PendingRequest(msg, f.request_to, f.request, f.takeover,
-                                                [d for d in f.dates if d.start >= msg.text.find(f.request) - 1]))
-            consumed_dates = True
+            req_start = MENTION.sub(lambda m: m.group(1), msg.text).find(f.request)
+            req_dates = [d for d in f.dates if req_start <= d.start < req_start + len(f.request)]
+            self.requests.append(PendingRequest(msg, f.request_to, f.request, f.takeover, req_dates))
+            # dates outside the request sentence ("S-03 goes tomorrow. Omar, same 150.") still count
+            consumed_dates = consumed_dates or bool(req_dates)
 
         # 9. a date stated as plan or fact
         if f.dates and not consumed_dates and not f.chatter and not f.no_deadline and not f.disagree \
                 and not f.question and not agreed_proposal:
             primary = self.primary_date(msg.text, f.dates)
             sentence = next((s for o, s in f.sents if o <= primary.start < o + len(s) + 2), msg.text)
-            self.set_deadline(msg, primary, sentence)
+            if is_due(primary, sentence):
+                self.set_deadline(msg, primary, sentence)
 
     @staticmethod
     def move_words(f: Features) -> set[str]:
@@ -576,7 +612,11 @@ class Extractor:
             self.change_deadline(p.target, p.msg, p.value, "moved", agreed_by=msg)
             self.items.remove(p.item)
         elif p.kind == "date":
-            value = f.dates[0] if f.dates else next(d for d in describe(p.msg, self.people).dates if d.value == p.value)
+            proposed = next(d for d in describe(p.msg, self.people).dates if d.value == p.value)
+            # "ok, Tuesday works" agrees to "Tuesday 28 April": a bare weekday in the reply
+            # points back at the proposed day, only an explicit date in the reply overrides it
+            explicit = [d for d in f.dates if d.kind in ("explicit", "ordinal")]
+            value = explicit[0] if explicit else proposed
             self.set_deadline(msg, value, p.item.label, origin=p.msg)
             self.items.remove(p.item)
         else:
@@ -609,7 +649,7 @@ class Extractor:
                     continue
                 if f.mentions and m.author not in f.mentions:
                     continue
-                if ANSWER_START.match(m.text.strip()) or qwords & keywords(m.text):
+                if ANSWER_START.match(m.text.strip()) or len(qwords & keywords(m.text)) >= 2:
                     answered = True
                 break
             if not answered:

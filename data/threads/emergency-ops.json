@@ -1,0 +1,568 @@
+{
+  "schema": "handover-thread/1",
+  "synthetic": true,
+  "team": "The Organization, emergency operations room",
+  "channel": "Displacement response, Halba shelters",
+  "messages": [
+    {
+      "id": "e001",
+      "createdDateTime": "2026-09-14T06:50:00+03:00",
+      "from": "Layla Frem",
+      "body": "Morning. Families arriving from the border villages since last night. Municipality opened two schools in Halba as shelters: S-01 Halba Public School and S-02 Al-Nour school. Ops room is this channel.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e002",
+      "createdDateTime": "2026-09-14T06:58:00+03:00",
+      "from": "Carla Nassif",
+      "body": "I'm at S-01. About 180 families so far, more buses coming. No mattresses at all.",
+      "replyToId": "e001",
+      "edited": false
+    },
+    {
+      "id": "e003",
+      "createdDateTime": "2026-09-14T07:10:00+03:00",
+      "from": "Layla Frem",
+      "body": "Priority today: mattresses and blankets to S-01 and S-02. Omar what do we have in WH-07?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e004",
+      "createdDateTime": "2026-09-14T07:25:00+03:00",
+      "from": "Omar Daher",
+      "body": "WH-07 Tripoli: 1,150 mattresses, 900 blankets, 600 hygiene kits, all EA-2026.",
+      "replyToId": "e003",
+      "edited": false
+    },
+    {
+      "id": "e005",
+      "createdDateTime": "2026-09-14T07:31:00+03:00",
+      "from": "Layla Frem",
+      "body": "Dispatch 300 mattresses and 300 blankets to S-01 this morning.",
+      "replyToId": "e004",
+      "edited": false
+    },
+    {
+      "id": "e006",
+      "createdDateTime": "2026-09-14T07:32:00+03:00",
+      "from": "Layla Frem",
+      "body": "S-02 gets 200 mattresses and 200 blankets tomorrow, they have fewer families.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e007",
+      "createdDateTime": "2026-09-14T07:33:00+03:00",
+      "from": "Layla Frem",
+      "body": "@Bilal can you take the big truck to WH-07 now?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e008",
+      "createdDateTime": "2026-09-14T07:36:00+03:00",
+      "from": "Bilal Hamdan",
+      "body": "yes, leaving now",
+      "replyToId": "e007",
+      "edited": false
+    },
+    {
+      "id": "e009",
+      "createdDateTime": "2026-09-14T09:40:00+03:00",
+      "from": "Omar Daher",
+      "body": "DSP-2026-00411 out: 300 mattresses, 300 blankets to S-01.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e010",
+      "createdDateTime": "2026-09-14T09:45:00+03:00",
+      "from": "Nour Kassab",
+      "body": "I'll confirm receipt with the shelter focal points for every dispatch, and keep the list in the ops sheet.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e011",
+      "createdDateTime": "2026-09-14T10:30:00+03:00",
+      "from": "Carla Nassif",
+      "body": "no coffee left at S-01, if anyone passes by the station",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e012",
+      "createdDateTime": "2026-09-14T11:00:00+03:00",
+      "from": "Layla Frem",
+      "body": "Decision from the coordinator: all dispatches for this response go on EA-2026 until further notice. No mixing with FA-2026 stock.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e013",
+      "createdDateTime": "2026-09-14T11:02:00+03:00",
+      "from": "Omar Daher",
+      "body": "understood",
+      "replyToId": "e012",
+      "edited": false
+    },
+    {
+      "id": "e014",
+      "createdDateTime": "2026-09-14T12:20:00+03:00",
+      "from": "Carla Nassif",
+      "body": "Les matelas sont bien arrivés à S-01, 300 matelas et 300 couvertures reçus, bon de livraison signé.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e015",
+      "createdDateTime": "2026-09-14T13:00:00+03:00",
+      "from": "Sami Rahal",
+      "body": "WH-11 Halba has 420 blankets and 800 hygiene kits under EA-2026. It's 5 minutes from both schools.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e016",
+      "createdDateTime": "2026-09-14T13:10:00+03:00",
+      "from": "Layla Frem",
+      "body": "Let's dispatch from WH-11 for the Halba shelters and keep WH-07 for Tripoli. Saves the road.",
+      "replyToId": "e015",
+      "edited": false
+    },
+    {
+      "id": "e017",
+      "createdDateTime": "2026-09-14T13:18:00+03:00",
+      "from": "Omar Daher",
+      "body": "Agreed.",
+      "replyToId": "e016",
+      "edited": false
+    },
+    {
+      "id": "e018",
+      "createdDateTime": "2026-09-14T15:30:00+03:00",
+      "from": "Layla Frem",
+      "body": "Hygiene kit distribution in S-01 and S-02 on Thursday, after registration is finished.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e019",
+      "createdDateTime": "2026-09-14T15:41:00+03:00",
+      "from": "Sami Rahal",
+      "body": "I'll prepare the kits at WH-11 and send them over.",
+      "replyToId": "e018",
+      "edited": false
+    },
+    {
+      "id": "e020",
+      "createdDateTime": "2026-09-14T18:40:00+03:00",
+      "from": "Carla Nassif",
+      "body": "A third school opened tonight, S-03 Bebnine intermediate school. 90 families. Needs everything.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e021",
+      "createdDateTime": "2026-09-14T18:52:00+03:00",
+      "from": "Layla Frem",
+      "body": "Send 150 mattresses from WH-07 to S-03 tomorrow morning, first thing.",
+      "replyToId": "e020",
+      "edited": false
+    },
+    {
+      "id": "e022",
+      "createdDateTime": "2026-09-14T23:10:00+03:00",
+      "from": "Omar Daher",
+      "body": "going to sleep for 4 hours, phone on",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e023",
+      "createdDateTime": "2026-09-15T07:20:00+03:00",
+      "from": "Sami Rahal",
+      "body": "DSP-2026-00412 out from WH-11: 200 blankets to S-02. Mattresses for S-02 coming from WH-07.",
+      "replyToId": null,
+      "edited": true
+    },
+    {
+      "id": "e024",
+      "createdDateTime": "2026-09-15T08:05:00+03:00",
+      "from": "Bilal Hamdan",
+      "body": "Road to Bebnine is closed after the bridge, army checkpoint, no trucks allowed.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e025",
+      "createdDateTime": "2026-09-15T08:12:00+03:00",
+      "from": "Layla Frem",
+      "body": "Then the S-03 mattress delivery is cancelled for today. DSP-2026-00413 stays in WH-07, don't load it.",
+      "replyToId": "e024",
+      "edited": false
+    },
+    {
+      "id": "e026",
+      "createdDateTime": "2026-09-15T08:15:00+03:00",
+      "from": "Omar Daher",
+      "body": "ok, unloading",
+      "replyToId": "e025",
+      "edited": false
+    },
+    {
+      "id": "e027",
+      "createdDateTime": "2026-09-15T08:30:00+03:00",
+      "from": "Carla Nassif",
+      "body": "What about sending the S-03 mattresses through Qobayat road? Longer but open.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e028",
+      "createdDateTime": "2026-09-15T08:41:00+03:00",
+      "from": "Bilal Hamdan",
+      "body": "No, that road isn't safe for the big truck after the rain, I wouldn't.",
+      "replyToId": "e027",
+      "edited": false
+    },
+    {
+      "id": "e029",
+      "createdDateTime": "2026-09-15T09:00:00+03:00",
+      "from": "Layla Frem",
+      "body": "Do we have a figure for how many families are in S-02 tonight?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e030",
+      "createdDateTime": "2026-09-15T10:10:00+03:00",
+      "from": "Omar Daher",
+      "body": "DSP-2026-00414 out: 200 mattresses to S-02.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e031",
+      "createdDateTime": "2026-09-15T12:30:00+03:00",
+      "from": "Nour Kassab",
+      "body": "S-02 confirmed: 200 mattresses and 200 blankets received, signed.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e032",
+      "createdDateTime": "2026-09-15T14:00:00+03:00",
+      "from": "Sami Rahal",
+      "body": "Problem: WH-11 only has 220 blankets left and S-01 is asking for 200 more tonight.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e033",
+      "createdDateTime": "2026-09-15T14:10:00+03:00",
+      "from": "Layla Frem",
+      "body": "Change of plan: switch blanket dispatches for all Halba shelters to WH-07 instead, WH-11 keeps hygiene kits only.",
+      "replyToId": "e032",
+      "edited": false
+    },
+    {
+      "id": "e034",
+      "createdDateTime": "2026-09-15T14:16:00+03:00",
+      "from": "Omar Daher",
+      "body": "Agreed, WH-07 sends the blankets from now on.",
+      "replyToId": "e033",
+      "edited": false
+    },
+    {
+      "id": "e035",
+      "createdDateTime": "2026-09-15T16:45:00+03:00",
+      "from": "Omar Daher",
+      "body": "DSP-2026-00416 out: 200 blankets to S-01 from WH-07.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e036",
+      "createdDateTime": "2026-09-15T17:30:00+03:00",
+      "from": "Layla Frem",
+      "body": "Coordination meeting with the municipality and the other organizations on the 21st at the governorate, 10:00.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e037",
+      "createdDateTime": "2026-09-15T17:34:00+03:00",
+      "from": "Layla Frem",
+      "body": "sorry, I meant the 22nd. The 21st is a holiday for the governorate staff.",
+      "replyToId": "e036",
+      "edited": false
+    },
+    {
+      "id": "e038",
+      "createdDateTime": "2026-09-15T21:00:00+03:00",
+      "from": "Carla Nassif",
+      "body": "S-01 generator died, families in the dark. Municipality sending a technician.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e039",
+      "createdDateTime": "2026-09-16T09:00:00+03:00",
+      "from": "Sami Rahal",
+      "body": "Kit distribution pushed to Friday. The kits from the supplier only arrive at WH-11 Thursday night.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e040",
+      "createdDateTime": "2026-09-16T09:05:00+03:00",
+      "from": "Layla Frem",
+      "body": "ok Friday",
+      "replyToId": "e039",
+      "edited": false
+    },
+    {
+      "id": "e041",
+      "createdDateTime": "2026-09-16T10:20:00+03:00",
+      "from": "Nour Kassab",
+      "body": "Should we open a fourth shelter in the Minieh school? S-01 is over capacity.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e042",
+      "createdDateTime": "2026-09-16T11:00:00+03:00",
+      "from": "Bilal Hamdan",
+      "body": "Bebnine road open again since 10.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e043",
+      "createdDateTime": "2026-09-16T11:10:00+03:00",
+      "from": "Layla Frem",
+      "body": "Then S-03 mattresses go tomorrow morning. Omar, same 150.",
+      "replyToId": "e042",
+      "edited": false
+    },
+    {
+      "id": "e044",
+      "createdDateTime": "2026-09-16T11:20:00+03:00",
+      "from": "Omar Daher",
+      "body": "Yes, loading at 6 tomorrow.",
+      "replyToId": "e043",
+      "edited": false
+    },
+    {
+      "id": "e045",
+      "createdDateTime": "2026-09-16T15:00:00+03:00",
+      "from": "Nour Kassab",
+      "body": "في حدا تأكد إنو وصلوا الحرامات عالقبيات؟ ما عندي أي تأكيد بالشيت",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e046",
+      "createdDateTime": "2026-09-17T07:05:00+03:00",
+      "from": "Omar Daher",
+      "body": "DSP-2026-00417 out: 150 mattresses to S-03 Bebnine.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e047",
+      "createdDateTime": "2026-09-17T10:40:00+03:00",
+      "from": "Carla Nassif",
+      "body": "S-03: 150 mattresses received, signed by the school principal.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e048",
+      "createdDateTime": "2026-09-17T14:00:00+03:00",
+      "from": "Carla Nassif",
+      "body": "Kit distribution is now Saturday the 19th. The schools asked us not to distribute on Friday, it's registration day with the ministry.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e049",
+      "createdDateTime": "2026-09-17T14:06:00+03:00",
+      "from": "Layla Frem",
+      "body": "D'accord, samedi.",
+      "replyToId": "e048",
+      "edited": false
+    },
+    {
+      "id": "e050",
+      "createdDateTime": "2026-09-17T14:10:00+03:00",
+      "from": "Sami Rahal",
+      "body": "تمام، بجهّزهن الجمعة",
+      "replyToId": "e048",
+      "edited": false
+    },
+    {
+      "id": "e051",
+      "createdDateTime": "2026-09-17T16:00:00+03:00",
+      "from": "Nour Kassab",
+      "body": "Could we push the kits to Monday? Saturday is hard for the volunteers.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e052",
+      "createdDateTime": "2026-09-17T16:12:00+03:00",
+      "from": "Layla Frem",
+      "body": "No, families have been without soap for four days. Saturday stays.",
+      "replyToId": "e051",
+      "edited": false
+    },
+    {
+      "id": "e053",
+      "createdDateTime": "2026-09-18T09:00:00+03:00",
+      "from": "Layla Frem",
+      "body": "La visite du gouverneur aux écoles prévue samedi est annulée, il reste à Tripoli.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e054",
+      "createdDateTime": "2026-09-18T09:30:00+03:00",
+      "from": "Carla Nassif",
+      "body": "@Nour can you find 6 volunteers for Saturday's distribution?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e055",
+      "createdDateTime": "2026-09-18T09:45:00+03:00",
+      "from": "Nour Kassab",
+      "body": "Yes, I'll call the youth group tonight.",
+      "replyToId": "e054",
+      "edited": false
+    },
+    {
+      "id": "e056",
+      "createdDateTime": "2026-09-18T11:00:00+03:00",
+      "from": "Layla Frem",
+      "body": "Situation report to the operations manager by end of day tomorrow: families per shelter, items dispatched, gaps.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e057",
+      "createdDateTime": "2026-09-18T11:05:00+03:00",
+      "from": "Nour Kassab",
+      "body": "I'll draft it from the ops sheet.",
+      "replyToId": "e056",
+      "edited": false
+    },
+    {
+      "id": "e058",
+      "createdDateTime": "2026-09-18T20:00:00+03:00",
+      "from": "Carla Nassif",
+      "body": "heavy rain, roof at S-02 leaking into two classrooms",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e059",
+      "createdDateTime": "2026-09-18T20:10:00+03:00",
+      "from": "Layla Frem",
+      "body": "@Sami can you send 20 tarpaulins to S-02 first thing?",
+      "replyToId": "e058",
+      "edited": false
+    },
+    {
+      "id": "e060",
+      "createdDateTime": "2026-09-18T20:25:00+03:00",
+      "from": "Sami Rahal",
+      "body": "on it, 7am",
+      "replyToId": "e059",
+      "edited": false
+    },
+    {
+      "id": "e061",
+      "createdDateTime": "2026-09-19T08:00:00+03:00",
+      "from": "Sami Rahal",
+      "body": "Kits arrived at both schools. DSP-2026-00421 and 00422.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e062",
+      "createdDateTime": "2026-09-19T13:30:00+03:00",
+      "from": "Carla Nassif",
+      "body": "Distribution done at S-01 and S-02: 640 hygiene kits handed out. S-03 tomorrow.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e063",
+      "createdDateTime": "2026-09-19T18:00:00+03:00",
+      "from": "Nour Kassab",
+      "body": "Sitrep sent to the operations manager.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e064",
+      "createdDateTime": "2026-09-20T12:00:00+03:00",
+      "from": "Carla Nassif",
+      "body": "S-03 hygiene kits distributed, 95 families.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e065",
+      "createdDateTime": "2026-09-20T12:30:00+03:00",
+      "from": "Sami Rahal",
+      "body": "20 tarpaulins delivered to S-02 yesterday morning, forgot to post.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e066",
+      "createdDateTime": "2026-09-20T13:00:00+03:00",
+      "from": "Nour Kassab",
+      "body": "Did the principal sign the waybill for the tarpaulins?",
+      "replyToId": "e065",
+      "edited": false
+    },
+    {
+      "id": "e067",
+      "createdDateTime": "2026-09-20T13:15:00+03:00",
+      "from": "Sami Rahal",
+      "body": "Yes, photo in the ops sheet.",
+      "replyToId": "e066",
+      "edited": false
+    },
+    {
+      "id": "e068",
+      "createdDateTime": "2026-09-21T09:00:00+03:00",
+      "from": "Layla Frem",
+      "body": "Tomorrow 10:00 governorate meeting. I'll bring the shelter figures.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e069",
+      "createdDateTime": "2026-09-21T15:00:00+03:00",
+      "from": "Carla Nassif",
+      "body": "First families going back home from S-02, about 30.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "e070",
+      "createdDateTime": "2026-09-22T13:30:00+03:00",
+      "from": "Layla Frem",
+      "body": "Meeting done. Municipality keeps S-01 and S-03 open at least two more weeks, S-02 closes once the last families leave.",
+      "replyToId": null,
+      "edited": false
+    }
+  ]
+}

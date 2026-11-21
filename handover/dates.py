@@ -31,17 +31,29 @@ WEEKDAYS = {
     "monday": 0, "mon": 0, "tuesday": 1, "tue": 1, "tues": 1,
     "wednesday": 2, "wed": 2, "thursday": 3, "thu": 3, "thur": 3, "thurs": 3,
     "friday": 4, "fri": 4, "saturday": 5, "sunday": 6,
+    # French
+    "lundi": 0, "mardi": 1, "mercredi": 2, "jeudi": 3, "vendredi": 4, "samedi": 5, "dimanche": 6,
+    # Arabic, standard and Lebanese spellings
+    "الاثنين": 0, "الإثنين": 0, "التنين": 0, "الثلاثاء": 1, "التلاتا": 1, "التلات": 1,
+    "الأربعاء": 2, "الاربعاء": 2, "الاربعا": 2, "الخميس": 3, "الجمعة": 4, "الجمعه": 4,
+    "السبت": 5, "الأحد": 6, "الاحد": 6,
 }
 MONTHS = {
     "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
     "april": 4, "apr": 4, "may": 5, "june": 6, "jun": 6, "july": 7, "jul": 7,
     "august": 8, "aug": 8, "september": 9, "sep": 9, "sept": 9,
     "october": 10, "oct": 10, "november": 11, "nov": 11, "december": 12, "dec": 12,
+    "janvier": 1, "février": 2, "fevrier": 2, "mars": 3, "avril": 4, "mai": 5, "juin": 6,
+    "juillet": 7, "août": 8, "aout": 8, "septembre": 9, "octobre": 10, "novembre": 11,
+    "décembre": 12, "decembre": 12,
+    "كانون الثاني": 1, "شباط": 2, "آذار": 3, "اذار": 3, "نيسان": 4, "أيار": 5, "ايار": 5,
+    "حزيران": 6, "تموز": 7, "آب": 8, "أيلول": 9, "ايلول": 9, "تشرين الأول": 10,
+    "تشرين الاول": 10, "تشرين الثاني": 11, "كانون الأول": 12, "كانون الاول": 12,
 }
 NUMBER_WORDS = {
     "a": 1, "an": 1, "one": 1, "two": 2, "a couple of": 2, "couple of": 2,
     "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
-    "nine": 9, "ten": 10,
+    "nine": 9, "ten": 10, "un": 1, "une": 1, "deux": 2, "trois": 3, "quatre": 4, "cinq": 5,
 }
 PAST_MARKERS = re.compile(
     r"\b(sent|was|were|did|had|received|delivered|paid|finished|happened|told|"
@@ -54,34 +66,51 @@ NOT_DATE_NOUNS = re.compile(
     re.I,
 )
 
-WD = r"(?P<wd>monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues?|wed|thurs?|thu|fri)"
-WD2 = WD.replace("?P<wd>", "?P<wd2>")
-MON = r"(?P<mon>january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept?|oct|nov|dec)"
-ORD = r"(?:st|nd|rd|th)"
-NUM = r"(?P<n>\d+|a|an|one|two|three|four|five|six|seven|eight|nine|ten|a couple of)"
+
+def _alt(words) -> str:
+    return "|".join(sorted(words, key=len, reverse=True))
+
+
+WD = rf"(?P<wd>monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues?|wed|thurs?|thu|fri|" \
+     rf"{_alt(k for k in WEEKDAYS if not k.isascii() or k.endswith('di') or k == 'dimanche')})"
+MON = rf"(?P<mon>{_alt(k for k in MONTHS if k != 'may')}|may)"
+ORD = r"(?:st|nd|rd|th|er)"
+NUM = r"(?P<n>\d+|a couple of|an|a|one|two|three|four|five|six|seven|eight|nine|ten|une|un|deux|trois|quatre|cinq)"
+B = r"(?<!\w)"  # word start that also works next to Arabic letters
+E = r"(?!\w)"
 
 PATTERNS: list[tuple[str, re.Pattern]] = [
     ("iso", re.compile(r"\b(?P<y>\d{4})-(?P<m>\d{2})-(?P<d>\d{2})\b")),
     ("dm_num", re.compile(r"(?<![\d/])(?P<d>\d{1,2})/(?P<m>\d{1,2})(?:/(?P<y>\d{2,4}))?(?![\d/])")),
     ("day_month", re.compile(
-        rf"\b(?:{WD},?\s+)?(?:the\s+)?(?P<d>\d{{1,2}}){ORD}?\s+(?:of\s+)?{MON}\b(?:,?\s+(?P<y>\d{{4}}))?", re.I)),
+        rf"{B}(?:{WD},?\s+)?(?:the\s+|le\s+)?(?P<d>\d{{1,2}}){ORD}?\s+(?:of\s+)?{MON}{E}(?:,?\s+(?P<y>\d{{4}}))?", re.I)),
     ("month_day", re.compile(
-        rf"\b(?:{WD},?\s+)?{MON}\s+(?:the\s+)?(?P<d>\d{{1,2}}){ORD}?\b(?:,?\s+(?P<y>\d{{4}}))?", re.I)),
+        rf"{B}(?:{WD},?\s+)?{MON}\s+(?:the\s+)?(?P<d>\d{{1,2}}){ORD}?\b(?:,?\s+(?P<y>\d{{4}}))?", re.I)),
     ("eod_tomorrow", re.compile(
         r"\b(?:(?:by\s+)?(?:the\s+)?(?:end\s+of\s+(?:the\s+)?day|eod|cob|close\s+of\s+business)\s+tomorrow"
         r"|tomorrow\s+(?:end\s+of\s+(?:the\s+)?day|eod|cob|noon|morning|afternoon|evening))\b", re.I)),
     ("eod_weekday", re.compile(
-        rf"\b(?:end\s+of\s+(?:the\s+)?day|eod|cob|close\s+of\s+business)\s+(?:on\s+)?{WD}\b", re.I)),
-    ("day_after_tomorrow", re.compile(r"\bday\s+after\s+tomorrow\b", re.I)),
-    ("tomorrow", re.compile(r"\btomorrow\b", re.I)),
-    ("today", re.compile(r"\b(?:today|tonight|this\s+(?:morning|afternoon|evening)|end\s+of\s+(?:the\s+)?day|eod|cob)\b", re.I)),
-    ("end_week", re.compile(r"\bend\s+of\s+(?P<next>next\s+)?(?:the\s+|this\s+)?week\b", re.I)),
-    ("end_month", re.compile(r"\bend\s+of\s+(?:the\s+|this\s+)?month\b", re.I)),
+        rf"\b(?:end\s+of\s+(?:the\s+)?day|eod|cob|close\s+of\s+business)\s+(?:on\s+)?{WD}{E}", re.I)),
+    ("day_after_tomorrow", re.compile(r"\b(?:day\s+after\s+tomorrow|apr[eè]s-demain)\b|(?<!\w)بعد\s+بكر[اةه](?!\w)", re.I)),
+    ("tomorrow", re.compile(r"\b(?:tomorrow|demain)\b|(?<!\w)(?:بكرا|بكرة|بكره|غدا|غداً)(?!\w)", re.I)),
+    ("today", re.compile(
+        r"\b(?:today|tonight|this\s+(?:morning|afternoon|evening)|end\s+of\s+(?:the\s+)?day|eod|cob|"
+        r"aujourd'hui|ce\s+soir|ce\s+matin)\b|(?<!\w)(?:اليوم|الليلة)(?!\w)", re.I)),
+    ("end_week", re.compile(
+        r"\bend\s+of\s+(?P<next>next\s+)?(?:the\s+|this\s+)?week\b|\bfin\s+(?:de\s+(?:la\s+)?)?semaine\b", re.I)),
+    ("end_month", re.compile(r"\bend\s+of\s+(?:the\s+|this\s+)?month\b|\bfin\s+du\s+mois\b", re.I)),
     ("in_n", re.compile(
-        rf"\b(?:in|within)\s+{NUM}\s+(?P<unit>days?|weeks?|working\s+days?)\b(?!\s+of\b)", re.I)),
-    ("weekday_ord", re.compile(rf"\b(?P<mod>this|next|last|coming)?\s*{WD}(?:'s)?,?\s+(?:the\s+)?(?P<d>\d{{1,2}}){ORD}?\b(?!\s*(?::|am|pm|h\b|\.\d))", re.I)),
-    ("weekday", re.compile(rf"\b(?:(?P<mod>this|next|last|coming)\s+)?{WD}(?:'s)?\b", re.I)),
-    ("ordinal", re.compile(rf"\b(?:the\s+)?(?P<d>\d{{1,2}}){ORD}\b", re.I)),
+        rf"\b(?:in|within|dans|d'ici)\s+{NUM}\s+(?P<unit>days?|weeks?|working\s+days?|jours?|semaines?)\b"
+        r"(?!\s+(?:of|after|from)\b)", re.I)),
+    ("ar_weeks", re.compile(r"(?<!\w)(?:بعد|خلال)\s+(?P<unit>أسبوعين|اسبوعين|جمعتين|أسبوع|اسبوع)(?!\w)")),
+    ("weekday_ord", re.compile(
+        rf"{B}(?:(?P<mod>this|next|last|coming)\s+)?{WD}(?:'s)?,?\s+(?:the\s+|le\s+)?(?P<d>\d{{1,2}}){ORD}?\b"
+        r"(?!\s*(?::|am|pm|h\b|\.\d))", re.I)),
+    ("weekday", re.compile(
+        rf"{B}(?:(?P<mod>this|next|last|coming)\s+)?{WD}(?:'s)?(?:\s+(?P<mod2>prochain|الجاي|القادم))?{E}", re.I)),
+    ("ordinal", re.compile(
+        rf"\b(?:the\s+)?(?P<d>\d{{1,2}}){ORD}\b|\b(?:le|du|au)\s+(?P<d2>\d{{1,2}})(?:er)?\b(?!\s*(?:h\b|:|%|/|\d|[a-z]))",
+        re.I)),
 ]
 
 
@@ -197,7 +226,7 @@ def find_dates(text: str, base: date) -> list[DateMention]:
                 raw = g["n"].lower()
                 n = int(raw) if raw.isdigit() else NUMBER_WORDS[raw]
                 unit = g["unit"].lower()
-                if unit.startswith("week"):
+                if unit.startswith(("week", "semaine")):
                     value = base + timedelta(weeks=n)
                 elif unit.startswith("working"):
                     value, left = base, n
@@ -207,6 +236,8 @@ def find_dates(text: str, base: date) -> list[DateMention]:
                             left -= 1
                 else:
                     value = base + timedelta(days=n)
+            elif kind == "ar_weeks":
+                value = base + timedelta(weeks=2 if g["unit"] in ("أسبوعين", "اسبوعين", "جمعتين") else 1)
             elif kind == "weekday_ord":
                 d = int(g["d"])
                 value = _next_day_of_month(base, d)
@@ -218,12 +249,13 @@ def find_dates(text: str, base: date) -> list[DateMention]:
                 clause_start = max(lower.rfind(c, 0, s) for c in ".!?;,")
                 before = lower[clause_start + 1:s]
                 past = bool(PAST_MARKERS.search(before)) and (g.get("mod") or "").lower() != "next"
-                value = _weekday(base, wd, g.get("mod"), past)
+                mod = g.get("mod") or ("next" if g.get("mod2") else None)
+                value = _weekday(base, wd, mod, past)
                 out_kind = "past" if value < base else "weekday"
             elif kind == "ordinal":
                 if NOT_DATE_NOUNS.match(text, e):
                     continue
-                value = _next_day_of_month(base, int(g["d"]))
+                value = _next_day_of_month(base, int(g["d"] or g["d2"]))
                 out_kind = "ordinal"
             if value is None:
                 continue

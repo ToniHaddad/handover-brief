@@ -112,3 +112,23 @@ def test_weekday_with_a_time_is_still_the_weekday():
 
 def test_may_without_a_day_is_not_a_date():
     assert find_dates("we may need more trucks", WED_4_MAR) == []
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("Le comptage est reporté à lundi", date(2026, 3, 9)),
+    ("lundi prochain", date(2026, 3, 9)),
+    ("le 14 avril", date(2026, 4, 14)),
+    ("dans deux semaines", date(2026, 3, 18)),
+    ("demain", date(2026, 3, 5)),
+    ("fin de semaine", date(2026, 3, 6)),
+    ("تمام، الخميس منيح", date(2026, 3, 5)),
+    ("الاثنين الجاي", date(2026, 3, 9)),
+    ("بكرا الصبح", date(2026, 3, 5)),
+    ("بعد أسبوعين", date(2026, 3, 18)),
+])
+def test_french_and_arabic_dates(text, expected):
+    assert one(text, WED_4_MAR) == expected
+
+
+def test_quantities_are_not_dates():
+    assert find_dates("12 boxes + 6 pieces, 24 per box", WED_4_MAR) == []

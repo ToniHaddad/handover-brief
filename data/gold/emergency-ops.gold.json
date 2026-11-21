@@ -1,0 +1,240 @@
+{
+  "thread": "emergency-ops",
+  "items": [
+    {
+      "type": "deadline",
+      "label": "Dispatch 300 mattresses and 300 blankets to S-01",
+      "match_ids": [
+        "e005"
+      ],
+      "chain": [
+        "2026-09-14"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Dispatch 200 mattresses and 200 blankets to S-02",
+      "match_ids": [
+        "e006"
+      ],
+      "chain": [
+        "2026-09-15"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Hygiene kit distribution in S-01 and S-02",
+      "match_ids": [
+        "e018"
+      ],
+      "chain": [
+        "2026-09-17",
+        "2026-09-18",
+        "2026-09-19"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "150 mattresses to S-03 Bebnine (first attempt)",
+      "match_ids": [
+        "e021"
+      ],
+      "chain": [
+        "2026-09-15"
+      ],
+      "status": "cancelled"
+    },
+    {
+      "type": "deadline",
+      "label": "150 mattresses to S-03 Bebnine once the road reopened",
+      "match_ids": [
+        "e043"
+      ],
+      "chain": [
+        "2026-09-17"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Coordination meeting at the governorate",
+      "match_ids": [
+        "e036"
+      ],
+      "chain": [
+        "2026-09-21",
+        "2026-09-22"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Situation report to the operations manager",
+      "match_ids": [
+        "e056"
+      ],
+      "chain": [
+        "2026-09-19"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "decision",
+      "label": "All dispatches for the response on EA-2026",
+      "match_ids": [
+        "e012"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "decision",
+      "label": "Dispatch from WH-11 for Halba shelters, WH-07 for Tripoli",
+      "match_ids": [
+        "e016",
+        "e017"
+      ],
+      "status": "reversed",
+      "superseded_by": "e033"
+    },
+    {
+      "type": "decision",
+      "label": "Blankets for all Halba shelters from WH-07, WH-11 keeps hygiene kits",
+      "match_ids": [
+        "e033",
+        "e034"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "proposal",
+      "label": "Send S-03 mattresses through the Qobayat road",
+      "match_ids": [
+        "e027"
+      ]
+    },
+    {
+      "type": "proposal",
+      "label": "Open a fourth shelter in the Minieh school",
+      "match_ids": [
+        "e041"
+      ]
+    },
+    {
+      "type": "proposal",
+      "label": "Push the kit distribution to Monday",
+      "match_ids": [
+        "e051"
+      ]
+    },
+    {
+      "type": "owner",
+      "label": "Take the big truck to WH-07",
+      "match_ids": [
+        "e007",
+        "e008"
+      ],
+      "owner": "Bilal Hamdan",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Confirm receipt of every dispatch with shelter focal points",
+      "match_ids": [
+        "e010"
+      ],
+      "owner": "Nour Kassab",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Prepare the hygiene kits at WH-11",
+      "match_ids": [
+        "e019"
+      ],
+      "owner": "Sami Rahal",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Load the 150 mattresses for S-03",
+      "match_ids": [
+        "e043",
+        "e044"
+      ],
+      "owner": "Omar Daher",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Find 6 volunteers for Saturday",
+      "match_ids": [
+        "e054",
+        "e055"
+      ],
+      "owner": "Nour Kassab",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Draft the situation report",
+      "match_ids": [
+        "e057"
+      ],
+      "owner": "Nour Kassab",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Send 20 tarpaulins to S-02",
+      "match_ids": [
+        "e059",
+        "e060"
+      ],
+      "owner": "Sami Rahal",
+      "status": "current"
+    },
+    {
+      "type": "question",
+      "label": "How many families are in S-02 tonight?",
+      "match_ids": [
+        "e029"
+      ]
+    },
+    {
+      "type": "question",
+      "label": "Has anyone confirmed the blankets reached Qobayat? (Arabic)",
+      "match_ids": [
+        "e045"
+      ]
+    },
+    {
+      "type": "cancellation",
+      "label": "S-03 mattress delivery cancelled, road closed",
+      "match_ids": [
+        "e025"
+      ],
+      "target": "e021"
+    },
+    {
+      "type": "cancellation",
+      "label": "Governor's visit to the schools cancelled (French)",
+      "match_ids": [
+        "e053"
+      ]
+    },
+    {
+      "type": "deadline",
+      "label": "Hygiene kit distribution at S-03",
+      "match_ids": [
+        "e062"
+      ],
+      "chain": [
+        "2026-09-20"
+      ],
+      "status": "current"
+    }
+  ]
+}

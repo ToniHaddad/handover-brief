@@ -212,3 +212,46 @@ def test_every_item_points_at_real_messages():
     for item in items:
         assert item.origin_id in {"1", "2"}
         assert set(item.source_ids) <= {"1", "2"}
+
+
+def test_arabic_agreement_to_a_proposed_date_keeps_the_proposed_day():
+    items = thread(
+        ("1", "2026-04-16 15:10", "Rami Khoury", "Keeper training on the phone app on Tuesday 28 April in Zahle?"),
+        ("2", "2026-04-16 15:22", "Georges Abi Nader", "تمام، الثلاثاء منيح", "1"),
+    )
+    [d] = of(items, "deadline")
+    assert d.date == date(2026, 4, 28)  # not the bare "Tuesday" of the reply (21 April)
+
+
+def test_french_cancellation_finds_its_target_by_code():
+    items = thread(
+        ("1", "2026-04-15 11:05", "Joumana Azar", "Transfer of 40 boxes of hygiene kits to WH-09 is planned for Thursday 23 April."),
+        ("2", "2026-04-23 08:15", "Joumana Azar", "Le transfert vers WH-09 de jeudi est annulé, ils n'ont plus de place."),
+    )
+    [d] = of(items, "deadline")
+    assert d.status == "cancelled"
+
+
+def test_arabic_question_without_answer_is_open():
+    items = thread(
+        ("1", "2026-04-15 14:02", "Fadi Sleiman", "مين معو مفتاح غرفة التبريد؟"),
+        ("2", "2026-04-16 09:00", "Nadine Saliba", "Trucks are here."),
+    )
+    assert [q.origin_id for q in of(items, "question")] == ["1"]
+
+
+def test_person_off_work_is_not_a_cancellation():
+    items = thread(
+        ("1", "2026-04-20 09:20", "Fadi Sleiman", "Could we unlock on Friday 1 May?"),
+        ("2", "2026-04-20 09:28", "Nadine Saliba", "No, 1 May is a holiday and the admin is off.", "1"),
+    )
+    assert not of(items, "cancellation")
+    assert len(of(items, "proposal")) == 1
+
+
+def test_tonight_in_a_report_is_not_a_deadline():
+    items = thread(
+        ("1", "2026-09-14 18:40", "Carla Nassif", "A third school opened tonight, S-03 Bebnine. 90 families."),
+        ("2", "2026-09-14 18:52", "Layla Frem", "Dispatch 150 mattresses to S-03 this evening."),
+    )
+    assert [d.origin_id for d in of(items, "deadline")] == ["2"]

@@ -1,0 +1,17 @@
+Baseline: the engine as it was before the rebase, run on the new tuning threads before any rule change.
+
+== tune (warehouse-golive, emergency-ops) ==
+type          gold found right  precision  recall
+deadline        15    19    13       0.68    0.87
+decision         7     6     5       0.83    0.71
+proposal         5     4     4       1.00    0.80
+owner           14    11     9       0.82    0.64
+question         4     1     1       1.00    0.25
+cancellation     4     3     2       0.67    0.50
+change           7     6     5       0.83    0.71
+all items       49    44    34       0.77    0.69
+Superseded, cancelled or unagreed items shown as current: 3 (out of 14 such items in gold)
+  ! g007 deadline 'Opening stock count is Thursday.' shown as current
+  ! g030 deadline 'Transfer of 40 boxes of hygiene kits from WH-14 to WH-09 is planned for Thursday 23 April, EA-2026 stock.' shown as current
+  ! e016 decision 'Let's dispatch from WH-11 for the Halba shelters and keep WH-07 for Tripoli.' shown as current
+

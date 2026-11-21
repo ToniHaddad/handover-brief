@@ -62,7 +62,7 @@ def test_score_counts_unagreed_proposal_shown_as_decision():
 
 
 def test_rendered_page_is_self_contained():
-    page = render_page(load_thread(DATA / "threads" / "warehouse-move.json"))
+    page = render_page(load_thread(DATA / "threads" / "warehouse-golive.json"))
     assert "<script src" not in page and "<link" not in page and "http://" not in page.split("<script id=\"data\"")[0]
     data = json.loads(page.split('type="application/json">')[1].split("</script>")[0])
     assert any(i["type"] == "deadline" and i["changed"] for i in data["items"])
@@ -76,8 +76,8 @@ def test_server_serves_index_and_briefs():
     base = f"http://127.0.0.1:{server.server_address[1]}"
     try:
         index = urllib.request.urlopen(base + "/").read().decode()
-        assert "Zahle warehouse move" in index
-        brief = urllib.request.urlopen(base + "/brief/warehouse-move").read().decode()
+        assert "WH-14 go-live" in index
+        brief = urllib.request.urlopen(base + "/brief/warehouse-golive").read().decode()
         assert "Handover brief" in brief
         with pytest.raises(urllib.error.HTTPError):
             urllib.request.urlopen(base + "/brief/..%2Fsplits")

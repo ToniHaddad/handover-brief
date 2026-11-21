@@ -1,0 +1,241 @@
+{
+  "thread": "warehouse-golive",
+  "items": [
+    {
+      "type": "deadline",
+      "label": "WH-14 unlocked in the stock system",
+      "match_ids": [
+        "g001"
+      ],
+      "chain": [
+        "2026-05-04",
+        "2026-05-06"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Item names mapped to catalogue codes",
+      "match_ids": [
+        "g004"
+      ],
+      "chain": [
+        "2026-04-17"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Opening stock count",
+      "match_ids": [
+        "g007"
+      ],
+      "chain": [
+        "2026-04-16",
+        "2026-04-20",
+        "2026-04-22"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Shelf QR labels printed",
+      "match_ids": [
+        "g017"
+      ],
+      "chain": [
+        "2026-04-23",
+        "2026-04-24"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "FA-2026 supplier delivery (6 trucks)",
+      "match_ids": [
+        "g022"
+      ],
+      "chain": [
+        "2026-04-16"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "Transfer of 40 boxes of hygiene kits to WH-09",
+      "match_ids": [
+        "g030"
+      ],
+      "chain": [
+        "2026-04-23"
+      ],
+      "status": "cancelled"
+    },
+    {
+      "type": "deadline",
+      "label": "Keeper training on the phone app in Zahle",
+      "match_ids": [
+        "g037",
+        "g038"
+      ],
+      "chain": [
+        "2026-04-28"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "deadline",
+      "label": "EA-2026 opening balances entered",
+      "match_ids": [
+        "g064"
+      ],
+      "chain": [
+        "2026-04-27"
+      ],
+      "status": "current"
+    },
+    {
+      "type": "decision",
+      "label": "Opening balances per project, FA-2026 and INKIND on separate lines",
+      "match_ids": [
+        "g010",
+        "g011"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "decision",
+      "label": "One QR label per shelf, not per box",
+      "match_ids": [
+        "g015",
+        "g016"
+      ],
+      "status": "reversed",
+      "superseded_by": "g058"
+    },
+    {
+      "type": "decision",
+      "label": "Expired stock found in the count goes on a damage report",
+      "match_ids": [
+        "g028"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "decision",
+      "label": "One QR label per box for hygiene kits",
+      "match_ids": [
+        "g058",
+        "g059"
+      ],
+      "status": "in_force"
+    },
+    {
+      "type": "proposal",
+      "label": "Count on Saturday the 18th instead",
+      "match_ids": [
+        "g021"
+      ]
+    },
+    {
+      "type": "proposal",
+      "label": "Unlock on Friday 1 May",
+      "match_ids": [
+        "g050"
+      ]
+    },
+    {
+      "type": "owner",
+      "label": "Map WH-14 item names to catalogue codes",
+      "match_ids": [
+        "g004"
+      ],
+      "owner": "Hiba Mansour",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Create keeper accounts for Georges and Fadi",
+      "match_ids": [
+        "g012",
+        "g013"
+      ],
+      "owner": "Rami Khoury",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Print the shelf labels",
+      "match_ids": [
+        "g017"
+      ],
+      "owner": "Fadi Sleiman",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Clear expired stock from aisle B before the count",
+      "match_ids": [
+        "g027"
+      ],
+      "owner": "Georges Abi Nader",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Ask for codes for the 9 unmapped items",
+      "match_ids": [
+        "g045"
+      ],
+      "owner": "Hiba Mansour",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Reprint hygiene kit labels per box",
+      "match_ids": [
+        "g060"
+      ],
+      "owner": "Fadi Sleiman",
+      "status": "current"
+    },
+    {
+      "type": "owner",
+      "label": "Enter EA-2026 opening balances",
+      "match_ids": [
+        "g064"
+      ],
+      "owner": "Rami Khoury",
+      "status": "current"
+    },
+    {
+      "type": "question",
+      "label": "Damaged cartons from aisle C: damage reports before or after go-live?",
+      "match_ids": [
+        "g026"
+      ]
+    },
+    {
+      "type": "question",
+      "label": "Who has the key to the cold room? (Arabic)",
+      "match_ids": [
+        "g033"
+      ]
+    },
+    {
+      "type": "cancellation",
+      "label": "Transfer to WH-09 cancelled, no space (French)",
+      "match_ids": [
+        "g056"
+      ],
+      "target": "g030"
+    },
+    {
+      "type": "cancellation",
+      "label": "Extra training session for the Baalbek keepers cancelled",
+      "match_ids": [
+        "g067"
+      ]
+    }
+  ]
+}

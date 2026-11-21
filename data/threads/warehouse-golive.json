@@ -1,0 +1,632 @@
+{
+  "schema": "handover-thread/1",
+  "synthetic": true,
+  "team": "The Organization, Bekaa logistics",
+  "channel": "WH-14 go-live (Zahle)",
+  "messages": [
+    {
+      "id": "g001",
+      "createdDateTime": "2026-04-13T08:41:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Morning all. Admin confirmed WH-14 gets unlocked in the stock system on 4 May. Before that we need the opening count, codes and labels done.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g002",
+      "createdDateTime": "2026-04-13T08:45:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Ok. Is the catalogue ready for us or are we still on the old item names?",
+      "replyToId": "g001",
+      "edited": false
+    },
+    {
+      "id": "g003",
+      "createdDateTime": "2026-04-13T08:52:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "Old names. About 380 lines in the WH-14 sheet need mapping to the new codes, FOO-RIC-001 style.",
+      "replyToId": "g002",
+      "edited": false
+    },
+    {
+      "id": "g004",
+      "createdDateTime": "2026-04-13T08:55:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "I'll map the WH-14 item names to catalogue codes. Should be done by end of the week.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g005",
+      "createdDateTime": "2026-04-13T09:10:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "generator off since 7, diesel truck stuck on the Chtaura road",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g006",
+      "createdDateTime": "2026-04-13T09:11:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "classic",
+      "replyToId": "g005",
+      "edited": false
+    },
+    {
+      "id": "g007",
+      "createdDateTime": "2026-04-13T10:02:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Opening stock count is Thursday. Everything in the building, per project, per expiry date.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g008",
+      "createdDateTime": "2026-04-13T10:05:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "All projects in one count or one project at a time?",
+      "replyToId": "g007",
+      "edited": false
+    },
+    {
+      "id": "g009",
+      "createdDateTime": "2026-04-13T10:09:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "One count, but separate sheets per project. FA-2026 and INKIND must never be mixed.",
+      "replyToId": "g008",
+      "edited": false
+    },
+    {
+      "id": "g010",
+      "createdDateTime": "2026-04-13T10:15:00+03:00",
+      "from": "Joumana Azar",
+      "body": "Let's enter the opening balances per project, FA-2026 and INKIND as separate lines even when it's the same item.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g011",
+      "createdDateTime": "2026-04-13T10:21:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Agreed. Same item, two projects, two lines.",
+      "replyToId": "g010",
+      "edited": false
+    },
+    {
+      "id": "g012",
+      "createdDateTime": "2026-04-13T11:30:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "@Rami can you create the keeper accounts for Georges and Fadi?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g013",
+      "createdDateTime": "2026-04-13T11:48:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Yes, on it. Phone login, they'll get a code by SMS.",
+      "replyToId": "g012",
+      "edited": false
+    },
+    {
+      "id": "g014",
+      "createdDateTime": "2026-04-14T09:00:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "For the QR labels, one per box or one per shelf?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g015",
+      "createdDateTime": "2026-04-14T09:20:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Per shelf. Let's print QR labels per shelf location, not per box, otherwise we print 4,000 labels.",
+      "replyToId": "g014",
+      "edited": false
+    },
+    {
+      "id": "g016",
+      "createdDateTime": "2026-04-14T09:31:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Makes sense, per shelf.",
+      "replyToId": "g015",
+      "edited": false
+    },
+    {
+      "id": "g017",
+      "createdDateTime": "2026-04-14T09:40:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "I'll print the shelf labels. Ready by the 23rd.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g018",
+      "createdDateTime": "2026-04-14T09:44:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "sorry, I meant the 24th. The label printer is in Beirut for repair until Thursday.",
+      "replyToId": "g017",
+      "edited": false
+    },
+    {
+      "id": "g019",
+      "createdDateTime": "2026-04-14T10:30:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "who wants manouche, I'm going to the bakery",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g020",
+      "createdDateTime": "2026-04-14T10:31:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "zaatar please",
+      "replyToId": "g019",
+      "edited": false
+    },
+    {
+      "id": "g021",
+      "createdDateTime": "2026-04-14T11:15:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "Should we count on Saturday the 18th instead? Then we don't have to close the warehouse on a weekday.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g022",
+      "createdDateTime": "2026-04-15T08:20:00+03:00",
+      "from": "Joumana Azar",
+      "body": "FA-2026 delivery from the supplier is confirmed for Thursday morning, 6 trucks.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g023",
+      "createdDateTime": "2026-04-15T08:24:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "That's the count day. We can't count with trucks unloading in the same aisles.",
+      "replyToId": "g022",
+      "edited": false
+    },
+    {
+      "id": "g024",
+      "createdDateTime": "2026-04-15T08:40:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Count pushed to Monday then. I've told the team. Thursday is for receiving the FA-2026 trucks.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g025",
+      "createdDateTime": "2026-04-15T08:46:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Ok, Monday.",
+      "replyToId": "g024",
+      "edited": false
+    },
+    {
+      "id": "g026",
+      "createdDateTime": "2026-04-15T09:30:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "Do we record the damaged cartons from aisle C as damage reports before go-live or after?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g027",
+      "createdDateTime": "2026-04-15T10:12:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "There's expired stock in aisle B, mostly canned cheese. I'll clear the expired stock from aisle B before the count.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g028",
+      "createdDateTime": "2026-04-15T10:40:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Decision from operations: anything expired found in the count goes on a damage report, not into the opening balance.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g029",
+      "createdDateTime": "2026-04-15T10:42:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "noted",
+      "replyToId": "g028",
+      "edited": false
+    },
+    {
+      "id": "g030",
+      "createdDateTime": "2026-04-15T11:05:00+03:00",
+      "from": "Joumana Azar",
+      "body": "Transfer of 40 boxes of hygiene kits from WH-14 to WH-09 is planned for Thursday 23 April, EA-2026 stock.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g031",
+      "createdDateTime": "2026-04-15T11:07:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Before or after the count?",
+      "replyToId": "g030",
+      "edited": false
+    },
+    {
+      "id": "g032",
+      "createdDateTime": "2026-04-15T11:15:00+03:00",
+      "from": "Joumana Azar",
+      "body": "After. It'll go out on a transfer once the balances are in the system.",
+      "replyToId": "g031",
+      "edited": false
+    },
+    {
+      "id": "g033",
+      "createdDateTime": "2026-04-15T14:02:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "مين معو مفتاح غرفة التبريد؟ بدنا نعدّ الأدوية كمان",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g034",
+      "createdDateTime": "2026-04-16T09:00:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "@Joumana can you confirm which INKIND pallets belong to the March donation and which are older?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g035",
+      "createdDateTime": "2026-04-16T09:15:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "FA-2026 trucks are here. Receiving.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g036",
+      "createdDateTime": "2026-04-16T13:40:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "All 6 trucks received, RCV-2026-00418. 1,920 boxes of rice, 24 per box.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g037",
+      "createdDateTime": "2026-04-16T15:10:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Keeper training on the phone app on Tuesday 28 April in Zahle?",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g038",
+      "createdDateTime": "2026-04-16T15:22:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "تمام، الثلاثاء منيح",
+      "replyToId": "g037",
+      "edited": false
+    },
+    {
+      "id": "g039",
+      "createdDateTime": "2026-04-16T15:25:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "ok for me",
+      "replyToId": "g037",
+      "edited": false
+    },
+    {
+      "id": "g040",
+      "createdDateTime": "2026-04-17T08:30:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Bad news, I can only come to Zahle on Wednesday next week, the admin training in Jbeil moved onto Monday.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g041",
+      "createdDateTime": "2026-04-17T08:41:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Then the count is now Wednesday the 22nd. Rami needs to be there to watch the first entries. Georges please tell the team.",
+      "replyToId": "g040",
+      "edited": false
+    },
+    {
+      "id": "g042",
+      "createdDateTime": "2026-04-17T08:50:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "ok, Wednesday 22nd. Team informed.",
+      "replyToId": "g041",
+      "edited": false
+    },
+    {
+      "id": "g043",
+      "createdDateTime": "2026-04-17T16:20:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "Mapping done. 371 lines mapped, 9 items have no code yet, I listed them in the sheet.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g044",
+      "createdDateTime": "2026-04-17T16:25:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Great. Who creates the 9 missing codes?",
+      "replyToId": "g043",
+      "edited": false
+    },
+    {
+      "id": "g045",
+      "createdDateTime": "2026-04-17T16:31:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "Leave it with me, I'll ask the catalogue focal point for new codes.",
+      "replyToId": "g044",
+      "edited": false
+    },
+    {
+      "id": "g046",
+      "createdDateTime": "2026-04-18T10:00:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "rain all night, the roof above aisle D leaks again",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g047",
+      "createdDateTime": "2026-04-18T10:05:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "put the plastic sheets over the pallets",
+      "replyToId": "g046",
+      "edited": false
+    },
+    {
+      "id": "g048",
+      "createdDateTime": "2026-04-20T09:00:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Can we move the unlock to Wednesday 6 May? I want two days after the count to check the balances before keepers start dispatching.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g049",
+      "createdDateTime": "2026-04-20T09:12:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "OK, 6 May. I'll tell the admin.",
+      "replyToId": "g048",
+      "edited": false
+    },
+    {
+      "id": "g050",
+      "createdDateTime": "2026-04-20T09:20:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "Or could we unlock on Friday 1 May? Long weekend after, nobody dispatches anyway.",
+      "replyToId": "g048",
+      "edited": false
+    },
+    {
+      "id": "g051",
+      "createdDateTime": "2026-04-20T09:28:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "No, 1 May is a holiday and the admin is off. The 6th stays.",
+      "replyToId": "g050",
+      "edited": false
+    },
+    {
+      "id": "g052",
+      "createdDateTime": "2026-04-22T07:45:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Count started. 4 teams, one per aisle.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g053",
+      "createdDateTime": "2026-04-22T16:50:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Count finished. 612 lines across FA-2026, EA-2026 and INKIND. 14 lines expired, on damage report DMG-2026-00031.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g054",
+      "createdDateTime": "2026-04-22T17:05:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Did you write the incident description on the damage report?",
+      "replyToId": "g053",
+      "edited": false
+    },
+    {
+      "id": "g055",
+      "createdDateTime": "2026-04-22T17:10:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Yes, expiry dates and photos are attached.",
+      "replyToId": "g054",
+      "edited": false
+    },
+    {
+      "id": "g056",
+      "createdDateTime": "2026-04-23T08:15:00+03:00",
+      "from": "Joumana Azar",
+      "body": "Le transfert vers WH-09 de jeudi est annulé, ils n'ont plus de place dans l'entrepôt. On verra le mois prochain.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g057",
+      "createdDateTime": "2026-04-23T08:20:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "d'accord, je laisse les kits sur l'étagère H2",
+      "replyToId": "g056",
+      "edited": false
+    },
+    {
+      "id": "g058",
+      "createdDateTime": "2026-04-23T10:00:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Change of plan on the labels: the mixed pallets on shelf H don't work with one label per shelf. Let's switch to one QR label per box for the hygiene kits instead.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g059",
+      "createdDateTime": "2026-04-23T10:12:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Agreed, per box for hygiene kits.",
+      "replyToId": "g058",
+      "edited": false
+    },
+    {
+      "id": "g060",
+      "createdDateTime": "2026-04-23T10:14:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "ok, I'll reprint those",
+      "replyToId": "g058",
+      "edited": false
+    },
+    {
+      "id": "g061",
+      "createdDateTime": "2026-04-24T09:30:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "Printer is back. Shelf labels and hygiene kit box labels printed.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g062",
+      "createdDateTime": "2026-04-24T11:00:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Opening balances entered for FA-2026 and INKIND. EA-2026 still to do.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g063",
+      "createdDateTime": "2026-04-24T11:05:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Who's entering EA-2026?",
+      "replyToId": "g062",
+      "edited": false
+    },
+    {
+      "id": "g064",
+      "createdDateTime": "2026-04-24T11:20:00+03:00",
+      "from": "Rami Khoury",
+      "body": "I'll enter the EA-2026 lines on Monday.",
+      "replyToId": "g063",
+      "edited": false
+    },
+    {
+      "id": "g065",
+      "createdDateTime": "2026-04-24T12:30:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "whoever finished the coffee and didn't make more, I know who you are",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g066",
+      "createdDateTime": "2026-04-24T12:31:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "not me",
+      "replyToId": "g065",
+      "edited": false
+    },
+    {
+      "id": "g067",
+      "createdDateTime": "2026-04-27T08:40:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Small change: tomorrow's training stays, but the extra session for the Baalbek keepers is cancelled, they'll join the Jbeil one.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g068",
+      "createdDateTime": "2026-04-27T15:40:00+03:00",
+      "from": "Rami Khoury",
+      "body": "EA-2026 opening balances entered. All three projects are in.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g069",
+      "createdDateTime": "2026-04-28T09:00:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Training started. Georges and Fadi logged in on their phones without problems.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g070",
+      "createdDateTime": "2026-04-28T13:10:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Training done. Both can receive, dispatch and see the stock card per item.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g071",
+      "createdDateTime": "2026-04-28T13:20:00+03:00",
+      "from": "Fadi Sleiman",
+      "body": "Can the stock card show boxes and pieces, like 12 boxes + 6 pieces?",
+      "replyToId": "g070",
+      "edited": false
+    },
+    {
+      "id": "g072",
+      "createdDateTime": "2026-04-28T13:30:00+03:00",
+      "from": "Rami Khoury",
+      "body": "Yes, it uses the pieces-per-box figure from the catalogue.",
+      "replyToId": "g071",
+      "edited": false
+    },
+    {
+      "id": "g073",
+      "createdDateTime": "2026-04-30T10:00:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Balances checked against the count sheets. Two differences, both typos, fixed.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g074",
+      "createdDateTime": "2026-04-30T16:00:00+03:00",
+      "from": "Hiba Mansour",
+      "body": "happy long weekend everyone",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g075",
+      "createdDateTime": "2026-05-05T08:30:00+03:00",
+      "from": "Nadine Saliba",
+      "body": "Reminder: WH-14 is unlocked tomorrow morning. Georges, first dispatch can go out tomorrow afternoon.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g076",
+      "createdDateTime": "2026-05-05T08:41:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "Ready. Waybill pad is in the drawer just in case the network is down.",
+      "replyToId": "g075",
+      "edited": false
+    },
+    {
+      "id": "g077",
+      "createdDateTime": "2026-05-06T09:05:00+03:00",
+      "from": "Rami Khoury",
+      "body": "WH-14 is unlocked. Keepers can work.",
+      "replyToId": null,
+      "edited": false
+    },
+    {
+      "id": "g078",
+      "createdDateTime": "2026-05-06T14:20:00+03:00",
+      "from": "Georges Abi Nader",
+      "body": "First dispatch out: DSP-2026-00902, 60 boxes of rice to the Zahle centre, Social department.",
+      "replyToId": null,
+      "edited": false
+    }
+  ]
+}
