@@ -20,7 +20,7 @@ handover serve
 ```
 
 ```
-Serving 3 threads on http://127.0.0.1:8102/  (Ctrl+C to stop)
+Serving 4 threads on http://127.0.0.1:8102/  (Ctrl+C to stop)
 ```
 
 Open http://127.0.0.1:8102/, pick a thread, click any item. For a single file you can send by email or put on a shared drive:
