@@ -1,6 +1,7 @@
 # handover-brief
 
-Turns a team chat export (JSON, see `docs/schema.md`) into a handover brief:
+Turns a team chat export (JSON, see `docs/schema.md`) into a handover brief
+(English, French and Arabic cues):
 deadlines with their change history, decisions in force, open questions,
 cancellations, unagreed proposals and owners, each linked to its source
 messages. Deterministic rules, no LLM, standard library only.

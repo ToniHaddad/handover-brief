@@ -2,13 +2,13 @@
 
 Turns weeks of team chat into a handover timeline where every decision and deadline links to the message that set it, including the ones that changed.
 
-![The brief for a warehouse move: the racking deadline is selected, its history shows Friday, then Monday, then Wednesday, and the thread on the right highlights the message where Karim moved it to Monday](docs/brief-moved-deadline.png)
+![The brief for a warehouse go-live: the opening stock count is selected, its history shows Thursday, then Monday, then Wednesday, and the thread on the right highlights the message where Georges pushed the count to Monday](docs/brief-moved-deadline.png)
 
 ## The need
 
-When someone takes over a project, they inherit weeks of channel messages and have to rebuild the state of play: what was decided, what is due when, what is still open. A summary loses the detail that matters most: the deadline that was moved from Friday to Monday in message 25, or the supplier choice that was reversed a week later. This tool lists each deadline, decision, open question, cancellation and unagreed proposal, and every item opens the exact message it came from, with its full change history beside it.
+In a humanitarian organization in Lebanon, much of the coordination happens in team chats, in Arabic, English and French: bringing a warehouse into the stock system, running an emergency operations room when shelters open in schools, following up rent contracts before they expire. When someone goes on leave or a new colleague takes over, they inherit weeks of messages and have to rebuild what is due when, what was agreed and what was called off. A summary loses the detail that matters most: the stock count that moved from Thursday to Monday, the delivery cancelled when the road closed, the follow-up date in the sheet that turned out to be wrong.
 
-There is no language model in this tool. Extraction is a fixed set of rules, so every claim can be traced to a message and every behaviour can be tested. The trade-off is that the rules miss phrasings they have not seen; the held-out results below show how often.
+This tool lists each deadline, decision, open question, cancellation and unagreed proposal, and every item opens the exact message it came from, with its full change history beside it. There is no language model: extraction is a fixed set of rules, so every claim can be traced to a message and every behaviour can be tested. The trade-off is that the rules miss phrasings they have not seen; the held-out results below show how often.
 
 ## Try it
 
@@ -23,94 +23,100 @@ handover serve
 Serving 3 threads on http://127.0.0.1:8102/  (Ctrl+C to stop)
 ```
 
-Open http://127.0.0.1:8102/, pick a thread, click any item. For a single file you can email or put on a shared drive:
+Open http://127.0.0.1:8102/, pick a thread, click any item. For a single file you can send by email or put on a shared drive:
 
 ```
-handover build data/threads/warehouse-move.json --out brief.html
+handover build data/threads/warehouse-golive.json --out brief.html
 ```
 
 ```
-97 messages -> 33 items (3 cancellation, 11 deadline, 4 decision, 10 owner, 3 proposal, 2 question)
-wrote brief.html (67 KB, self-contained)
+78 messages -> 25 items (2 cancellation, 8 deadline, 4 decision, 7 owner, 2 proposal, 2 question)
+wrote brief.html (58 KB, self-contained)
 ```
 
-The page has no external requests (no CDN, no fonts to download), works at phone width and has light and dark themes. `handover items <thread.json>` prints the items as a table ([sample](docs/sample-output.txt)). `python -m handover` is the same command if your system blocks the generated launcher.
+The page makes no external requests (no CDN, no web fonts), so it opens on a weak connection or none. It works at phone width, in light and dark. `handover items <thread.json>` prints the items as a table ([sample](docs/sample-output.txt)). `python -m handover` is the same command if your system blocks the generated launcher.
 
-<img src="docs/mobile-source.png" alt="On a phone, the selected deadline opens a panel with its history and the highlighted message 'Racking pushed to Monday'" width="300">
+<img src="docs/mobile-source.png" alt="On a phone, the selected stock count opens a panel with its history and the highlighted message 'Count pushed to Monday'" width="300">
 
 ## How it works
 
-The input is a thread in a small JSON format modelled on a Microsoft Teams channel export: message id, author, timestamp, text, reply-to id, edited flag ([docs/schema.md](docs/schema.md)).
+The input is a chat thread in a small JSON format: message id, author, timestamp, text, reply-to id, edited flag ([docs/schema.md](docs/schema.md)). Field names follow the Microsoft Graph chat message format, so an export from most chat tools converts with a short script.
 
 | Step | What it does |
 |---|---|
-| Resolve dates | Every date phrase is resolved against the timestamp of the message that contains it: "Friday", "next Monday", "the 14th", "end of day tomorrow", "in two weeks", "10/04", "April 10". Rules are in [dates.py](handover/dates.py), for example "next Monday" said on a Wednesday is 5 days later. |
-| Describe each message | Cue patterns mark proposals, agreement, disagreement, requests, claims ("I'll take it"), moves ("pushed to"), corrections ("sorry, I meant the 18th"), cancellations and announced decisions. |
-| One pass, in order | A state machine keeps what a careful reader keeps in mind: current deadlines, open proposals, pending requests. A move changes the deadline it refers to (found by reply link, the old date, or shared words) and appends to its history. A proposal becomes a decision only when **another person** agrees; a proposed date change nobody agreed to leaves the deadline as it was. A later decision on the same topic with a reversal cue ("switch", "revised") marks the earlier one reversed. |
-| Unanswered questions | A question with no reply, and no on-topic answer from someone else in the next few messages, is listed as open. Side chatter is ignored. |
+| Resolve dates | Every date phrase is resolved against the timestamp of the message that contains it: "Friday", "next Monday", "the 14th", "end of day tomorrow", "in two weeks", "10/04", "April 10", and the French and Arabic equivalents ("lundi prochain", "le 14 avril", "dans deux semaines", "الاثنين الجاي", "بكرا"). Rules are in [dates.py](handover/dates.py). |
+| Describe each message | Cue patterns in English, French and Arabic mark proposals, agreement, disagreement, requests, claims ("I'll take it", "je m'en occupe"), moves ("pushed to", "reporté à"), corrections, cancellations ("annulé", "ملغى") and announced decisions. Codes such as WH-07, S-03 or FA-2026 are kept whole, because they name the thing a message is about. |
+| One pass, in order | A state machine keeps what a careful reader keeps in mind: current deadlines, open proposals, pending requests. A move changes the deadline it refers to (found by reply link, the old date, or shared words) and appends to its history. A proposal becomes a decision only when **another person** agrees; a proposed date change nobody agreed to leaves the deadline as it was. A later decision on the same topic with a reversal cue marks the earlier one reversed. |
+| Unanswered questions | A question (ending in `?` or `؟`) with no reply, and no on-topic answer from someone else in the next few messages, is listed as open. Side chatter is ignored. |
 | Render | Items and messages are embedded as JSON in one HTML page. Clicking an item highlights its messages and scrolls to the first change. |
 
 Each item keeps the ids of all its source messages and a history of versions (set, moved, corrected, agreed, cancelled, reversed, handed over), with author and message for each step.
 
 ## Results
 
-Three synthetic threads from fictional Northbridge Relief teams, 69 to 97 messages each, with gold labels written by the rules in [docs/labelling.md](docs/labelling.md). I wrote and tuned on two of them (a warehouse move in Lebanon, a cash distribution in Kenya). The third (a donor report in Colombia) was written, with its gold labels, by a different language model from the same written rules, before any extraction code existed. It was committed first, not read while tuning, and measured once ([docs/heldout-first-run.txt](docs/heldout-first-run.txt)). The extractor has not changed since that run.
+Three synthetic threads, 70 to 83 messages each, with gold labels written by the rules in [docs/labelling.md](docs/labelling.md): a warehouse joining the stock system (stock count, catalogue codes, QR labels, keeper training, the unlock day), an emergency operations room (shelters in schools, urgent dispatches, a delivery cancelled when a road closed), and rent renewals (contracts ending in three months, next year's budget lines, a wrong follow-up date, a landlord who never answers). Each has Arabic and French messages.
+
+I wrote the first two and tuned the rules on them only ([baseline before tuning](docs/tune-baseline.txt): precision 0.77, recall 0.69). The rent-renewals thread and its gold labels were written by a different language model from the same written rules and committed before any rule change. I checked only its structure, then measured it once ([docs/heldout-first-run.txt](docs/heldout-first-run.txt)). After that run I found that the scorer ignored a deadline's status; I fixed the scorer, not the extractor, and rescored. Both runs are in that file and the extractor has not changed since.
 
 Output of `handover bench` ([docs/benchmark.txt](docs/benchmark.txt)):
 
 ```
-== tune (warehouse-move, cash-distribution) ==
+== tune (warehouse-golive, emergency-ops) ==
 type          gold found right  precision  recall
-deadline        20    20    19       0.95    0.95
-decision         9     9     9       1.00    1.00
-proposal         6     6     6       1.00    1.00
-owner           21    22    21       0.95    1.00
+deadline        16    17    15       0.88    0.94
+decision         7     7     7       1.00    1.00
+proposal         5     5     5       1.00    1.00
+owner           14    15    14       0.93    1.00
 question         4     4     4       1.00    1.00
-cancellation     5     5     5       1.00    1.00
-change           9     9     9       1.00    1.00
-all items       65    66    64       0.97    0.98
-Superseded, cancelled or unagreed items shown as current: 0 (out of 19 such items in gold)
+cancellation     4     4     4       1.00    1.00
+change           7     7     7       1.00    1.00
+all items       50    52    49       0.94    0.98
+Superseded, cancelled or unagreed items shown as current: 0 (out of 14 such items in gold)
+Current items shown as cancelled, reversed or handed over: 1 (out of 33 current items in gold)
 
-== heldout (donor-report) ==
+== heldout (rent-renewals) ==
 type          gold found right  precision  recall
-deadline         7     8     7       0.88    1.00
-decision         4     3     3       1.00    0.75
-proposal         2     3     2       0.67    1.00
-owner            4     2     2       1.00    0.50
-question         3     4     3       0.75    1.00
+deadline        12    14     9       0.64    0.75
+decision         4     3     2       0.67    0.50
+proposal         2     6     2       0.33    1.00
+owner            7     7     6       0.86    0.86
+question         3     2     2       1.00    0.67
 cancellation     1     1     1       1.00    1.00
-change           3     2     2       1.00    0.67
-all items       21    21    18       0.86    0.86
-Superseded, cancelled or unagreed items shown as current: 1 (out of 6 such items in gold)
-  ! d007 deadline 'Q1 report kickoff is Thursday at 10.' shown as current
+change           4     2     2       1.00    0.50
+all items       29    33    22       0.67    0.76
+Superseded, cancelled or unagreed items shown as current: 3 (out of 8 such items in gold)
+Current items shown as cancelled, reversed or handed over: 0 (out of 20 current items in gold)
 ```
 
-A match needs the right type, the right source message and the right value (the current date for a deadline, the status for a decision, the person for an owner; a change needs the whole chain of dates). The last line of each block is the number that matters most for a handover: how many items the brief presents as current although they were superseded, cancelled or never agreed.
+A match needs the right type, the right source message and the right value (date and status for a deadline, status for a decision, person and status for an owner; a change needs the whole chain of dates). The two last lines of each block are the errors that hurt a handover most: something stale presented as current, and something still on presented as cancelled.
 
-Read the tuned numbers as "the rules do what they were written to do". The held-out numbers are the honest estimate, and they come from 21 gold items, so one item moves recall by about 5 points.
+Read the tuned numbers as "the rules do what they were written to do". The held-out numbers are the honest estimate. They are worse than in this project's earlier scenario (held-out precision 0.86, recall 0.86, 1 stale item out of 6) on a thread with three languages, and they come from 29 gold items, so one item moves recall by about 3 points.
+
+**Arabic and French.** Of the dozen Arabic and French messages in the held-out thread, the rules handled an Arabic agreement ("تمام، موافقة"), an Arabic acceptance of a task, an Arabic and a French open question, a French deadline ("Dans deux semaines, il faut avoir vérifié les codes") and a French proposal ("je propose de basculer"). They missed two French agreements written with a typographic apostrophe (D’accord instead of D'accord), the French verb "basculer" as a sign that a decision was reversed, and they linked a French cancellation to the wrong item (see below).
 
 ## Where it fails
 
-Every case below is from the held-out thread.
+From the held-out thread:
 
-![The held-out brief lists the Q1 kickoff as a current deadline, although message 19 called it off](docs/heldout-failure.png)
+![The rent-renewals brief still lists the wrong March 26 follow-up date as current, and the corrected January 16 date as a separate deadline on 16 April](docs/heldout-failure.png)
 
-- **A cancelled meeting shown as current.** "Calling off the kickoff this morning. No need to join if the hold is still showing." (#19, a reply to the kickoff message). A rule meant to protect things that are "still on" ("the cleaning crew is cancelled, furniture still goes Monday") saw "still" and the word "hold", which also appears in the kickoff message, and excluded the kickoff from being cancelled. The cancellation is listed, but the kickoff also stays under current deadlines. This is the one stale item.
-- **A proposal phrased as an opinion.** "I'd put the results table in the narrative body" (#10) is not a proposal cue the rules know, so "fine by me" (#11) had nothing to agree with. When the team later moved the table to Annex A (#45, #46), that showed up as a new decision and the reversal was lost from "things that changed".
-- **Ownership in other words.** "sí, narrative is mine" (#5) and "Leave the financial workbook with me" (#6) were not recognised; the rules know "leave it with me" and a list of "I'll ..." verbs. Two of four owners missed.
-- **A question read as a proposal.** "Are the annex headings locked by the donor or can we change them?" (#53) contains "can we", so it was listed as an unagreed proposal.
-- **A past event read as a deadline.** "Hartwell acknowledged both files this morning." (#87) "This morning" resolves to the message date and became a deadline.
-- **Banter read as an open question.** "only 14? showoff" (#86).
+- **The wrong follow-up date stays current.** Message #2 holds two dates ("contract ends April 16. Our follow-up is set for March 26"); the rules make one deadline per message and kept the follow-up. The fix came as "Corrected it in the Sheet to January 16, three months before April 16" (#9). "Corrected it" is not a correction cue the rules know, so it became a new deadline, and "before April 16" outranked "to January 16", so even that one is dated 16 April.
+- **A typographic apostrophe.** "D’accord, on garde les lignes sans date" (#32) and "D’accord pour le 10 mars" (#42) were not read as agreement. One decision is listed as an unagreed proposal; an agreed date is listed as a proposal and reappears later as a fresh deadline.
+- **A French reversal.** "je propose de basculer tout le loyer ... sur FA-2026" became a decision, but "basculer" is not a reversal cue, so the old EA-2026 decision is still shown in force beside it.
+- **A cancellation linked to the wrong item.** "On annule la visite à Halba" (#44) replied to a message that set both a visit date and an owner ("I'll take the visit"); it cancelled the owner and left the visit under current deadlines.
+- **A question read as a proposal.** "Which cost centre should we use for Halba's municipal fee?" (#51) contains "should we". The same failure appeared in this project's earlier held-out run, and I did not fix it while tuning.
+- **A refusal read as a deadline.** "Wednesday won't work for finance" (#19) is not in the disagreement cues.
 
-One miss in the tuning set is by design: "share the PDM report within two weeks of the survey starting" is relative to another event, not the message, so the resolver refuses to guess a date rather than give a wrong one.
+From a tuning thread, still unfixed:
+
+- **A date match cancels the wrong event.** "La visite du gouverneur aux écoles prévue samedi est annulée" cancelled the governor's Saturday visit, which was never set up in the thread, and the rules attached it to the only Saturday item: the hygiene kit distribution, which then shows as cancelled ([screenshot](docs/tune-failure.png)). I found this after the held-out run and left the rules as they were, so the held-out number stays an unseen measurement.
 
 ## What I would add next
 
-- Fix the six cases above, then write a new held-out thread, because this one is no longer unseen.
-- A converter from a real Teams or Slack export (HTML stripped, threads flattened) into the thread format.
+- Fix the cases above (one deadline per date in a message, typographic apostrophes, French reversal verbs, cancel both the date and the owner of a task, require more than a shared date before cancelling), then write a new held-out thread.
+- A converter from a real chat export (HTML stripped, threads flattened) into the thread format.
 - An LLM pass could propose items the rules miss, with the rules and the source links kept as the check on what it may claim.
-- Arabic and French cue lists and date phrases ("الجمعة", "vendredi prochain").
 
 ## Licence
 
-MIT. All threads and people are synthetic; Northbridge Relief is a fictional organisation.
+MIT. All threads, people, codes and figures are synthetic; the organization is not named and no real organization's material is used.
