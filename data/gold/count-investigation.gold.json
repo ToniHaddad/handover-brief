@@ -1,0 +1,28 @@
+{
+  "thread": "count-investigation",
+  "items": [
+    {"type":"decision","label":"Reconcile each project and expiry separately without offsetting FA and EA variances","match_ids":["c004","c005"],"status":"in_force"},
+    {"type":"deadline","label":"WH-22 canned cheese recount","match_ids":["c008"],"chain":["2026-06-18","2026-06-22","2026-06-23"],"status":"current"},
+    {"type":"owner","label":"Lead the floor recount at WH-22","match_ids":["c010","c011"],"owner":"Rami Nassar","status":"current"},
+    {"type":"decision","label":"Use one signed recount sheet with separate FA and EA sections","match_ids":["c014","c015"],"status":"reversed","superseded_by":"c033"},
+    {"type":"proposal","label":"Move the recount up to Friday, June 19","match_ids":["c017"]},
+    {"type":"question","label":"Which folder holds the signed copy of the old rack layout?","match_ids":["c025"]},
+    {"type":"deadline","label":"Upload scans of the signed count sheets","match_ids":["c028"],"chain":["2026-06-24"],"status":"current"},
+    {"type":"deadline","label":"File the final investigation pack","match_ids":["c028"],"chain":["2026-07-10"],"status":"current"},
+    {"type":"cancellation","label":"Withdraw damage report DMG-2026-00037 after finding the carton intact","match_ids":["c031"],"target":"c019"},
+    {"type":"decision","label":"Sign a separate recount sheet for each project","match_ids":["c033","c034"],"status":"in_force"},
+    {"type":"owner","label":"Assemble the investigation pack with signed count sheets and card extracts","match_ids":["c035"],"owner":"Mira Zein","status":"current"},
+    {"type":"decision","label":"The operations manager signs the stock adjustment and the warehouse keeper signs the count sheets","match_ids":["c037"],"status":"in_force"},
+    {"type":"owner","label":"Handle operations sign-off for the WH-22 stock adjustment","match_ids":["c037"],"owner":"Nour Matar","status":"current"},
+    {"type":"deadline","label":"Project monitoring visit to WH-22","match_ids":["c039"],"chain":["2026-07-08"],"status":"cancelled"},
+    {"type":"deadline","label":"Internal evidence review on the channel call","match_ids":["c040"],"chain":["2026-07-08"],"status":"current"},
+    {"type":"owner","label":"Trace the EA transfer in the admin log and post the approved reversal","match_ids":["c041","c042"],"owner":"Tarek Zoghaib","status":"current"},
+    {"type":"decision","label":"Append a linked reversal for the second posting of TRF-2026-00142 without moving stock","match_ids":["c047","c048"],"status":"in_force"},
+    {"type":"proposal","label":"Add a photo of the empty overflow bays to the final pack","match_ids":["c049"]},
+    {"type":"deadline","label":"Check the paper archive for missing FA movement slips","match_ids":["c051"],"chain":["2026-07-02","2026-07-09"],"status":"current"},
+    {"type":"question","label":"How long did the generator run during the first count?","match_ids":["c055"]},
+    {"type":"deadline","label":"File the FA variance memo","match_ids":["c057"],"chain":["2026-07-03"],"status":"current"},
+    {"type":"deadline","label":"Closeout readout","match_ids":["c064"],"chain":["2026-07-14","2026-07-15"],"status":"current"},
+    {"type":"cancellation","label":"Cancel the project monitoring visit to WH-22","match_ids":["c069"],"target":"c039"}
+  ]
+}
