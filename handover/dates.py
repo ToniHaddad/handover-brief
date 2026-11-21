@@ -178,10 +178,24 @@ def _overlaps(spans: list[tuple[int, int]], s: int, e: int) -> bool:
     return any(s < b and e > a for a, b in spans)
 
 
+# Phones type curly quotes, non-breaking spaces and dashes. Each maps to one plain character,
+# so offsets found in the normalized text are valid in the original.
+_TYPO = str.maketrans({
+    "’": "'", "‘": "'", "ʼ": "'", "´": "'", "“": '"', "”": '"', "«": '"',
+    "»": '"', " ": " ", " ": " ", " ": " ", "–": "-", "—": "-", "‑": "-",
+    "…": ".",
+})
+
+
+def normalize(text: str) -> str:
+    return text.translate(_TYPO)
+
+
 def find_dates(text: str, base: date) -> list[DateMention]:
     """All date expressions in `text`, resolved against `base`, in text order."""
     found: list[DateMention] = []
     spans: list[tuple[int, int]] = []
+    original, text = text, normalize(text)
     lower = text.lower()
     for kind, pattern in PATTERNS:
         for m in pattern.finditer(text):
@@ -260,6 +274,6 @@ def find_dates(text: str, base: date) -> list[DateMention]:
             if value is None:
                 continue
             spans.append((s, e))
-            found.append(DateMention(s, e, text[s:e], value, out_kind))
+            found.append(DateMention(s, e, original[s:e], value, out_kind))
     found.sort(key=lambda x: x.start)
     return found

@@ -14,7 +14,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import timedelta
 
-from .dates import DateMention, find_dates
+from .dates import MONTHS, WEEKDAYS, DateMention, find_dates, normalize
 from .model import Item, Message, Thread, Version
 
 # ---------------------------------------------------------------- cue patterns
@@ -33,7 +33,8 @@ AGREE_NOT = re.compile(r"\b(?:as agreed|not agreed|never agreed|if agreed|pas d'
 DISAGREE = re.compile(
     r"^(?:no|nope|not really|i'd rather not|i would rather not|i don't think|i disagree|can't|cannot|"
     r"not possible|let's not|non|pas possible|لا)(?!\w)"
-    r"|\b(?:too late|won't approve|not approve|rather not|disagree|pas d'accord)\b|مش ممكن|ما بيمشي", re.I)
+    r"|\b(?:too late|won't approve|not approve|rather not|disagree|pas d'accord|won't work|doesn't work|"
+    r"does not work|will not work|ne marche pas|ne convient pas)\b|مش ممكن|ما بيمشي|ما بيزبط", re.I)
 PROPOSE = re.compile(
     r"\b(?:let's|let us|i propose|i suggest|i'd suggest|we could|why don't we|how about|"
     r"what about \w+ing|what if we|should we|shall we|could we|can we|i'd like|i would like|"
@@ -76,6 +77,10 @@ MOVE = re.compile(
 CORRECTION = re.compile(
     r"\b(?:sorry,? i meant|i meant|correction|typo|should have said|should read|my mistake|my bad|oops|"
     r"je voulais dire)\b"
+    r"|\bcorrected (?:it |that |this |the \w+ )?(?:in [^.,]{0,30}? )?to\b"
+    r"|\b(?:updated|fixed) (?:it |that |the \w+ )?(?:in [^.,]{0,30}? )?to\b"
+    r"|\b(?:should|must) (?:be|read|say)\b[^.]{0,40}?,? not\b"
+    r"|\bcorrig[ée]e? (?:à|au|en)\b|\bet non (?:pas )?(?:le|la)\b"
     r"|^\*|(?<!\w)(?:قصدي|عفوا قصدي)(?!\w)"
     r"|\b\d{1,2}(?:st|nd|rd|th)? not (?:the )?\d{1,2}(?:st|nd|rd|th)?\b", re.I)
 CANCEL = re.compile(
@@ -93,6 +98,7 @@ DECISION = re.compile(
     r"\b(?:we(?:'ve| have)? decided|it's decided|it is decided|final decision|has decided|"
     r"the decision is|decided to)\b|(?<!\w)(?:القرار|تقرر)(?!\w)", re.I)
 REVERSAL = re.compile(
+    r"\bbascul\w*|\bau lieu de\b|\bà la place\b|\bon passe\b|(?<!\w)(?:بدلاً|بدال|عوض)(?!\w)|"
     r"\b(?:switch(?:ing)?|instead|change of plan|revised|revise|scrap|reverse|reversing|no longer|"
     r"rather than|from this round|replace|replacing|overrule|back to|actually|on second thought|"
     r"changed our minds?|change of mind|finalement|plutôt)\b|(?<!\w)(?:بدل|بالآخر)(?!\w)", re.I)
@@ -108,7 +114,9 @@ CHATTER = re.compile(
     r"\b(?:coffee|lunch|mug|match|football|weather|rain|snow|dust storm|batteries|birthday|"
     r"fever|sick|get well|pole sana|traffic|kitchen|cake|tea|dinner|breakfast|holiday plans|"
     r"almuerzo|cafe|café|lluvia|manouche|zaatar|bakery)\b|(?<!\w)(?:قهوة|ترويقة|منقوشة)(?!\w)", re.I)
-STILL = re.compile(r"\bstill\b", re.I)
+# "furniture still goes Monday" keeps that item alive; "if the hold is still showing" does not
+STILL = re.compile(r"\bstill (?:goes|go|going|on|happening|stands|planned|scheduled|booked|confirmed)\b"
+                   r"|\b(?:toujours prévue?|maintenue?)\b", re.I)
 ANSWER_START = re.compile(
     r"^(?:yes|no|yeah|nope|not yet|it's|it is|they|we|the|i think|already|done|sent|i|he|she|"
     r"none|all|only|sí|si|oui|non|نعم|لا|ايه|إيه|ما في)(?!\w)", re.I)
@@ -129,10 +137,12 @@ end new next last this first deadline date time noon am pm i'll i'm we're it's t
 won't isn't we'll they're there's what's here's she'll he'll you'll said says say told tell
 good great sure fine agreed agree moved pushed push cancelled cancel instead meant
 les des une est pour pas que qui dans sur avec par plus été
-""".split())
+demain aujourd'hui prochain prochaine semaine semaines jours jour mois soir matin
+""".split()) | {w for k in (*WEEKDAYS, *MONTHS) for w in k.split()} | {"بكرا", "بكرة", "اليوم", "الجاي"}
 
 
 def keywords(text: str) -> set[str]:
+    text = normalize(text)
     out = {c.lower() for c in CODE.findall(text)}  # WH-07, S-03, FA-2026 name things precisely
     rest = CODE.sub(" ", text.lower()).replace("-", " ")
     for raw in re.findall(r"[a-záàâçéèêëîïôûùüñ0-9'؀-ۿ]+", rest):
@@ -161,6 +171,22 @@ def sentences(text: str) -> list[tuple[int, str]]:
     if text[start:].strip():
         out.append((start, text[start:].strip()))
     return out
+
+
+NOT_NAMES = {"The", "This", "That", "OK", "Ok", "USD", "LBP", "I", "We", "Yes", "No", "Decision", "Let's"}
+
+
+def codes_and_names(text: str) -> tuple[set[str], set[str]]:
+    """Codes (WH-07, FA-2026) and capitalised names that are not the first word of a sentence."""
+    codes = {c.upper() for c in CODE.findall(text)}
+    names = set()
+    for _, s in sentences(CODE.sub(" ", text)):
+        for w in re.findall(r"[A-Za-zÀ-ÿ']+", s)[1:]:
+            w = w.removesuffix("'s")
+            if w[:1].isupper() and len(w) > 2 and w not in NOT_NAMES and w.lower() not in WEEKDAYS \
+                    and w.lower() not in MONTHS:
+                names.add(w)
+    return codes, names
 
 
 def is_due(mention: DateMention, sentence: str) -> bool:
@@ -192,6 +218,7 @@ class Features:
     disagree: bool = False
     claim: str | None = None
     claim_dates: list[DateMention] = field(default_factory=list)
+    correction_new: DateMention | None = None
     cancel_clause: str = ""
     accept: bool = False
     takeover: bool = False
@@ -207,7 +234,7 @@ class Features:
 
 def describe(msg: Message, people: dict[str, str]) -> Features:
     """Describe one message with the cue patterns. `people` maps first names to full names."""
-    text = msg.text.strip()
+    text = normalize(msg.text.strip())
     body = MENTION.sub(lambda m: m.group(1), text)
     f = Features(dates=[d for d in find_dates(body, msg.day) if d.kind != "past"], sents=sentences(body))
     f.mentions = [people[n.lower()] for n in MENTION.findall(text) if n.lower() in people]
@@ -225,7 +252,10 @@ def describe(msg: Message, people: dict[str, str]) -> Features:
         f.claim = body[claim.start(): claim.end() + (end.end() if end else len(body))].strip()
         f.claim_dates = [d for d in f.dates if d.start >= claim.start() and is_due(d, f.claim)]
     f.takeover = bool(TAKEOVER.search(body))
-    f.correction = bool(CORRECTION.search(body))
+    corr = CORRECTION.search(body)
+    f.correction = bool(corr)
+    if corr:  # the new value is the first date at or after the cue
+        f.correction_new = next((d for d in f.dates if d.start >= corr.start()), None)
     f.decision = bool(DECISION.search(body))
     f.reversal = bool(REVERSAL.search(body))
     cancel = CANCEL.search(body)
@@ -248,7 +278,9 @@ def describe(msg: Message, people: dict[str, str]) -> Features:
             to = f.mentions[0]
         elif addressee and addressee.group(1).lower() in people:
             to = people[addressee.group(1).lower()]
-        if PROPOSE.search(s) and not PROPOSE_NOT.search(s) and not f.proposal:
+        # "Which cost centre should we use?" asks for information; "what if we", "how about" propose
+        info_q = is_q and INFO_QUESTION_START.match(s) and not re.match(r"^(?:what if|what about|how about)\b", s, re.I)
+        if PROPOSE.search(s) and not PROPOSE_NOT.search(s) and not f.proposal and not info_q:
             f.proposal = s
         elif REQUEST.search(s) and not f.request and (to or "?" in s or re.search(r"\bcan the\b|\bcould the\b", s, re.I)):
             f.request, f.request_to = s, to
@@ -324,20 +356,35 @@ class Extractor:
     def deadlines(self) -> list[Item]:
         return [i for i in self.items if i.type == "deadline" and i.status == "current"]
 
-    def find_target(self, msg: Message, words: set[str], candidates: list[Item], old_dates=(), min_overlap=1):
+    def reply_chain(self, msg: Message, depth: int = 3) -> set[str]:
+        """Ids this message replies to, directly or through earlier replies."""
+        out, cur = set(), msg
+        while cur.reply_to and len(out) < depth:
+            out.add(cur.reply_to)
+            cur = self.by_id[cur.reply_to]
+        return out
+
+    def find_target(self, msg: Message, words: set[str], candidates: list[Item], old_dates=(), min_overlap=1,
+                    date_needs_words=False):
         best, best_score = None, 0.0
+        chain = self.reply_chain(msg)
         for c in candidates:
             score = 0.0
-            if msg.reply_to and msg.reply_to in c.source_ids:
+            replied = bool(msg.reply_to and msg.reply_to in c.source_ids)
+            if replied:
                 score += 5
-            if c.date and c.date in old_dates:
-                score += 4
+            elif chain & set(c.source_ids):
+                score += 2
             # a shared code (WH-09, S-03, DSP-2026-00413) names the same thing: it counts twice
             overlap = sum(2 if CODE.fullmatch(w) else 1 for w in words & c.keywords)
+            if c.date and c.date in old_dates and (not date_needs_words or overlap or replied):
+                score += 4
             if overlap >= min_overlap:
                 score += 2 * overlap
             if score > 0:
                 score += self.thread.messages.index(self.by_id[c.source_ids[-1]]) / 10000
+                if c.type == "deadline":
+                    score += 0.5  # "the visit is cancelled" names the event before the person on it
             if score > best_score:
                 best, best_score = c, score
         return best
@@ -358,8 +405,9 @@ class Extractor:
 
     # -- state changes
     def set_deadline(self, msg: Message, mention: DateMention, label: str, kind: str = "set",
-                     origin: Message | None = None, merge: bool = True) -> Item:
-        words = keywords(msg.text)
+                     origin: Message | None = None, merge: bool = True, about: str | None = None) -> Item:
+        # `about` is the sentence the date belongs to when one message sets several dates
+        words = keywords(about or msg.text)
         for d in self.deadlines():
             # The same date again is the same deadline when the message is about the same
             # thing (shared words, or a reply to it) or too short to set up something new.
@@ -371,7 +419,7 @@ class Extractor:
                 return d
         origin = origin or msg
         item = self.new_item("deadline", "current", label, origin, date=mention.value)
-        item.keywords |= keywords(origin.text) | words
+        item.keywords |= (keywords(origin.text) if about is None else set()) | words
         item.add_source(msg.id)
         item.history.append(Version(kind, origin.id, origin.author, mention.value.isoformat(), short(origin.text)))
         if origin is not msg:
@@ -390,12 +438,17 @@ class Extractor:
     def make_decision(self, item: Item, msg: Message, words: set[str]):
         """Turn a proposal (or a new item) into a decision in force; reverse the one it replaces."""
         reverse, best = None, 0
-        cue = bool(REVERSAL.search(" ".join([item.label, msg.text])))
+        new_text = normalize(" ".join([item.label, msg.text]))
+        cue = bool(REVERSAL.search(new_text))
+        new_codes, new_names = codes_and_names(new_text)
         for d in self.items:
             if d is item or d.type != "decision" or d.status != "in_force":
                 continue
             overlap = len(words & d.keywords)
-            if ((overlap >= 1 and cue) or overlap >= 4) and overlap > best:
+            # same named thing (Tripoli, Jbeil, Halba) given a different code (EA-2026 -> FA-2026)
+            old_codes, old_names = codes_and_names(normalize(" ".join([d.label, self.by_id[d.origin_id].text])))
+            conflict = bool(new_names & old_names) and bool(new_codes) and bool(old_codes) and not new_codes <= old_codes
+            if ((overlap >= 1 and (cue or conflict)) or overlap >= 4) and overlap > best:
                 reverse, best = d, overlap
         if reverse:
             reverse.status = "reversed"
@@ -428,14 +481,22 @@ class Extractor:
         words = keywords(msg.text)
         consumed_dates = False
 
-        # 1. correction of the author's own recent date ("sorry, I meant the 18th")
+        # 1. a correction: "sorry, I meant the 18th", or one that states the new value
+        #    ("corrected it to January 16", "should be the 9th, not the 2nd")
         if f.correction and f.dates:
-            recent = [d for d in self.deadlines()
-                      if self.by_id[d.origin_id].author == msg.author or msg.reply_to in d.source_ids]
-            recent = [d for d in recent if msg.idx - self.by_id[d.source_ids[-1]].idx <= 5]
-            if recent:
-                target = recent[-1]
-                self.change_deadline(target, msg, f.dates[0].value, "corrected")
+            new = f.correction_new or f.dates[0]
+            old = {d.value for d in f.dates if d.value != new.value}
+            chain = self.reply_chain(msg)
+            target = None
+            if old:  # the old value is named: find the deadline that holds it
+                target = self.find_target(msg, words, self.deadlines(), old_dates=old, date_needs_words=True)
+            if target is None:
+                recent = [d for d in self.deadlines()
+                          if (self.by_id[d.origin_id].author == msg.author or chain & set(d.source_ids))
+                          and msg.idx - self.by_id[d.source_ids[-1]].idx <= 5]
+                target = recent[-1] if recent else None
+            if target is not None and target.date != new.value:
+                self.change_deadline(target, msg, new.value, "corrected")
                 consumed_dates = True
 
         # 2. cancellation
@@ -453,18 +514,22 @@ class Extractor:
                 candidates = [i for i in self.items
                               if i.type in ("deadline", "owner") and i.status == "current" and not (kept & i.keywords)]
                 in_sentence = {d.value for d in find_dates(f.cancel_clause, msg.day)}
-                target = self.find_target(msg, cancel_words, candidates, old_dates=in_sentence, min_overlap=2)
+                # a shared date alone is not enough: the cancelled thing must be named
+                # (or replied to), so "the governor's visit on Saturday is cancelled" leaves
+                # Saturday's kit distribution alone
+                target = self.find_target(msg, cancel_words, candidates, old_dates=in_sentence, min_overlap=2,
+                                          date_needs_words=True)
                 item = self.new_item("cancellation", "cancelled", f.cancel, msg)
                 item.history.append(Version("cancelled", msg.id, msg.author, "", short(msg.text)))
                 if target:
                     item.target = target.id
                     item.label = short(f"{target.label}")
-                    target.status = "cancelled"
-                    target.add_source(msg.id)
-                    target.history.append(Version("cancelled", msg.id, msg.author, "", short(msg.text)))
-                    for o in self.items:  # a task called off takes its owner with it
-                        if o.type == "owner" and o.status == "current" and target.origin_id in o.source_ids:
-                            o.status = "cancelled"
+                    # the deadline and the owner a message set up are one task: call off both
+                    for t in [i for i in candidates if i is target or i.origin_id == target.origin_id
+                              or target.origin_id in i.source_ids[:2]]:
+                        t.status = "cancelled"
+                        t.add_source(msg.id)
+                        t.history.append(Version("cancelled", msg.id, msg.author, "", short(msg.text)))
                 consumed_dates = True
 
         # 3. a decision announced as made
@@ -568,7 +633,7 @@ class Extractor:
 
         # 8. a new request ("@Rana can you get freight quotes?")
         if f.request and not f.chatter:
-            req_start = MENTION.sub(lambda m: m.group(1), msg.text).find(f.request)
+            req_start = MENTION.sub(lambda m: m.group(1), normalize(msg.text.strip())).find(f.request)
             req_dates = [d for d in f.dates if req_start <= d.start < req_start + len(f.request)]
             self.requests.append(PendingRequest(msg, f.request_to, f.request, f.takeover, req_dates))
             # dates outside the request sentence ("S-03 goes tomorrow. Omar, same 150.") still count
@@ -577,10 +642,17 @@ class Extractor:
         # 9. a date stated as plan or fact
         if f.dates and not consumed_dates and not f.chatter and not f.no_deadline and not f.disagree \
                 and not f.question and not agreed_proposal:
-            primary = self.primary_date(msg.text, f.dates)
-            sentence = next((s for o, s in f.sents if o <= primary.start < o + len(s) + 2), msg.text)
-            if is_due(primary, sentence):
-                self.set_deadline(msg, primary, sentence)
+            # one deadline per sentence that carries its own date: "the contract ends April 16.
+            # Our follow-up is set for March 26." holds two deadlines
+            dated = []
+            for o, s in f.sents:
+                sdates = [d for d in f.dates if o <= d.start < o + len(s) + 1]
+                if sdates and not NOT_A_DEADLINE.search(s):
+                    primary = self.primary_date(normalize(msg.text), sdates)
+                    if is_due(primary, s):
+                        dated.append((primary, s))
+            for primary, sentence in dated:
+                self.set_deadline(msg, primary, sentence, about=sentence if len(dated) > 1 else None)
 
     @staticmethod
     def move_words(f: Features) -> set[str]:

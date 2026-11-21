@@ -255,3 +255,106 @@ def test_tonight_in_a_report_is_not_a_deadline():
         ("2", "2026-09-14 18:52", "Layla Frem", "Dispatch 150 mattresses to S-03 this evening."),
     )
     assert [d.origin_id for d in of(items, "deadline")] == ["2"]
+
+
+# ---- rules added after rent-renewals moved into the tuning set
+
+def test_curly_apostrophes_in_cues():
+    items = thread(
+        ("1", "2026-01-20 13:25", "Dalia Akl", "Can we put March 10 as the deadline for clearing the Saida renewal?"),
+        ("2", "2026-01-20 13:33", "Karim Nahle", "D\u2019accord pour le 10 mars, \u00e7a nous laisse assez de marge.", "1"),
+        ("3", "2026-01-20 14:00", "Maya Tannous", "I\u2019ll draft the renewal letter for Saida."),
+    )
+    [d] = of(items, "deadline")
+    assert d.date == date(2026, 3, 10) and d.origin_id == "1"
+    assert not of(items, "proposal")
+    assert [o.owner for o in of(items, "owner")] == ["Maya Tannous"]
+
+
+def test_two_dates_for_two_things_in_one_message():
+    items = thread(
+        ("1", "2026-01-12 08:51", "Maya Tannous",
+         "Zahle centre, RENT-ZAH-03: contract ends April 16. Our follow-up is set for March 26 in the Sheet."),
+    )
+    assert sorted(d.date for d in of(items, "deadline")) == [date(2026, 3, 26), date(2026, 4, 16)]
+
+
+def test_correction_that_states_the_new_value_supersedes_the_old_date():
+    items = thread(
+        ("1", "2026-01-12 08:51", "Maya Tannous",
+         "Zahle centre, RENT-ZAH-03: contract ends April 16. Our follow-up is set for March 26 in the Sheet."),
+        ("2", "2026-01-13 09:09", "Rima Zoghbi", "The March 26 follow-up doesn't match the contract.", "1"),
+        ("3", "2026-01-13 09:14", "Maya Tannous",
+         "Right, the follow-up was copied from another row. Corrected it in the Sheet to January 16, "
+         "three months before April 16.", "2"),
+    )
+    by_date = {d.date: d for d in of(items, "deadline")}
+    assert set(by_date) == {date(2026, 1, 16), date(2026, 4, 16)}  # the contract end is untouched
+    follow = by_date[date(2026, 1, 16)]
+    assert [v.kind for v in follow.history if v.kind != "mentioned"] == ["set", "corrected"]
+
+
+def test_should_be_x_not_y_is_a_correction():
+    items = thread(
+        ("1", "2026-06-17 09:00", "Nadia Fares", "Recount at WH-22 is set for the 2nd of July."),
+        ("2", "2026-06-17 09:30", "Ziad Moukarzel", "The recount date in the sheet should be the 9th, not the 2nd."),
+    )
+    [d] = of(items, "deadline")
+    assert d.date == date(2026, 7, 9) and d.history[-1].kind == "corrected"
+
+
+def test_cancellation_attaches_to_the_event_it_names_not_to_another_on_the_same_day():
+    items = thread(
+        ("1", "2026-09-17 14:00", "Carla Nassif", "Hygiene kit distribution in S-01 and S-02 is now Saturday the 19th."),
+        ("2", "2026-09-18 09:00", "Layla Frem",
+         "La visite du gouverneur aux \u00e9coles pr\u00e9vue samedi est annul\u00e9e, il reste \u00e0 Tripoli."),
+    )
+    [d] = of(items, "deadline")
+    assert d.status == "current"
+    [c] = of(items, "cancellation")
+    assert c.target is None
+
+
+def test_cancelled_visit_takes_both_its_date_and_its_owner():
+    items = thread(
+        ("1", "2026-01-19 14:20", "Rima Zoghbi", "Halba site visit is Thursday. I'll take the visit and check the folder."),
+        ("2", "2026-01-21 09:08", "Dalia Akl", "On annule la visite \u00e0 Halba. Le magasin est ferm\u00e9.", "1"),
+    )
+    [d] = of(items, "deadline")
+    [o] = of(items, "owner")
+    assert d.status == "cancelled" and o.status == "cancelled"
+
+
+def test_later_decision_on_the_same_thing_with_a_different_code_reverses_the_earlier_one():
+    items = thread(
+        ("1", "2026-01-13 09:38", "Karim Nahle", "For the Tripoli warehouse, let's charge the whole rent to EA-2026."),
+        ("2", "2026-01-13 09:42", "Dalia Akl", "ok", "1"),
+        ("3", "2026-01-20 10:32", "Karim Nahle", "Let's cover the Jbeil rent entirely from WASH-2026."),
+        ("4", "2026-01-20 10:41", "Dalia Akl", "Fine by me.", "3"),
+        ("5", "2026-01-26 14:32", "Dalia Akl", "Pour Tripoli, je propose de mettre tout le loyer sur FA-2026."),
+        ("6", "2026-01-26 14:37", "Karim Nahle", "tamam, agreed.", "5"),
+    )
+    tripoli_old, jbeil, tripoli_new = of(items, "decision")
+    assert tripoli_old.status == "reversed" and tripoli_old.target == tripoli_new.id
+    assert jbeil.status == "in_force" and tripoli_new.status == "in_force"
+
+
+def test_question_starting_with_which_is_not_a_proposal():
+    items = thread(
+        ("1", "2026-01-22 10:38", "Karim Nahle", "Which cost centre should we use for Halba's municipal fee?"),
+        ("2", "2026-01-23 09:00", "Tarek Choueiri", "Generator is down again."),
+    )
+    assert not of(items, "proposal")
+    assert [q.origin_id for q in of(items, "question")] == ["1"]
+
+
+def test_wont_work_turns_a_proposed_date_down():
+    items = thread(
+        ("1", "2026-01-14 09:06", "Dalia Akl", "Finance needs the budget pack next Monday."),
+        ("2", "2026-01-14 09:17", "Tarek Choueiri", "Could we move the pack to Wednesday instead?", "1"),
+        ("3", "2026-01-14 09:20", "Dalia Akl", "Wednesday won't work for finance. Keep Monday for now.", "2"),
+    )
+    [d] = of(items, "deadline")
+    assert d.date == date(2026, 1, 19)
+    [p] = of(items, "proposal")
+    assert p.history[-1].kind == "rejected"
