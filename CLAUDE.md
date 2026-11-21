@@ -22,12 +22,16 @@ messages. Deterministic rules, no LLM, standard library only.
 - `handover/bench.py` scoring rules from `docs/labelling.md`
 - `handover/render.py` + `handover/static/brief.html` the single-file page (vanilla JS, data embedded as JSON)
 - `handover/server.py` index and `/brief/<thread>`
-- `data/threads`, `data/gold`, `data/splits.json` (tune: warehouse-golive, emergency-ops; held-out: rent-renewals)
+- `data/threads`, `data/gold`, `data/splits.json` (tune: warehouse-golive, emergency-ops, rent-renewals; held-out: count-investigation)
 
 ## Quirks
 
-- The held-out thread was measured once (`docs/heldout-first-run.txt`).
-  Changing `extract.py` or `dates.py` means the held-out numbers in the
-  README are no longer an unseen measurement: say so if you change them.
+- Held-out discipline: a new unseen thread (written by another model from
+  `docs/labelling.md`, structure checked only) is committed before any rule
+  change, then measured once (`docs/heldout-first-run.txt`). Rent-renewals
+  was unseen in round 2 and is tuning data now. Changing `extract.py` or
+  `dates.py` after a measurement means a new unseen thread is needed.
+- Text is normalised (`dates.normalize`: curly quotes, NBSP, dashes) before
+  any cue matching; replacements are one character each so offsets hold.
 - Labels in the brief are quoted source sentences, never paraphrases.
 - Screenshots in `docs/` come from the shared shot tool against `handover serve`.
