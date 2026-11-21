@@ -529,7 +529,7 @@ class Extractor:
                 self.set_deadline(msg, d, f.claim, merge=bool(same))
                 consumed_dates = True
 
-        # 6. a move stated as fact ("Racking pushed to Monday", "Monday instead of today")
+        # 6. a move stated as fact ("Count pushed to Monday", "Monday instead of today")
         if f.move and not f.proposal and not consumed_dates:
             new, old = self.move_dates(f)
             target = self.find_target(msg, self.move_words(f), self.deadlines(), old_dates=old) \

@@ -1,33 +1,25 @@
-deadline     current     w001   2026-03-31                    Landlord confirmed in writing: we have to be out of the Zahle warehous
-decision     in_force    w006                                 Let's keep everything about the move in this channel please, not Whats
-owner        superseded  w009              Daniel Mensah      I'll take the stock count.
-owner        current     w010              Rana Khoury        Rana can you get freight quotes, at least three?
-deadline     current     w011   2026-03-05                    Rana can you get freight quotes, at least three? (Sure, will have them
-deadline     current     w013   2026-03-11                    They say racking installation done by Friday if we confirm the order t
-owner        current     w016              Joelle Saba        I'll raise the PO.
-deadline     current     w018   2026-03-18                    Main move day is the 17th.
-deadline     cancelled   w021   2026-03-12                    The donor's logistics advisor wants to see the new site. She suggested
-decision     reversed    w028                                 Bekaa is cheapest and we used them in Baalbek last year without issues
-proposal     not_agreed  w031                                 What if we do a Saturday shift on the 14th to move the slow-moving sto
-owner        current     w036              Karim Nassar       Karim can you sort a forklift hire for the 18th?
-owner        current     w038              Amal Rizk          I'll send the floor plan to the broker.
-owner        cancelled   w040              Rana Khoury        Our bin label printer is dead. Leave it with me, I'll order a new one 
-deadline     current     w044   2026-03-16                    1,140 pallet positions, should finish by end of the week.
-deadline     current     w045   2026-03-10                    Broker says the insurance certificate will be issued by end of day tom
-decision     in_force    w050                                 Decision from the CD this morning: cold-chain items go to the Beirut w
-proposal     not_agreed  w052                                 Should we also move the shelter kits to Beirut while we're at it?
-cancellation cancelled   w056                                 The donor's logistics advisor wants to see the new site. She suggested
-decision     in_force    w060                                 Cedar Line can do the 18th at their quoted price. Let's switch to Ceda
-proposal     not_agreed  w063                                 Could we push move day to Friday the 20th? Drivers prefer it and it gi
-owner        current     w069              Rana Khoury        Get well. @Rana can you take over the stock count? (I'll take it over.
-owner        current     w074              Joelle Saba        I'll pay the forklift deposit Monday.
-deadline     current     w074   2026-03-16                    I'll pay the forklift deposit Monday.
-cancellation cancelled   w079                                 Our bin label printer is dead. Leave it with me, I'll order a new one 
-deadline     current     w080   2026-03-17                    Cedar wants the final pallet count by tomorrow noon.
-owner        current     w081              Amal Rizk          Cedar wants the final pallet count by tomorrow noon. (I'll send it.)
-deadline     current     w087   2026-03-23                    Furniture goes next Monday with the cleaning crew.
-deadline     current     w090   2026-04-02                    I need the move cost summary for the donor report in two weeks.
-cancellation cancelled   w094                                 The cleaning crew for Zahle is cancelled, the landlord will do the cle
-owner        current     w095              Daniel Mensah      I'll organise a pickup truck for the furniture then.
-question     unanswered  w047                                 Who has the keys to the back gate at the old site?
-question     unanswered  w072                                 Do we need a new fire safety certificate for Chtaura before stock goes
+deadline     current     g001   2026-05-06                    Admin confirmed WH-14 gets unlocked in the stock system on 4 May.
+owner        current     g004              Hiba Mansour       I'll map the WH-14 item names to catalogue codes.
+deadline     current     g004   2026-04-17                    Should be done by end of the week.
+deadline     current     g007   2026-04-22                    Opening stock count is Thursday.
+decision     in_force    g010                                 Let's enter the opening balances per project, FA-2026 and INKIND as se
+owner        current     g012              Rami Khoury        Rami can you create the keeper accounts for Georges and Fadi?
+decision     reversed    g015                                 Let's print QR labels per shelf location, not per box, otherwise we pr
+owner        current     g017              Fadi Sleiman       I'll print the shelf labels.
+deadline     current     g017   2026-04-24                    I'll print the shelf labels.
+proposal     not_agreed  g021                                 Should we count on Saturday the 18th instead? Then we don't have to cl
+deadline     current     g022   2026-04-16                    FA-2026 delivery from the supplier is confirmed for Thursday morning, 
+owner        current     g027              Georges Abi Nader  I'll clear the expired stock from aisle B before the count.
+decision     in_force    g028                                 Decision from operations: anything expired found in the count goes on 
+deadline     cancelled   g030   2026-04-23                    Transfer of 40 boxes of hygiene kits from WH-14 to WH-09 is planned fo
+deadline     current     g037   2026-04-28                    Keeper training on the phone app on Tuesday 28 April in Zahle?
+owner        current     g045              Hiba Mansour       Leave it with me, I'll ask the catalogue focal point for new codes.
+proposal     not_agreed  g050                                 Or could we unlock on Friday 1 May? Long weekend after, nobody dispatc
+cancellation cancelled   g056                                 Transfer of 40 boxes of hygiene kits from WH-14 to WH-09 is planned fo
+decision     in_force    g058                                 Change of plan on the labels: the mixed pallets on shelf H don't work 
+owner        current     g060              Fadi Sleiman       I'll reprint those
+owner        current     g064              Rami Khoury        I'll enter the EA-2026 lines on Monday.
+deadline     current     g064   2026-04-27                    I'll enter the EA-2026 lines on Monday.
+cancellation cancelled   g067                                 Small change: tomorrow's training stays, but the extra session for the
+question     unanswered  g026                                 Do we record the damaged cartons from aisle C as damage reports before
+question     unanswered  g033                                 مين معو مفتاح غرفة التبريد؟

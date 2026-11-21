@@ -17,4 +17,4 @@ jobs:
       - name: Benchmark runs and the brief builds
         run: |
           handover bench
-          handover build data/threads/warehouse-move.json --out /tmp/brief.html
+          handover build data/threads/warehouse-golive.json --out /tmp/brief.html

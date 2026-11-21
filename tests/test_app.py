@@ -17,7 +17,7 @@ DATA = Path(__file__).resolve().parent.parent / "data"
 
 
 def msg(mid, text="hi", when="2026-03-02T09:00:00+02:00", reply=None):
-    return {"id": mid, "createdDateTime": when, "from": "Amal Rizk", "body": text, "replyToId": reply}
+    return {"id": mid, "createdDateTime": when, "from": "Nadine Saliba", "body": text, "replyToId": reply}
 
 
 def test_loader_reads_all_bundled_threads():
@@ -83,3 +83,12 @@ def test_server_serves_index_and_briefs():
             urllib.request.urlopen(base + "/brief/..%2Fsplits")
     finally:
         server.shutdown()
+
+
+def test_score_requires_the_right_status_and_counts_the_reverse_error():
+    gold = [{"type": "deadline", "label": "x", "match_ids": ["1"], "chain": ["2026-09-19"], "status": "current"}]
+    pred = Item("deadline-1", "deadline", "cancelled", "x", "1", ["1"],
+                [Version("set", "1", "A", "2026-09-19")], date=date(2026, 9, 19))
+    scores, stale = score_thread([pred], gold)
+    assert scores["deadline"].tp == 0
+    assert len(stale.hidden) == 1 and stale.live == 1

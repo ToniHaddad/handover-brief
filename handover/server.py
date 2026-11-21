@@ -27,7 +27,7 @@ a.t:hover{border-color:var(--accent)}
 .n{font:600 18px/1.3 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}.m{font-size:13px;color:var(--ink-3)}
 .c{font-size:13px;color:var(--ink-2);margin-top:4px}.c b{color:var(--moved)}
 </style></head><body><main><div class="kicker">Handover brief</div><h1>Team threads</h1>
-<p>Synthetic chats from Northbridge Relief project teams. Open one to see its handover timeline.</p>
+<p>Synthetic chats from teams in a humanitarian organization in Lebanon. Open one to see its handover timeline.</p>
 __LIST__</main></body></html>"""
 
 

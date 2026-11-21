@@ -93,7 +93,7 @@ def test_explicit_date_long_past_rolls_to_next_year():
 
 
 def test_weekday_with_ordinal_is_one_mention():
-    found = find_dates("Racking now Wednesday the 11th.", date(2026, 3, 9))
+    found = find_dates("Count now Wednesday the 11th.", date(2026, 3, 9))
     assert [m.value for m in found] == [date(2026, 3, 11)]
 
 

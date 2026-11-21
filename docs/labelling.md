@@ -58,10 +58,16 @@ proposed or stated it; the agreeing message may be listed too. A predicted
 item matches a gold item when the types agree, the predicted origin message
 is in `match_ids`, and:
 
-- deadline: the predicted current date equals the last value of `chain`;
+- deadline: the predicted current date equals the last value of `chain`
+  and the status (`current` or `cancelled`) agrees;
 - decision: the predicted status (`in_force` or `reversed`) agrees;
-- owner: the predicted owner name agrees;
+- owner: the predicted owner name and status agree;
 - the other types need only the message.
+
+The benchmark also counts two errors that matter most in a handover: items
+shown as current although gold says they were superseded, cancelled or never
+agreed, and the reverse, current items shown as cancelled, reversed or handed
+over.
 
 Changes are scored from the same items: a gold change is a deadline whose
 chain has more than one value, a reversed decision, or a superseded owner.

@@ -1,25 +1,30 @@
-== tune (warehouse-move, cash-distribution) ==
+== tune (warehouse-golive, emergency-ops) ==
 type          gold found right  precision  recall
-deadline        20    20    19       0.95    0.95
-decision         9     9     9       1.00    1.00
-proposal         6     6     6       1.00    1.00
-owner           21    22    21       0.95    1.00
+deadline        16    17    15       0.88    0.94
+decision         7     7     7       1.00    1.00
+proposal         5     5     5       1.00    1.00
+owner           14    15    14       0.93    1.00
 question         4     4     4       1.00    1.00
-cancellation     5     5     5       1.00    1.00
-change           9     9     9       1.00    1.00
-all items       65    66    64       0.97    0.98
-Superseded, cancelled or unagreed items shown as current: 0 (out of 19 such items in gold)
+cancellation     4     4     4       1.00    1.00
+change           7     7     7       1.00    1.00
+all items       50    52    49       0.94    0.98
+Superseded, cancelled or unagreed items shown as current: 0 (out of 14 such items in gold)
+Current items shown as cancelled, reversed or handed over: 1 (out of 33 current items in gold)
+  ! e018 deadline 'Hygiene kit distribution in S-01 and S-02 on Thursday, after registration is finished.' shown as cancelled
 
-== heldout (donor-report) ==
+== heldout (rent-renewals) ==
 type          gold found right  precision  recall
-deadline         7     8     7       0.88    1.00
-decision         4     3     3       1.00    0.75
-proposal         2     3     2       0.67    1.00
-owner            4     2     2       1.00    0.50
-question         3     4     3       0.75    1.00
+deadline        12    14     9       0.64    0.75
+decision         4     3     2       0.67    0.50
+proposal         2     6     2       0.33    1.00
+owner            7     7     6       0.86    0.86
+question         3     2     2       1.00    0.67
 cancellation     1     1     1       1.00    1.00
-change           3     2     2       1.00    0.67
-all items       21    21    18       0.86    0.86
-Superseded, cancelled or unagreed items shown as current: 1 (out of 6 such items in gold)
-  ! d007 deadline 'Q1 report kickoff is Thursday at 10.' shown as current
+change           4     2     2       1.00    0.50
+all items       29    33    22       0.67    0.76
+Superseded, cancelled or unagreed items shown as current: 3 (out of 8 such items in gold)
+  ! r002 deadline 'Our follow-up is set for March 26 in the Sheet.' shown as current
+  ! r011 decision 'For the next annual period on the Tripoli warehouse, let's charge the whole USD 21,600 to EA-2026.' shown as current
+  ! r035 deadline 'Halba site visit is Thursday.' shown as current
+Current items shown as cancelled, reversed or handed over: 0 (out of 20 current items in gold)
 

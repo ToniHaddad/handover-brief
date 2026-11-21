@@ -21,7 +21,7 @@ messages. Deterministic rules, no LLM, standard library only.
 - `handover/bench.py` scoring rules from `docs/labelling.md`
 - `handover/render.py` + `handover/static/brief.html` the single-file page (vanilla JS, data embedded as JSON)
 - `handover/server.py` index and `/brief/<thread>`
-- `data/threads`, `data/gold`, `data/splits.json` (tune: warehouse-move, cash-distribution; held-out: donor-report)
+- `data/threads`, `data/gold`, `data/splits.json` (tune: warehouse-golive, emergency-ops; held-out: rent-renewals)
 
 ## Quirks
 

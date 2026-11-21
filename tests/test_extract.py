@@ -19,40 +19,40 @@ def of(items, type_):
     return [i for i in items if i.type == type_]
 
 
-# 2026-03-03 is a Tuesday.
+# 2026-04-13 is a Monday.
 
 def test_deadline_moved_twice_keeps_the_whole_chain():
     items = thread(
-        ("1", "2026-03-03 09:40", "Amal Rizk", "Atlas say racking installation done by Friday."),
-        ("2", "2026-03-05 08:30", "Karim Nassar", "Bad news: steel delivery is late. Racking pushed to Monday."),
-        ("3", "2026-03-09 08:10", "Amal Rizk", "Atlas are short a crew. Racking now Wednesday the 11th."),
+        ("1", "2026-04-13 10:02", "Nadine Saliba", "Opening stock count at WH-14 is Thursday."),
+        ("2", "2026-04-15 08:40", "Georges Abi Nader", "Count pushed to Monday, the FA-2026 trucks arrive Thursday."),
+        ("3", "2026-04-17 08:41", "Nadine Saliba", "Then the count is now Wednesday the 22nd."),
     )
     [d] = of(items, "deadline")
-    assert d.date == date(2026, 3, 11)
-    assert [v.value for v in d.history if v.kind in ("set", "moved")] == ["2026-03-06", "2026-03-09", "2026-03-11"]
+    assert d.date == date(2026, 4, 22)
+    assert [v.value for v in d.history if v.kind in ("set", "moved")] == ["2026-04-16", "2026-04-20", "2026-04-22"]
     assert [v.message_id for v in d.history if v.kind == "moved"] == ["2", "3"]
-    assert [v.author for v in d.history if v.kind == "moved"] == ["Karim Nassar", "Amal Rizk"]
+    assert [v.author for v in d.history if v.kind == "moved"] == ["Georges Abi Nader", "Nadine Saliba"]
     assert d.changed
 
 
 def test_correction_by_the_author_replaces_the_date():
     items = thread(
-        ("1", "2026-03-04 09:02", "Amal Rizk", "Main move day is the 17th."),
-        ("2", "2026-03-04 09:06", "Amal Rizk", "sorry, I meant the 18th. The 17th is the staff retreat.", "1"),
+        ("1", "2026-04-14 09:40", "Fadi Sleiman", "I'll print the shelf labels. Ready by the 23rd."),
+        ("2", "2026-04-14 09:44", "Fadi Sleiman", "sorry, I meant the 24th. The printer is in Beirut until Thursday.", "1"),
     )
     [d] = of(items, "deadline")
-    assert d.date == date(2026, 3, 18)
+    assert d.date == date(2026, 4, 24)
     assert d.history[-1].kind == "corrected"
 
 
 def test_move_that_nobody_agreed_to_does_not_change_the_deadline():
     items = thread(
-        ("1", "2026-03-04 09:02", "Amal Rizk", "Main move day is Wednesday 18 March."),
-        ("2", "2026-03-12 09:30", "Karim Nassar", "Could we push move day to Friday the 20th? Drivers prefer it."),
-        ("3", "2026-03-12 09:41", "Amal Rizk", "No, the 18th stays. The trucks are booked.", "2"),
+        ("1", "2026-09-14 15:30", "Layla Frem", "Hygiene kit distribution in S-01 and S-02 on Saturday 19 September."),
+        ("2", "2026-09-17 16:00", "Nour Kassab", "Could we push the kit distribution to Monday? Saturday is hard for volunteers."),
+        ("3", "2026-09-17 16:12", "Layla Frem", "No, families have been without soap for four days. Saturday stays.", "2"),
     )
     [d] = of(items, "deadline")
-    assert d.date == date(2026, 3, 18)
+    assert d.date == date(2026, 9, 19)
     [p] = of(items, "proposal")
     assert p.origin_id == "2" and p.status == "not_agreed"
     assert not of(items, "decision")
@@ -60,21 +60,21 @@ def test_move_that_nobody_agreed_to_does_not_change_the_deadline():
 
 def test_agreed_move_changes_the_deadline_and_records_who_agreed():
     items = thread(
-        ("1", "2026-05-04 08:30", "Wanjiru Kamau", "Distribution date is 14 May."),
-        ("2", "2026-05-13 09:00", "Wanjiru Kamau", "Can we move distribution to Thursday 21st?"),
-        ("3", "2026-05-13 09:10", "Otieno Ouma", "Agreed, 21st.", "2"),
+        ("1", "2026-04-13 08:41", "Nadine Saliba", "WH-14 gets unlocked in the stock system on 4 May."),
+        ("2", "2026-04-20 09:00", "Rami Khoury", "Can we move the unlock to Wednesday 6 May?"),
+        ("3", "2026-04-20 09:12", "Nadine Saliba", "OK, 6 May.", "2"),
     )
     [d] = of(items, "deadline")
-    assert d.date == date(2026, 5, 21)
-    assert ("agreed", "3", "Otieno Ouma") in [(v.kind, v.message_id, v.author) for v in d.history]
+    assert d.date == date(2026, 5, 6)
+    assert ("agreed", "3", "Nadine Saliba") in [(v.kind, v.message_id, v.author) for v in d.history]
     assert not of(items, "proposal")
 
 
 def test_proposal_without_agreement_is_never_a_decision():
     items = thread(
-        ("1", "2026-05-07 09:00", "Achieng Odhiambo", "Should we pay the first 100 households early as a test?"),
-        ("2", "2026-05-07 09:05", "Ekai Lokwang", "finally some rain here"),
-        ("3", "2026-05-08 09:00", "Wanjiru Kamau", "Final list is with the provider."),
+        ("1", "2026-09-16 10:20", "Nour Kassab", "Should we open a fourth shelter in the Minieh school?"),
+        ("2", "2026-09-16 11:00", "Bilal Hamdan", "Bebnine road open again since 10."),
+        ("3", "2026-09-17 07:05", "Omar Daher", "DSP-2026-00417 out: 150 mattresses to S-03."),
     )
     assert not of(items, "decision")
     [p] = of(items, "proposal")
@@ -83,8 +83,8 @@ def test_proposal_without_agreement_is_never_a_decision():
 
 def test_agreement_must_come_from_another_person():
     items = thread(
-        ("1", "2026-03-05 09:12", "Rana Khoury", "Let's go with Bekaa Freight for the move."),
-        ("2", "2026-03-05 09:13", "Rana Khoury", "ok"),
+        ("1", "2026-04-14 09:20", "Georges Abi Nader", "Let's print QR labels per shelf location, not per box."),
+        ("2", "2026-04-14 09:21", "Georges Abi Nader", "ok"),
     )
     assert not of(items, "decision")
     assert len(of(items, "proposal")) == 1
@@ -92,8 +92,8 @@ def test_agreement_must_come_from_another_person():
 
 def test_proposal_agreed_by_another_person_is_a_decision():
     items = thread(
-        ("1", "2026-03-05 09:12", "Rana Khoury", "Let's go with Bekaa Freight for the move."),
-        ("2", "2026-03-05 09:20", "Amal Rizk", "Agreed, go with Bekaa.", "1"),
+        ("1", "2026-04-14 09:20", "Georges Abi Nader", "Let's print QR labels per shelf location, not per box."),
+        ("2", "2026-04-14 09:31", "Nadine Saliba", "Makes sense, per shelf.", "1"),
     )
     [d] = of(items, "decision")
     assert d.status == "in_force" and d.source_ids == ["1", "2"]
@@ -101,8 +101,8 @@ def test_proposal_agreed_by_another_person_is_a_decision():
 
 def test_hedged_reply_is_not_agreement():
     items = thread(
-        ("1", "2026-03-05 09:40", "Daniel Mensah", "What if we do a Saturday shift to move slow stock early?"),
-        ("2", "2026-03-05 09:52", "Marc Aoun", "Possibly. I need to check the overtime rules.", "1"),
+        ("1", "2026-04-14 11:15", "Fadi Sleiman", "What if we count on a Saturday so the warehouse stays open?"),
+        ("2", "2026-04-14 11:30", "Nadine Saliba", "Possibly. I need to check the overtime rules.", "1"),
     )
     assert not of(items, "decision")
     assert len(of(items, "proposal")) == 1
@@ -110,10 +110,10 @@ def test_hedged_reply_is_not_agreement():
 
 def test_later_decision_reverses_the_earlier_one():
     items = thread(
-        ("1", "2026-03-05 09:12", "Rana Khoury", "Bekaa Freight is cheapest. Let's go with Bekaa Freight."),
-        ("2", "2026-03-05 09:20", "Amal Rizk", "Agreed.", "1"),
-        ("3", "2026-03-12 09:00", "Rana Khoury", "Bekaa Freight can't do our date. Let's switch to Cedar Line instead."),
-        ("4", "2026-03-12 09:10", "Amal Rizk", "Yes, switch.", "3"),
+        ("1", "2026-09-14 13:10", "Layla Frem", "Let's dispatch blankets from WH-11 for the Halba shelters."),
+        ("2", "2026-09-14 13:18", "Omar Daher", "Agreed.", "1"),
+        ("3", "2026-09-15 14:10", "Layla Frem", "WH-11 is short. Let's switch blanket dispatches for Halba to WH-07 instead."),
+        ("4", "2026-09-15 14:16", "Omar Daher", "Yes, switch.", "3"),
     )
     old, new = of(items, "decision")
     assert old.status == "reversed" and old.target == new.id
@@ -122,7 +122,7 @@ def test_later_decision_reverses_the_earlier_one():
 
 def test_announced_decision_counts_without_a_reply():
     items = thread(
-        ("1", "2026-03-10 09:00", "Marc Aoun", "Decision from the CD: cold-chain items go to Beirut, not Chtaura."),
+        ("1", "2026-09-14 11:00", "Layla Frem", "Decision from the coordinator: all dispatches go on EA-2026."),
     )
     [d] = of(items, "decision")
     assert d.status == "in_force"
@@ -130,9 +130,9 @@ def test_announced_decision_counts_without_a_reply():
 
 def test_cancellation_marks_the_dated_event_cancelled():
     items = thread(
-        ("1", "2026-03-04 11:41", "Amal Rizk", "Site visit with the donor advisor on 12 March, 10:00 at Chtaura."),
-        ("2", "2026-03-11 11:15", "Joelle Saba", "The advisor is stuck in Beirut. Thursday's site visit is off."),
-        ("3", "2026-03-11 11:20", "Amal Rizk", "Ok. Cancelling the room booking.", "2"),
+        ("1", "2026-09-14 18:52", "Layla Frem", "Send 150 mattresses from WH-07 to S-03 on 15 September, first thing."),
+        ("2", "2026-09-15 08:12", "Layla Frem", "Road closed. The S-03 mattress delivery is cancelled for today."),
+        ("3", "2026-09-15 08:15", "Omar Daher", "ok, cancelling the loading", "2"),
     )
     [d] = of(items, "deadline")
     assert d.status == "cancelled"
@@ -142,8 +142,8 @@ def test_cancellation_marks_the_dated_event_cancelled():
 
 def test_cancelled_task_takes_its_owner_with_it():
     items = thread(
-        ("1", "2026-03-06 10:05", "Rana Khoury", "Our label printer is dead. Leave it with me, I'll order a new one."),
-        ("2", "2026-03-16 10:00", "Rana Khoury", "We don't need the label printer after all. Dropping that task.", "1"),
+        ("1", "2026-04-15 10:12", "Georges Abi Nader", "The scanner is dead. Leave it with me, I'll order a new one."),
+        ("2", "2026-04-24 10:00", "Georges Abi Nader", "We don't need the scanner after all. Dropping that task.", "1"),
     )
     [o] = of(items, "owner")
     assert o.status == "cancelled"
@@ -151,8 +151,8 @@ def test_cancelled_task_takes_its_owner_with_it():
 
 def test_cancelling_one_thing_leaves_what_is_still_on():
     items = thread(
-        ("1", "2026-03-19 09:00", "Amal Rizk", "Furniture leaves Zahle next Monday with the cleaning crew."),
-        ("2", "2026-03-20 08:45", "Marc Aoun", "The cleaning crew is cancelled. Furniture still goes next Monday."),
+        ("1", "2026-04-13 09:00", "Nadine Saliba", "Keeper training goes next Monday with the Baalbek session."),
+        ("2", "2026-04-14 08:45", "Rami Khoury", "The Baalbek session is cancelled. Keeper training still goes next Monday."),
     )
     [d] = of(items, "deadline")
     assert d.status == "current"
@@ -160,54 +160,54 @@ def test_cancelling_one_thing_leaves_what_is_still_on():
 
 def test_claimed_task_and_accepted_request_make_owners():
     items = thread(
-        ("1", "2026-03-02 10:17", "Daniel Mensah", "I'll take the stock count."),
-        ("2", "2026-03-02 10:20", "Amal Rizk", "@Rana can you get freight quotes?"),
-        ("3", "2026-03-02 10:34", "Rana Khoury", "Sure, will have them by Thursday.", "2"),
-        ("4", "2026-03-02 10:40", "Amal Rizk", "@Karim can you book the forklift?"),
+        ("1", "2026-04-13 08:55", "Hiba Mansour", "I'll map the WH-14 item names to catalogue codes."),
+        ("2", "2026-04-13 11:30", "Nadine Saliba", "@Rami can you create the keeper accounts?"),
+        ("3", "2026-04-13 11:48", "Rami Khoury", "Sure, will have them by Thursday.", "2"),
+        ("4", "2026-04-13 11:50", "Nadine Saliba", "@Joumana can you check the INKIND pallets?"),
     )
     owners = {o.owner: o for o in of(items, "owner")}
-    assert set(owners) == {"Daniel Mensah", "Rana Khoury"}  # Karim never accepted
-    assert owners["Rana Khoury"].origin_id == "2"
+    assert set(owners) == {"Hiba Mansour", "Rami Khoury"}  # Joumana never accepted
+    assert owners["Rami Khoury"].origin_id == "2"
     [d] = of(items, "deadline")
-    assert d.date == date(2026, 3, 5)
+    assert d.date == date(2026, 4, 16)
 
 
 def test_takeover_supersedes_the_previous_owner():
     items = thread(
-        ("1", "2026-03-02 10:17", "Daniel Mensah", "I'll take the stock count."),
-        ("2", "2026-03-13 08:20", "Amal Rizk", "@Rana can you take over the stock count?"),
-        ("3", "2026-03-13 08:35", "Rana Khoury", "Yes, I'll take it over.", "2"),
+        ("1", "2026-09-14 15:41", "Sami Rahal", "I'll prepare the hygiene kits at WH-11."),
+        ("2", "2026-09-16 08:20", "Layla Frem", "@Omar can you take over the hygiene kits, Sami is off sick?"),
+        ("3", "2026-09-16 08:35", "Omar Daher", "Yes, I'll take it over.", "2"),
     )
-    daniel, rana = of(items, "owner")
-    assert daniel.status == "superseded" and rana.status == "current"
+    sami, omar = of(items, "owner")
+    assert sami.status == "superseded" and omar.status == "current"
 
 
 def test_unanswered_question_is_listed_and_answered_one_is_not():
     items = thread(
-        ("1", "2026-03-09 10:00", "Rana Khoury", "Who has the keys to the back gate at the old site?"),
-        ("2", "2026-03-09 10:02", "Karim Nassar", "anyone going to the market at lunch? need batteries"),
-        ("3", "2026-03-10 09:00", "Joelle Saba", "Is the forklift included in the quote?"),
-        ("4", "2026-03-10 09:05", "Amal Rizk", "No, it's separate.", "3"),
-        ("5", "2026-03-10 09:30", "Rana Khoury", "Has the landlord seen the floor plan?"),
-        ("6", "2026-03-10 09:40", "Amal Rizk", "Yes, he signed it off."),
+        ("1", "2026-04-15 09:30", "Fadi Sleiman", "Do we record the damaged cartons as damage reports before go-live?"),
+        ("2", "2026-04-15 09:32", "Georges Abi Nader", "anyone going to the bakery? manouche for the team"),
+        ("3", "2026-04-16 09:00", "Nadine Saliba", "Is the forklift included in the quote?"),
+        ("4", "2026-04-16 09:05", "Georges Abi Nader", "No, it's separate.", "3"),
+        ("5", "2026-04-16 09:30", "Hiba Mansour", "Has the admin seen the code list?"),
+        ("6", "2026-04-16 09:40", "Rami Khoury", "Yes, he signed it off."),
     )
     qs = of(items, "question")
-    assert [q.origin_id for q in qs] == ["1"]  # lunch chatter is not a handover question
+    assert [q.origin_id for q in qs] == ["1"]  # the bakery chatter is not a handover question
 
 
 def test_question_answered_only_by_side_chatter_stays_open():
     items = thread(
-        ("1", "2026-05-18 08:30", "Wanjiru Kamau", "Has the provider confirmed the float is loaded?"),
-        ("2", "2026-05-18 08:45", "Achieng Odhiambo", "Working from home today, my son has a fever."),
-        ("3", "2026-05-18 09:30", "Achieng Odhiambo", "Budget revision done and sent to Tom."),
+        ("1", "2026-09-15 09:00", "Layla Frem", "Has anyone confirmed the blankets reached S-02?"),
+        ("2", "2026-09-15 09:15", "Carla Nassif", "no coffee left at S-01, if anyone passes by the station"),
+        ("3", "2026-09-15 10:10", "Omar Daher", "DSP-2026-00414 out: 200 mattresses to S-02."),
     )
     assert [q.origin_id for q in of(items, "question")] == ["1"]
 
 
 def test_every_item_points_at_real_messages():
     items = thread(
-        ("1", "2026-03-03 09:40", "Amal Rizk", "Racking done by Friday."),
-        ("2", "2026-03-05 08:30", "Karim Nassar", "Racking pushed to Monday."),
+        ("1", "2026-04-13 10:02", "Nadine Saliba", "Count done by Thursday."),
+        ("2", "2026-04-15 08:40", "Georges Abi Nader", "Count pushed to Monday."),
     )
     for item in items:
         assert item.origin_id in {"1", "2"}

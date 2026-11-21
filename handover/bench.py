@@ -42,20 +42,25 @@ class Stale:
     """Items the brief shows as current although gold says they are not."""
     shown: list[str] = field(default_factory=list)
     traps: int = 0  # gold items that are superseded, cancelled, reversed or never agreed
+    hidden: list[str] = field(default_factory=list)  # the reverse error: current items shown as cancelled
+    live: int = 0  # gold deadlines, decisions and owners that are current
 
     def add(self, other: "Stale") -> None:
         self.shown += other.shown
         self.traps += other.traps
+        self.hidden += other.hidden
+        self.live += other.live
 
 
 def _attr_ok(pred: Item, gold: dict) -> bool:
     t = gold["type"]
     if t == "deadline":
-        return pred.date is not None and pred.date.isoformat() == gold["chain"][-1]
+        return (pred.date is not None and pred.date.isoformat() == gold["chain"][-1]
+                and pred.status == gold.get("status", "current"))
     if t == "decision":
         return pred.status == gold["status"]
     if t == "owner":
-        return pred.owner == gold["owner"]
+        return pred.owner == gold["owner"] and pred.status == gold.get("status", "current")
     return True
 
 
@@ -138,6 +143,15 @@ def score_thread(items: list[Item], gold_items: list[dict]) -> tuple[dict[str, S
             if wrong:
                 stale.shown.append(f"{p.origin_id} {p.type} '{p.label}' shown as current")
                 break
+    # the reverse error: something still on that the brief files as cancelled, reversed or handed over
+    live = [g for g in gold_items if g["type"] in ("deadline", "decision", "owner")
+            and g.get("status") in ("current", "in_force")]
+    stale.live = len(live)
+    for p in items:
+        if p.type not in ("deadline", "decision", "owner") or p.status in ("current", "in_force"):
+            continue
+        if any(g["type"] == p.type and p.origin_id in g["match_ids"] for g in live):
+            stale.hidden.append(f"{p.origin_id} {p.type} '{p.label}' shown as {p.status}")
     return scores, stale
 
 
@@ -174,6 +188,10 @@ def run(data_dir: Path, verbose: bool = False, only: str | None = None) -> str:
         lines.append(f"Superseded, cancelled or unagreed items shown as current: "
                      f"{len(stale_total.shown)} (out of {stale_total.traps} such items in gold)")
         for s in stale_total.shown:
+            lines.append(f"  ! {s}")
+        lines.append(f"Current items shown as cancelled, reversed or handed over: "
+                     f"{len(stale_total.hidden)} (out of {stale_total.live} current items in gold)")
+        for s in stale_total.hidden:
             lines.append(f"  ! {s}")
         if verbose:
             for t in TYPES:
